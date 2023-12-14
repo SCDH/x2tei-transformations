@@ -1,0 +1,33 @@
+# editor backup files
+*~
+auto
+
+test/*.usx
+
+/frameworks
+/test/alea
+/test/edition-ibu-nubatah
+/seed-config.yaml
+/log.txt
+/test.*
+
+*.zip
+
+# build artifacts
+/target
+/public
+*.xsl.sef
+*.xsef
+/test.sh
+/xslt.sh
+/saxon.xml
+/saxon.*.xml
+/frontend/seed-*.tgz
+/frontend/seed-*.tgz.[0-9]
+/frontend/transformation-api
+/frontend/public/transformation-api
+
+# xspec reports
+*-report.html
+*-result.html
+xspec

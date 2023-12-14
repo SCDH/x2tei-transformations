@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.uni-muenster.scdh</groupId>
+    <artifactId>usx-transformations</artifactId>
+    <version>${revision}${changelist}</version>
+
+    <name>USX Transformations</name>
+    <description>XSLT Library for converting USX documents</description>
+    <url>https://zivgitlab.uni-muenster.de/SCDH/tei-processing/usx</url>
+
+    <developers>
+        <developer>
+            <name>Christian Lück</name>
+            <organization>SCDH, University of Münster</organization>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Service Center for Digital Humanities, ULB, University of Münster</name>
+        <url>https://www.uni-muenster.de/SCDH/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License, version 3</name>
+            <url>https://gplv3.fsf.org/</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:${project.url}.git</connection>
+        <developerConnection>scm:git:${project.url}.git</developerConnection>
+        <url>scm:git:${project.url}.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <!-- prefix used in the transformation ID in the package for the SEED XML Transformer -->
+        <id-prefix>alea</id-prefix>
+
+        <!-- prefix used for the npm package with transformations compiled to the SEF format for Saxon-JS -->
+        <sef-package.prefix>@${id-prefix}/</sef-package.prefix>
+
+        <upload.uri>https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/seed-tei-transformations/</upload.uri>
+        <release.url/>
+        <!-- the gitlab package registry -->
+        <distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <saxon.version>11.5</saxon.version>
+        <xmlresolver.version>4.5.1</xmlresolver.version>
+        <xspec.version>2.2.4</xspec.version>
+        <xspec.version.OLD>1.6.0</xspec.version.OLD>
+        <xslt.dir>${project.basedir}/xsl</xslt.dir>
+        <seed-config-xsl.url>${project.basedir}/distribution/seed/seed-config.xsl</seed-config-xsl.url>
+        <sef-config-xsl.url>${project.basedir}/distribution/seed/sef-config.xsl</sef-config-xsl.url>
+        <sef-package.dir>${project.build.directory}/sef</sef-package.dir>
+    </properties>
+
+    <dependencies>
+        <!-- Tooling -->
+        <dependency>
+            <!-- required by Saxon >= 11, XSpec maven plugin 2.2.0 -->
+            <groupId>org.xmlresolver</groupId>
+            <artifactId>xmlresolver</artifactId>
+            <version>${xmlresolver.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>${saxon.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <packaging>pom</packaging>
+
+    <repositories>
+
+        <repository>
+            <id>gitlab-seed-tei-transformations</id>
+            <url>https://zivgitlab.uni-muenster.de/api/v4/projects/5496/packages/maven</url>
+        </repository>
+
+        <!-- for deployment on gitlab package repository -->
+        <repository>
+            <id>gitlab-maven</id>
+            <url>${distribution.url}</url>
+        </repository>
+    </repositories>
+
+    <!-- get the build artifacts into the gitlab maven package registry -->
+    <distributionManagement>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>${distribution.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>gitlab-maven</id>
+            <url>${distribution.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+    <build>
+
+        <!-- We want a jar file without version number, because that's
+             easier to pack into the framework zip. -->
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+
+            <!-- <!-\- run XSpec regression tests -\-> -->
+            <!-- <plugin> -->
+            <!--    <groupId>io.xspec.maven</groupId> -->
+            <!--    <artifactId>xspec-maven-plugin</artifactId> -->
+            <!--    <version>2.2.0</version> -->
+            <!--    <configuration> -->
+            <!--       <!-\-coverage>true</coverage-\-> -->
+            <!--       <generateSurefireReport>true</generateSurefireReport> -->
+            <!--       <testDir>xsl/common</testDir> -->
+            <!--    </configuration> -->
+            <!--    <executions> -->
+            <!--       <execution> -->
+            <!--          <phase>test</phase> -->
+            <!--          <goals> -->
+            <!--             <goal>run-xspec</goal> -->
+            <!--          </goals> -->
+            <!--       </execution> -->
+            <!--    </executions> -->
+            <!--    <dependencies> -->
+            <!--       <dependency> -->
+            <!--          <groupId>net.sf.saxon</groupId> -->
+            <!--          <artifactId>Saxon-HE</artifactId> -->
+            <!--          <version>${saxon.version}</version> -->
+            <!--       </dependency> -->
+            <!--       <dependency> -->
+            <!--          <groupId>org.xmlresolver</groupId> -->
+            <!--          <artifactId>xmlresolver</artifactId> -->
+            <!--          <version>${xmlresolver.version}</version> -->
+            <!--       </dependency> -->
+            <!--       <dependency> -->
+            <!--          <groupId>io.xspec</groupId> -->
+            <!--          <artifactId>xspec</artifactId> -->
+            <!--          <version>${xspec.version}</version> -->
+            <!--       </dependency> -->
+            <!--       <dependency> -->
+            <!--          <!-\- https://github.com/xspec/xspec-maven-plugin-1/issues/73 -\-> -->
+            <!--          <groupId>commons-io</groupId> -->
+            <!--          <artifactId>commons-io</artifactId> -->
+            <!--          <version>2.11.0</version> -->
+            <!--       </dependency> -->
+            <!--    </dependencies> -->
+            <!-- </plugin> -->
+
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jars</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <includeArtifactIds>Saxon-HE,xmlresolver</includeArtifactIds>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-xspec</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>io.xspec</groupId>
+                                    <artifactId>xspec</artifactId>
+                                    <version>${xspec.version}</version>
+                                    <classifier>enduser-files</classifier>
+                                    <type>zip</type>
+                                    <!-- "tar.gz" is also available -->
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.2</version>
+                <executions>
+                    <execution>
+                        <id>merge-configurations</id>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <transformationSets>
+                                <!-- merge local configuration and the configuration of dependency packages -->
+                                <transformationSet>
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <include>saxon-local.xml</include>
+                                    </includes>
+                                    <stylesheet>utils/saxon-dependencies.xsl</stylesheet>
+                                </transformationSet>
+                            </transformationSets>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <transformationSets>
+                                <!-- make a saxon configurations for HE, PE and EE -->
+                                <transformationSet>
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <include>saxon.xml</include>
+                                    </includes>
+                                    <stylesheet>utils/saxon-config-edition.xsl</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>edition</name>
+                                            <value>HE</value>
+                                        </parameter>
+                                    </parameters>
+                                    <fileMappers>
+                                        <fileMapper
+                                            implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.he.xml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                </transformationSet>
+                                <transformationSet>
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <include>saxon.xml</include>
+                                    </includes>
+                                    <stylesheet>utils/saxon-config-edition.xsl</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>edition</name>
+                                            <value>PE</value>
+                                        </parameter>
+                                    </parameters>
+                                    <fileMappers>
+                                        <fileMapper
+                                            implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.pe.xml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                </transformationSet>
+                                <transformationSet>
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <include>saxon.xml</include>
+                                    </includes>
+                                    <stylesheet>utils/saxon-config-edition.xsl</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>edition</name>
+                                            <value>EE</value>
+                                        </parameter>
+                                    </parameters>
+                                    <fileMappers>
+                                        <fileMapper
+                                            implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.ee.xml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                </transformationSet>
+                                <transformationSet>
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <include>saxon.xml</include>
+                                    </includes>
+                                    <stylesheet>utils/saxon-config.xsl</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>edition</name>
+                                            <value>HE</value>
+                                        </parameter>
+                                        <parameter>
+                                            <name>package-name</name>
+                                            <value>https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/transform/xsl/common/librend.xsl</value>
+                                        </parameter>
+                                        <parameter>
+                                            <name>output</name>
+                                            <value>html</value>
+                                        </parameter>
+                                    </parameters>
+                                    <fileMappers>
+                                        <fileMapper
+                                            implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.he.html.xml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                </transformationSet>
+                                <transformationSet>
+                                    <!-- generate configuration for SEED XML Transformer -->
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <!-- include every transformation resource for the SEED XML Transformer -->
+                                        <include>xsl/usx2tei.xsl</include>
+                                    </includes>
+                                    <parameters>
+                                        <parameter>
+                                            <name>saxon-config-uri</name>
+                                            <value>${project.basedir}/saxon.xml</value>
+                                        </parameter>
+                                        <parameter>
+                                            <name>id-prefix</name>
+                                            <value>${id-prefix}</value>
+                                        </parameter>
+                                        <parameter>
+                                            <name>mk-sef</name>
+                                            <value>true</value>
+                                        </parameter>
+                                        <parameter>
+                                            <name>sef-output-base</name>
+                                            <!-- Note the trailing slash! It's required for resolve-uri() -->
+                                            <value>file://${sef-package.dir}/transformation-api/transform/</value>
+                                        </parameter>
+                                    </parameters>
+                                    <stylesheet>${seed-config-xsl.url}</stylesheet>
+                                    <fileMappers>
+                                        <fileMapper
+                                            implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.json</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>
+                                </transformationSet>
+                                <transformationSet>
+                                    <!-- generate /transformations resource for the SEF package -->
+                                    <dir>${project.basedir}</dir>
+                                    <includes>
+                                        <include>pom.xml</include>
+                                    </includes>
+                                    <parameters>
+                                        <parameter>
+                                            <name>sef-output-base</name>
+                                            <!-- Note the trailing slash! It's required for resolve-uri() -->
+                                            <value>file://${sef-package.dir}/transformation-api/</value>
+                                        </parameter>
+                                    </parameters>
+                                    <stylesheet>${sef-config-xsl.url}</stylesheet>
+                                </transformationSet>
+                            </transformationSets>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>10.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <!-- convert configurations from JSON to YAML -->
+                <groupId>com.github.iarellano</groupId>
+                <artifactId>iad-j2y2j-converter-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>json-2-yaml</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>json-2-yaml</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/generated-resources/xml/xslt/xsl</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>**/*.json</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputExtension>yml</outputExtension>
+                            <outputDirectory>${project.build.directory}/generated-resources/yml/xsl</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>yaml-2-yaml</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>json-2-yaml</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/generated-resources/xml/xslt/xsl</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>**/*.json</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputExtension>yml</outputExtension>
+                            <outputDirectory>${project.build.directory}/generated-resources/yml/xsl</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>properties-to-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/bin</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/test</directory>
+                                    <includes>
+                                        <include>test.sh</include>
+                                        <include>xslt.sh</include>
+                                        <include>query.sh</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>properties-to-oxygen-plugin-descriptor</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/distribution/oxygen</directory>
+                                    <includes>
+                                        <include>descriptor.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>sef-package-transformations-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${sef-package.dir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/distribution/seed</directory>
+                                    <includes>
+                                        <include>package.json</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}</directory>
+                                    <includes>
+                                        <include>LICENSE</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <!-- let's have a license property -->
+                    <execution>
+                        <id>read-license</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <loadfile property="license" srcFile="LICENSE"/>
+                            </target>
+                            <exportAntProperties>true</exportAntProperties>
+                        </configuration>
+                    </execution>
+
+                    <!-- concat SEED XML Transformer configurations to seed-config.yaml -->
+                    <execution>
+                        <id>concat-seed-xml-transformer-configurations</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <concat destfile="${project.build.directory}/seed-config.yaml"
+                                    force="yes">
+                                    <fileset
+                                        dir="${project.build.directory}/generated-resources/yml">
+                                        <include name="**/*.yml"/>
+                                    </fileset>
+                                    <filterchain>
+                                        <!-- remove structure from yaml files -->
+                                        <linecontainsregexp negate="true">
+                                            <regexp pattern="^---$"/>
+                                        </linecontainsregexp>
+                                    </filterchain>
+                                </concat>
+                            </target>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>set-permissions</id>
+                        <phase>test</phase>
+                        <configuration>
+                            <target>
+                                <chmod file="${project.build.directory}/bin/test.sh" perm="755"/>
+                                <chmod file="${project.build.directory}/bin/xslt.sh" perm="755"/>
+                                <chmod file="${project.build.directory}/bin/query.sh" perm="755"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>copy-merged-saxon-configuration</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target>
+                                <copy
+                                    file="${project.build.directory}/generated-resources/xml/xslt/saxon-local.xml"
+                                    tofile="${project.basedir}/saxon.xml"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>copy-saxon-configurations</id>
+                        <phase>test</phase>
+                        <configuration>
+                            <target>
+                                <copy todir="${project.basedir}">
+                                    <fileset
+                                        dir="${project.build.directory}/generated-resources/xml/xslt">
+                                        <include name="saxon.*.xml"/>
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <!--    <execution> -->
+                    <!--       <phase>test</phase> -->
+                    <!--       <configuration> -->
+                    <!--          <target> -->
+                    <!-- 		   <property name="compile_classpath" refid="maven.compile.classpath"/> -->
+                    <!-- 		   <property name="runtime_classpath" refid="maven.runtime.classpath"/> -->
+                    <!-- 		   <property name="test_classpath" refid="maven.test.classpath"/> -->
+                    <!-- 		   <property name="plugin_classpath" refid="maven.plugin.classpath"/> -->
+                    <!--             <ant -->
+                    <!--                 antfile="${project.basedir}/build.xml"> -->
+                    <!--                <target name="test"/> -->
+                    <!--             </ant> -->
+                    <!--          </target> -->
+                    <!--       </configuration> -->
+                    <!--       <goals> -->
+                    <!--          <goal>run</goal> -->
+                    <!--       </goals> -->
+                    <!--    </execution> -->
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <!-- required by Saxon >= 11, XSpec maven plugin 2.2.0 -->
+                        <groupId>org.xmlresolver</groupId>
+                        <artifactId>xmlresolver</artifactId>
+                        <version>${xmlresolver.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>${saxon.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>zip-distribution</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <archiveBaseDirectory>${project.basedir}</archiveBaseDirectory>
+                            <descriptors>
+                                <descriptor>distribution/zip/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- make oxygen distribution -->
+                        <id>oxygen-distribution</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <archiveBaseDirectory>${project.basedir}</archiveBaseDirectory>
+                            <descriptors>
+                                <descriptor>distribution/oxygen/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- paketize resources for the SEED XML transformer -->
+                        <id>seed-distribution</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <archiveBaseDirectory>${project.basedir}</archiveBaseDirectory>
+                            <descriptors>
+                                <descriptor>distribution/seed/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
