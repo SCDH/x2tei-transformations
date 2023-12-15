@@ -53,6 +53,22 @@ The example USX document present during development has these features:
         </xsl:choose>
     </xsl:function>
 
+    <xsl:function name="scdh:make-id" as="attribute()?">
+        <xsl:param name="id" as="attribute()?"/>
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="prefix" as="xs:string"/>
+        <xsl:choose>
+            <xsl:when test="$id">
+                <xsl:attribute name="{$name}"
+                    select="concat($prefix, replace($id, '(\s+|[:])', '.') => replace('^(\d+)', '_$1'))"
+                />
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- TODO -->
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
     <xsl:template match="/usx">
         <TEI xml:lang="{$language}">
             <xsl:call-template name="root-attributes"/>
@@ -148,7 +164,7 @@ The example USX document present during development has these features:
             <xsl:when test="$no-paragraphs">
                 <xsl:call-template name="chapters-and-verses"/>
             </xsl:when>
-            <xsl:when test="empty(($overlapping-verses, $overlapping-chapters))">
+            <xsl:when test="true() or empty(($overlapping-verses, $overlapping-chapters))">
                 <xsl:call-template name="chapters-paragraphs-verses"/>
             </xsl:when>
             <xsl:otherwise>
@@ -280,13 +296,38 @@ The example USX document present during development has these features:
                 the starting has @sid and the ending has @eid attribute -->
             <xsl:for-each-group select="node()" group-starting-with="verse[@sid]">
                 <!-- drop whitespace before first starting verse element -->
-                <xsl:if test="current-group() => string-join() => normalize-space() ne ''">
-                    <seg type="verse">
-                        <xsl:attribute name="n" select="current-group()[1]/@number"/>
-                        <xsl:sequence select="current-group()[1]/@sid => scdh:make-id()"/>
-                        <xsl:apply-templates select="current-group()"/>
-                    </seg>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="current-group() => string-join() => normalize-space() eq ''">
+                        <!-- drop whitespace before first start verse milestone -->
+                    </xsl:when>
+                    <xsl:when test="current-group()[1][self::verse[@sid]]">
+                        <!-- paragraph starting with a verse start -->
+                        <l>
+                            <xsl:attribute name="n" select="current-group()[1]/@number"/>
+                            <xsl:sequence select="current-group()[1]/@sid => scdh:make-id()"/>
+                            <!-- if this verse exceeds the paragraph boundaries, we use TEI's aggregation -->
+                            <xsl:if test="
+                                    some $sid in ($overlapping-verses ! @sid)
+                                        satisfies current-group()[1]/@sid eq $sid">
+                                <xsl:sequence
+                                    select="current-group()[1]/@sid => scdh:make-id('next', '#continued')"
+                                />
+                            </xsl:if>
+                            <xsl:apply-templates select="current-group()"/>
+                        </l>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- paragraph continuing a verse -->
+                        <l>
+                            <!-- we use TEI's aggregation -->
+                            <xsl:sequence
+                                select="current-group()[self::verse[@eid]]/@eid => scdh:make-id('prev', '#')"/>
+                            <xsl:sequence
+                                select="current-group()[self::verse[@eid]]/@eid => scdh:make-id('xml:id', 'continued')"/>
+                            <xsl:apply-templates select="current-group()"/>
+                        </l>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:for-each-group>
         </lg>
     </xsl:template>
