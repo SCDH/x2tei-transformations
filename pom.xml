@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.uni-muenster.scdh</groupId>
-    <artifactId>usx-transformations</artifactId>
+    <artifactId>x2tei-transformations</artifactId>
     <version>${revision}${changelist}</version>
 
-    <name>USX Transformations</name>
-    <description>XSLT Library for converting USX documents</description>
+    <name>x2TEI Transformations</name>
+    <description>XSLT Library for converting from various formats to TEI-XML</description>
     <url>https://zivgitlab.uni-muenster.de/SCDH/tei-processing/usx</url>
 
     <developers>
@@ -40,12 +40,12 @@
 
     <properties>
         <!-- prefix used in the transformation ID in the package for the SEED XML Transformer -->
-        <id-prefix>alea</id-prefix>
+        <id-prefix>x2tei</id-prefix>
 
         <!-- prefix used for the npm package with transformations compiled to the SEF format for Saxon-JS -->
         <sef-package.prefix>@${id-prefix}/</sef-package.prefix>
 
-        <upload.uri>https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/seed-tei-transformations/</upload.uri>
+        <upload.uri>https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/x2tei-transformations/</upload.uri>
         <release.url/>
         <!-- the gitlab package registry -->
         <distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
@@ -316,7 +316,7 @@
                                     <dir>${project.basedir}</dir>
                                     <includes>
                                         <!-- include every transformation resource for the SEED XML Transformer -->
-                                        <include>xsl/usx2tei.xsl</include>
+                                        <include>xsl/usx/usx2tei.xsl</include>
                                     </includes>
                                     <parameters>
                                         <parameter>
