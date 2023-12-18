@@ -62,6 +62,13 @@
     </properties>
 
     <dependencies>
+        <!-- Frontend -->
+        <dependency>
+            <groupId>de.wwu.scdh.seed</groupId>
+            <artifactId>seed-frontend-components-webjar</artifactId>
+            <version>0.3.0</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Tooling -->
         <dependency>
             <!-- required by Saxon >= 11, XSpec maven plugin 2.2.0 -->
@@ -83,16 +90,16 @@
     <repositories>
 
         <repository>
-            <id>gitlab-seed-tei-transformations</id>
-            <url>https://zivgitlab.uni-muenster.de/api/v4/projects/5496/packages/maven</url>
+            <id>gitlab-seed-frontend-components</id>
+            <url>https://zivgitlab.uni-muenster.de/api/v4/projects/6840/packages/maven</url>
         </repository>
 
         <!-- for deployment on gitlab package repository -->
-        <repository>
+<!--        <repository>
             <id>gitlab-maven</id>
             <url>${distribution.url}</url>
         </repository>
-    </repositories>
+-->    </repositories>
 
     <!-- get the build artifacts into the gitlab maven package registry -->
     <distributionManagement>
@@ -170,6 +177,24 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                             <includeArtifactIds>Saxon-HE,xmlresolver</includeArtifactIds>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-frontend-webjar</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/frontend</outputDirectory>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>de.wwu.scdh.seed</groupId>
+                                    <artifactId>seed-frontend-components-webjar</artifactId>
+                                    <type>jar</type>
+                                    <!-- "tar.gz" is also available -->
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
                     <execution>
