@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!--link rel="icon" type="image/png" href="/public/scdh.png" /-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ALEA Transformations</title>
+
+    <!-- TODO: how to load those f...ing chunks? -->
+    <script type="module" src="https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/seed-frontend-components/seed-frontend-components.js"></script>
+  </head>
+  <body>
+    <seed-choose-transform-rest
+      transformationApi="/hees-alea/alea-transformations/transformation-api/" OFFtransformations="[param-integer]">
+      <seed-transform-sef id="sef-transformer">
+	<seed-download-link></seed-download-link>
+	<iframe></iframe>
+      </seed-transform-sef>
+    </seed-choose-transform-rest>
+  </body>
+  <!--
+      Workaround for saxon-js:
+      We have to pass the SaxonJS object into the custom element because
+      loading of SaxonJS as a module is broken.
+
+      See https://saxonica.plan.io/issues/6233
+    -->
+  <script src="saxon-js/SaxonJS2.js"></script>
+  <script>
+    console.log(SaxonJS);
+    // set SaxonJS as engine of seed-transform-sef element
+    var transformer = document.getElementById("sef-transformer");
+    transformer.engine = SaxonJS;
+  </script>
+
+</html>
