@@ -21,6 +21,9 @@ The example USX document present during development has these features:
     <!-- if true, paragraphs are omitted regardless to the structure of the content -->
     <xsl:param name="no-paragraphs" as="xs:boolean" select="false()" required="false"/>
 
+    <!-- whether or not to keep the notes from the USX in the main text -->
+    <xsl:param name="notes" as="xs:boolean" select="true()" required="false"/>
+
     <!-- this stylesheets is applicable on /usx as global context item -->
     <xsl:global-context-item as="document-node(element(usx))" use="required"/>
 
@@ -333,7 +336,12 @@ The example USX document present during development has these features:
     </xsl:template>
 
     <!-- TODO: handle notes -->
-    <xsl:template match="note"/>
+    <xsl:template match="note[$notes]">
+        <note>
+            <xsl:call-template name="formatting"/>
+            <xsl:apply-templates/>
+        </note>
+    </xsl:template>
 
 
     <!-- output some formatting attributes for the current context element -->
