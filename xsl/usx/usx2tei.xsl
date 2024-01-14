@@ -113,13 +113,9 @@ The example USX document present during development has these features:
                     <xsl:apply-templates mode="publicationStmt"
                         select="//chapter[1]/preceding-sibling::para"/>
                 </publicationStmt>
-                <sourceDesc>
-                    <p>
-                        <xsl:text>Converted from </xsl:text>
-                        <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
-                    </p>
-                </sourceDesc>
+                <xsl:call-template name="sourceDesc"/>
             </fileDesc>
+            <xsl:call-template name="encodingDesc"/>
             <revisionDesc>
                 <change when="{current-date()}">
                     <xsl:text>Converted from </xsl:text>
@@ -131,6 +127,17 @@ The example USX document present during development has these features:
             </revisionDesc>
         </teiHeader>
     </xsl:template>
+
+    <xsl:template name="sourceDesc">
+        <sourceDesc>
+            <p>
+                <xsl:text>Converted from </xsl:text>
+                <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
+            </p>
+        </sourceDesc>
+    </xsl:template>
+
+    <xsl:template name="encodingDesc"/>
 
     <xsl:template mode="title" match="para">
         <title>
@@ -341,7 +348,6 @@ The example USX document present during development has these features:
         </lg>
     </xsl:template>
 
-    <!-- TODO: handle notes -->
     <xsl:template match="note[$notes]">
         <note>
             <xsl:call-template name="formatting"/>
@@ -359,5 +365,6 @@ The example USX document present during development has these features:
             </xsl:when>
         </xsl:choose>
     </xsl:template>
+
 
 </xsl:stylesheet>
