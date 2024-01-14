@@ -73,16 +73,22 @@ The example USX document present during development has these features:
     </xsl:function>
 
     <xsl:template match="/usx">
-        <TEI xml:lang="{$language}">
-            <xsl:call-template name="root-attributes"/>
-            <xsl:call-template name="header"/>
-            <text>
-                <body>
-                    <xsl:call-template name="content"/>
-                </body>
-            </text>
-        </TEI>
+        <xsl:variable name="basic-tei">
+            <TEI xml:lang="{$language}">
+                <xsl:call-template name="root-attributes"/>
+                <xsl:call-template name="header"/>
+                <text>
+                    <body>
+                        <xsl:call-template name="content"/>
+                    </body>
+                </text>
+            </TEI>
+        </xsl:variable>
+        <xsl:apply-templates mode="postproc" select="$basic-tei"/>
     </xsl:template>
+
+    <!-- the postproc mode is for downstream stylesheets importing this one -->
+    <xsl:mode name="postproc" on-no-match="shallow-copy"/>
 
     <xsl:template name="root-attributes">
         <xsl:if test="book[@code]">
