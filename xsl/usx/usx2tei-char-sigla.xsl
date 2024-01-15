@@ -103,7 +103,7 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                     <xsl:for-each select="$witnesses">
                         <listWit>
                             <xsl:for-each select="string-to-codepoints(.) ! codepoints-to-string(.)">
-                                <witness xml:id="{.}">
+                                <witness xml:id="{tei:make-wit-id(.)}">
                                     <xsl:value-of select="."/>
                                 </witness>
                             </xsl:for-each>
