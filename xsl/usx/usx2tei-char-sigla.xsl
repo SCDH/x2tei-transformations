@@ -181,13 +181,17 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                         <lem>
                             <xsl:sequence
                                 select="tei:make-wit($entries-flattend/descendant-or-self::tei:lemSep/preceding-sibling::*/descendant-or-self::tei:wit)"/>
+                            <!-- we have to insert the verse reference into the lem, because lem has to be first element in app -->
+                            <xsl:copy-of select="$verse-ref"/>
                             <xsl:copy-of
                                 select="$entries-flattend/descendant-or-self::tei:lemSep/preceding-sibling::node()"
                             />
                         </lem>
                     </xsl:when>
                     <xsl:otherwise>
-                        <lem/>
+                        <lem>
+                            <xsl:copy-of select="$verse-ref"/>
+                        </lem>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
@@ -204,8 +208,8 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                 </xsl:choose>
             </xsl:variable>
 
-            <!-- output: verse-ref. lemma  -->
-            <xsl:sequence select="$verse-ref"/>
+            <!-- output: verse-ref. lemma. Note: lem must be first in app -->
+            <!--xsl:sequence select="$verse-ref"/-->
             <xsl:sequence select="$lemma"/>
 
             <xsl:variable name="reading">
