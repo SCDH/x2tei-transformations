@@ -54,25 +54,11 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     <xsl:variable name="sigla-re" as="xs:string">
         <xsl:variable name="regex" as="xs:string">
             <xsl:value-of>
-                <xsl:text>(^|\s)(</xsl:text>
-                <xsl:for-each select="$witnesses">
-                    <xsl:if test="position() gt 1">
-                        <xsl:text>|</xsl:text>
-                    </xsl:if>
-                    <xsl:text>[</xsl:text>
-                    <xsl:value-of select="."/>
-                    <xsl:text>]+</xsl:text>
-                </xsl:for-each>
-                <xsl:text>)(\s(</xsl:text>
-                <xsl:for-each select="$witnesses">
-                    <xsl:if test="position() gt 1">
-                        <xsl:text>|</xsl:text>
-                    </xsl:if>
-                    <xsl:text>[</xsl:text>
-                    <xsl:value-of select="."/>
-                    <xsl:text>]+</xsl:text>
-                </xsl:for-each>
-                <xsl:text>))*</xsl:text>
+                <xsl:text>(^|\s)</xsl:text>
+                <xsl:value-of select="$witnesses-re"/>
+                <xsl:text>(\s</xsl:text>
+                <xsl:value-of select="$witnesses-re"/>
+                <xsl:text>)*</xsl:text>
                 <xsl:text>(\s|\p{P}|$)</xsl:text>
             </xsl:value-of>
         </xsl:variable>
@@ -95,17 +81,19 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="tei:make-wit" as="attribute()">
+    <xsl:function name="tei:make-wit" as="attribute()?">
         <xsl:param name="witnesses" as="element(tei:wit)*"/>
-        <xsl:attribute name="wit">
-            <xsl:for-each select="$witnesses">
-                <xsl:if test="position() gt 1">
-                    <xsl:text> </xsl:text>
-                </xsl:if>
-                <xsl:text>#</xsl:text>
-                <xsl:value-of select="tei:make-wit-id(.)"/>
-            </xsl:for-each>
-        </xsl:attribute>
+        <xsl:if test="$witnesses">
+            <xsl:attribute name="wit">
+                <xsl:for-each select="$witnesses">
+                    <xsl:if test="position() gt 1">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                    <xsl:text>#</xsl:text>
+                    <xsl:value-of select="tei:make-wit-id(.)"/>
+                </xsl:for-each>
+            </xsl:attribute>
+        </xsl:if>
     </xsl:function>
 
     <xsl:template name="witnesses">
@@ -138,8 +126,24 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     </xsl:template>
 
     <xsl:variable name="sigla-alternatives-re" as="xs:string"
-        select="concat('[', string-join($witnesses), ']')"/>
+        select="concat('([', string-join($witnesses), ']+)')"/>
 
+    <xsl:variable name="sigla-grouped-re" as="xs:string">
+        <xsl:value-of>
+            <xsl:text>(</xsl:text>
+            <xsl:for-each select="$witnesses">
+                <xsl:if test="position() gt 1">
+                    <xsl:text>|</xsl:text>
+                </xsl:if>
+                <xsl:text>[</xsl:text>
+                <xsl:value-of select="."/>
+                <xsl:text>]+</xsl:text>
+            </xsl:for-each>
+            <xsl:text>)</xsl:text>
+        </xsl:value-of>
+    </xsl:variable>
+
+    <xsl:variable name="witnesses-re" as="xs:string" select="$sigla-alternatives-re"/>
 
 
     <!-- upcycling apparatus -->
@@ -157,8 +161,103 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
             <xsl:variable name="no-flatten" select="
                     some $t in $entries[self::text()]
                         satisfies matches($t, '\S') or count($entries[self::element()]) gt 1"/>
+            <xsl:variable name="entries-flattend">
+                <xsl:choose>
+                    <xsl:when test="$no-flatten">
+                        <xsl:sequence select="$entries"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:sequence select="$entries/node()"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="lemma">
+                <xsl:choose>
+                    <xsl:when test="$entries-flattend/descendant-or-self::tei:lemSep">
+                        <lem>
+                            <xsl:sequence
+                                select="tei:make-wit($entries-flattend/descendant-or-self::tei:lemSep/preceding-sibling::*/descendant-or-self::tei:wit)"/>
+                            <xsl:copy-of
+                                select="$entries-flattend/descendant-or-self::tei:lemSep/preceding-sibling::node()"
+                            />
+                        </lem>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <lem/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="readings">
+                <xsl:choose>
+                    <xsl:when test="$entries-flattend/descendant-or-self::tei:lemSep">
+                        <xsl:copy-of
+                            select="$entries-flattend/descendant-or-self::tei:lemSep/following-sibling::node()"
+                        />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy-of select="$entries-flattend"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+
+            <!-- output: verse-ref. lemma  -->
             <xsl:sequence select="$verse-ref"/>
-            <xsl:choose>
+            <xsl:sequence select="$lemma"/>
+
+            <xsl:variable name="reading">
+                <xsl:choose>
+                    <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
+                        <witDetail>
+                            <xsl:sequence
+                                select="tei:make-wit($readings/descendant-or-self::tei:wit)"/>
+                            <xsl:sequence select="$readings"/>
+                        </witDetail>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <rdg>
+                            <xsl:sequence
+                                select="tei:make-wit($readings/descendant-or-self::tei:wit)"/>
+                            <xsl:sequence select="$readings"/>
+                        </rdg>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:apply-templates mode="app2" select="$reading"/>
+            <!--
+            <xsl:call-template name="rdg">
+                <xsl:with-param name="element-name" as="xs:QName">
+                    <xsl:choose>
+                        <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
+                            <xsl:sequence select="xs:QName('witDetail')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:sequence select="xs:QName('rdg')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:with-param>
+                <xsl:with-param name="entries">
+                    <xsl:choose>
+                        <xsl:when test="$no-flatten">
+                            <xsl:sequence select="$entries"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:sequence select="$entries/node()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:with-param>
+                <xsl:with-param name="lem-searching">
+                    <xsl:choose>
+                        <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
+                            <xsl:sequence select="false()"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:sequence select="true()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:with-param>
+            </xsl:call-template>
+            -->
+            <!--            <xsl:choose>
                 <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
                     <xsl:choose>
                         <xsl:when test="$no-flatten">
@@ -166,7 +265,10 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                                 <xsl:sequence
                                     select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
                                 <xsl:comment>witdetail1 <xsl:value-of select="count($entries[element()])"/></xsl:comment>
-                                <xsl:apply-templates mode="app2" select="$entries"/>
+                                <xsl:apply-templates mode="app2" select="$entries">
+                                    <xsl:with-param name="lem-searching" select="false()"
+                                        tunnel="yes"/>
+                                </xsl:apply-templates>
                             </witDetail>
                         </xsl:when>
                         <xsl:otherwise>
@@ -174,36 +276,60 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                                 <xsl:sequence
                                     select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
                                 <xsl:comment>witdetail2</xsl:comment>
-                                <xsl:apply-templates mode="app2" select="$entries/node()"/>
+                                <xsl:apply-templates mode="app2" select="$entries/node()">
+                                    <xsl:with-param name="lem-searching" select="false()"
+                                        tunnel="yes"/>
+                                </xsl:apply-templates>
                             </witDetail>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
-                    <rdg>
-                        <xsl:choose>
-                            <xsl:when test="$no-flatten">
-                                <rdg>
-                                    <xsl:sequence
-                                        select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
-                                    <xsl:apply-templates mode="app2" select="$entries"/>
-                                </rdg>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <rdg>
-                                    <xsl:sequence
-                                        select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
-                                    <xsl:apply-templates mode="app2" select="$entries/node()"/>
-                                </rdg>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </rdg>
+                    <xsl:choose>
+                        <xsl:when test="$no-flatten">
+                            <rdg>
+                                <xsl:sequence
+                                    select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
+                                <xsl:apply-templates mode="app2" select="$entries">
+                                    <xsl:with-param name="lem-searching" select="true()"
+                                        tunnel="yes"/>
+                                </xsl:apply-templates>
+                            </rdg>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <rdg>
+                                <xsl:sequence
+                                    select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
+                                <xsl:apply-templates mode="app2" select="$entries/node()">
+                                    <xsl:with-param name="lem-searching" select="true()"
+                                        tunnel="yes"/>
+                                </xsl:apply-templates>
+                            </rdg>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
+            -->
         </app>
     </xsl:template>
 
+    <xsl:template name="rdg">
+        <xsl:param name="element-name" as="xs:QName"/>
+        <xsl:param name="entries" as="node()*"/>
+        <xsl:param name="lem-searching" as="xs:boolean"/>
+        <xsl:variable name="rdg">
+            <xsl:element name="{$element-name}">
+                <xsl:sequence select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
+                <xsl:apply-templates mode="postproc" select="$entries">
+                    <xsl:with-param name="lem-searching" select="$lem-searching"/>
+                </xsl:apply-templates>
+            </xsl:element>
+        </xsl:variable>
+        <xsl:apply-templates mode="app2" select="$rdg"/>
+    </xsl:template>
+
     <xsl:template mode="postproc" match="tei:body//tei:note//text()">
+        <xsl:param name="lem-searching" as="xs:boolean" select="true()" tunnel="yes"/>
         <xsl:analyze-string select="." regex="{$sigla-re}">
             <!-- encode witnesses in <wit> -->
             <xsl:matching-substring>
@@ -224,7 +350,29 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                 <xsl:value-of select="regex-group(5)"/>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:value-of select="."/>
+                <xsl:choose>
+                    <xsl:when test="$lem-searching and not(matches(., '\['))">
+                        <xsl:analyze-string select="." regex="\]">
+                            <xsl:matching-substring>
+                                <lemSep/>
+                            </xsl:matching-substring>
+                            <xsl:non-matching-substring>
+                                <xsl:analyze-string select="." regex=";">
+                                    <xsl:matching-substring>
+                                        <rdgSep/>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="."/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
+                                <!--xsl:value-of select="."/-->
+                            </xsl:non-matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:non-matching-substring>
         </xsl:analyze-string>
     </xsl:template>
@@ -238,6 +386,22 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     </xsl:template>
 
     <xsl:mode name="app2" on-no-match="shallow-copy"/>
+
+    <xsl:template mode="app2" match="tei:lem"/>
+
+    <xsl:template mode="app2" match="tei:rdg[tei:rdgSep]">
+        <xsl:for-each-group select="./node()" group-starting-with="tei:rdgSep">
+            <rdg>
+                <xsl:sequence select="tei:make-wit(current-group()/descendant-or-self::tei:wit)"/>
+                <xsl:apply-templates mode="app2"
+                    select="current-group() except current-group()/self::tei:rdgSep"/>
+            </rdg>
+        </xsl:for-each-group>
+    </xsl:template>
+
+    <xsl:template mode="app2" match="tei:witDetail//tei:rdgSep">
+        <xsl:text>;</xsl:text>
+    </xsl:template>
 
 
 </xsl:stylesheet>
