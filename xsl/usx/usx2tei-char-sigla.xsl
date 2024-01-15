@@ -152,7 +152,9 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
         <app>
             <xsl:variable name="postproc">
                 <xsl:document>
-                    <xsl:apply-templates mode="postproc"/>
+                    <xsl:apply-templates mode="postproc">
+                        <xsl:with-param name="lem-searching" select="normalize-space(.) => matches('^(\s*\d+,\d+\s*[ab]?\s*)(\[[^\]]+\])\s*$') => not()" tunnel="true"/>
+                    </xsl:apply-templates>
                 </xsl:document>
             </xsl:variable>
             <xsl:variable name="verse-ref" select="$postproc/tei:note[1][self::tei:note]"/>
