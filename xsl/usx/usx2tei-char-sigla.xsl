@@ -153,7 +153,9 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
             <xsl:variable name="postproc">
                 <xsl:document>
                     <xsl:apply-templates mode="postproc">
-                        <xsl:with-param name="lem-searching" select="normalize-space(.) => matches('^(\s*\d+,\d+\s*[ab]?\s*)(\[[^\]]+\])\s*$') => not()" tunnel="true"/>
+                        <xsl:with-param name="lem-searching"
+                            select="normalize-space(.) => matches('^(\s*\d+,\d+\s*[ab]?\s*)(\[[^\]]+\])\s*$') => not()"
+                            tunnel="true"/>
                     </xsl:apply-templates>
                 </xsl:document>
             </xsl:variable>
@@ -208,6 +210,7 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
 
             <xsl:variable name="reading">
                 <xsl:choose>
+                    <!-- when the entry is enclosed in [ ], it is a witDetail -->
                     <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
                         <witDetail>
                             <xsl:sequence
@@ -224,94 +227,9 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
+
+            <!-- run second stage -->
             <xsl:apply-templates mode="app2" select="$reading"/>
-            <!--
-            <xsl:call-template name="rdg">
-                <xsl:with-param name="element-name" as="xs:QName">
-                    <xsl:choose>
-                        <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
-                            <xsl:sequence select="xs:QName('witDetail')"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:sequence select="xs:QName('rdg')"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:with-param>
-                <xsl:with-param name="entries">
-                    <xsl:choose>
-                        <xsl:when test="$no-flatten">
-                            <xsl:sequence select="$entries"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:sequence select="$entries/node()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:with-param>
-                <xsl:with-param name="lem-searching">
-                    <xsl:choose>
-                        <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
-                            <xsl:sequence select="false()"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:sequence select="true()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:with-param>
-            </xsl:call-template>
-            -->
-            <!--            <xsl:choose>
-                <xsl:when test="matches($entries-text, '^\[[^\]]+\]$')">
-                    <xsl:choose>
-                        <xsl:when test="$no-flatten">
-                            <witDetail>
-                                <xsl:sequence
-                                    select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
-                                <xsl:comment>witdetail1 <xsl:value-of select="count($entries[element()])"/></xsl:comment>
-                                <xsl:apply-templates mode="app2" select="$entries">
-                                    <xsl:with-param name="lem-searching" select="false()"
-                                        tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </witDetail>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <witDetail>
-                                <xsl:sequence
-                                    select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
-                                <xsl:comment>witdetail2</xsl:comment>
-                                <xsl:apply-templates mode="app2" select="$entries/node()">
-                                    <xsl:with-param name="lem-searching" select="false()"
-                                        tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </witDetail>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:choose>
-                        <xsl:when test="$no-flatten">
-                            <rdg>
-                                <xsl:sequence
-                                    select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
-                                <xsl:apply-templates mode="app2" select="$entries">
-                                    <xsl:with-param name="lem-searching" select="true()"
-                                        tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </rdg>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <rdg>
-                                <xsl:sequence
-                                    select="tei:make-wit($entries/descendant-or-self::tei:wit)"/>
-                                <xsl:apply-templates mode="app2" select="$entries/node()">
-                                    <xsl:with-param name="lem-searching" select="true()"
-                                        tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </rdg>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:otherwise>
-            </xsl:choose>
-            -->
         </app>
     </xsl:template>
 
