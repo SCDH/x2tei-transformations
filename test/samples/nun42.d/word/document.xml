@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+    xmlns:w10="urn:schemas-microsoft-com:office:word"
+    xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+    xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"
+    xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"
+    xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+    xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" mc:Ignorable="w14 wp14 w15">
+    <w:body>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="INStandard"/>
+                <w:spacing w:before="200" w:after="120"/>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                </w:rPr>
+                <w:t>42</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                </w:rPr>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                </w:rPr>
+                <w:t xml:space="preserve">وقال </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>[</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>البسيط</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>]</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="INStandard"/>
+                <w:ind w:left="360" w:hanging="0"/>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>لو آذنتني عُذّالي بحربهمُ</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:tab/>
+                <w:tab/>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>أوفى التكاريش قد أصبحتُ هيمانا</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="INStandard"/>
+                <w:ind w:left="360" w:hanging="0"/>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>إذاً لقام بنصري معشرٌ خُشُنٌ</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:tab/>
+                <w:tab/>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>عند الحفيظة إن ذو لوثةٍ</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="FootnoteAnchor"/>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:footnoteReference w:id="2"/>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t xml:space="preserve"> لانا</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="INStandard"/>
+                <w:spacing w:before="200" w:after="120"/>
+                <w:ind w:left="360" w:hanging="0"/>
+                <w:rPr>
+                    <w:lang w:bidi="ar-EG"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>قومٌ إذا الأيرُ أبدى ناجذيه لهم</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:tab/>
+                <w:tab/>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="28"/>
+                    <w:sz w:val="28"/>
+                    <w:szCs w:val="28"/>
+                    <w:rtl w:val="true"/>
+                    <w:lang w:val="fr-CH" w:bidi="ar-EG"/>
+                </w:rPr>
+                <w:t>طاروا إليه زرافاتٍ ووحدنا</w:t>
+            </w:r>
+        </w:p>
+        <w:sectPr>
+            <w:footnotePr>
+                <w:numFmt w:val="decimal"/>
+            </w:footnotePr>
+            <w:type w:val="nextPage"/>
+            <w:pgSz w:w="11906" w:h="16838"/>
+            <w:pgMar w:left="1417" w:right="1417" w:gutter="0" w:header="0" w:top="1417"
+                w:footer="0" w:bottom="1134"/>
+            <w:pgNumType w:fmt="decimal"/>
+            <w:formProt w:val="false"/>
+            <w:textDirection w:val="lrTb"/>
+            <w:docGrid w:type="default" w:linePitch="360" w:charSpace="0"/>
+        </w:sectPr>
+    </w:body>
+</w:document>
