@@ -7,6 +7,7 @@ This is an XSLT library for transforming various input formats to TEI-XML. Input
   P5
 - [Accordance](https://www.accordancebible.com/) plain text files of
   books of the Bible to TEI P5
+- docx
 
 ## Getting started
 
