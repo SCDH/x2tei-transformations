@@ -32,30 +32,30 @@ test:
     - ./mvnw verify
     - target/bin/test.sh
 
-build-frontend:
-  stage: build
-  image: harbor.uni-muenster.de/proxy-docker/library/node:21-alpine
-  cache:
-    key:
-      files:
-        - package-lock.json
-      prefix: npm
-    paths:
-      - node_modules/
-  before_script:
-    - apk update
-    - apk add wget
-  script:
-    - cd frontend
-    - echo "//${CI_SERVER_HOST}/api/v4/projects/805/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
-    - cat .npmrc
-    - ./install-via-api.sh
-    - ls -l node_modules
-    - ls -l node_modules/@scdh
-    - npm run build
-  artifacts:
-    paths:
-      - frontend/dist
+# build-frontend:
+#   stage: build
+#   image: harbor.uni-muenster.de/proxy-docker/library/node:21-alpine
+#   cache:
+#     key:
+#       files:
+#         - package-lock.json
+#       prefix: npm
+#     paths:
+#       - node_modules/
+#   before_script:
+#     - apk update
+#     - apk add wget
+#   script:
+#     - cd frontend
+#     - echo "//${CI_SERVER_HOST}/api/v4/projects/805/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
+#     - cat .npmrc
+#     - ./install-via-api.sh
+#     - ls -l node_modules
+#     - ls -l node_modules/@scdh
+#     - npm run build
+#   artifacts:
+#     paths:
+#       - frontend/dist
 
 
 # deploy using ci_settings.xml as maven settings
@@ -91,14 +91,7 @@ pages:
     - cp -v target/*-package.zip public/
     - cp -v target/descriptor.xml public/
     - cp -v target/*-oxygen-distribution.jar public/
-    - cp -v target/*-seed-resources.tar.gz public/
-    # copy compiled transformations
-    - cp -vr target/sef/transformation-api public/
-    # copy frontend
-    - cp -vrf frontend/dist/* public/
-    - cp -vrf frontend/saxon-js public/
   needs:
-    - build-frontend
     - push-packages
   artifacts:
     paths:
