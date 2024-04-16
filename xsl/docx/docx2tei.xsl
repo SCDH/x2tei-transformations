@@ -40,7 +40,7 @@ paths of the documents in the docx file to document nodes of the parsed files.
         select="('/word/document.xml', '/word/footnotes.xml', '/word/styles.xml')"/>
 
     <!-- XML ID of the user that does the file conversion -->
-    <xsl:param name="docx2t:user-name" as="xs:string?" select="'#'||system-property('user.name')"/>
+    <xsl:param name="docx2t:user-name" as="xs:string?" select="system-property('user.name')"/>
 
     <!-- entry points -->
 
@@ -177,7 +177,7 @@ paths of the documents in the docx file to document nodes of the parsed files.
         <revisionDesc>
             <change>
                 <xsl:if test="$docx2t:user-name and $docx2t:user-name ne ''">
-                    <xsl:attribute name="who" select="$docx2t:user-name"/>
+                    <xsl:attribute name="who" select="'#' || $docx2t:user-name"/>
                 </xsl:if>
                 <xsl:attribute name="when"
                     select="current-dateTime() => format-dateTime('[Y0001]-[M01]-[D01]')"/>
