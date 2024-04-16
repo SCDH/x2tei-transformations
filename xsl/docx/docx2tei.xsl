@@ -39,6 +39,9 @@ paths of the documents in the docx file to document nodes of the parsed files.
     <xsl:param name="zipped-files" as="xs:string*" required="false"
         select="('/word/document.xml', '/word/footnotes.xml', '/word/styles.xml')"/>
 
+    <!-- XML ID of the user that does the file conversion -->
+    <xsl:param name="docx2t:user-name" as="xs:string?" select="'#'||system-property('user.name')"/>
+
     <!-- entry points -->
 
     <!-- initial template as entry point:
@@ -142,10 +145,12 @@ paths of the documents in the docx file to document nodes of the parsed files.
     <!-- named templates for the header etc. -->
 
     <xsl:template name="rootAttributes" as="attribute()*" visibility="public">
+        <xsl:context-item as="element(w:document)" use="required"/>
         <!--xsl:attribute name="xml:base" select="base-uri(.)"/-->
     </xsl:template>
 
     <xsl:template name="teiHeader" as="element(tei:teiHeader)" visibility="public">
+        <xsl:context-item as="element(w:document)" use="required"/>
         <teiHeader>
             <xsl:call-template name="fileDesc"/>
             <xsl:call-template name="profileDesc"/>
@@ -154,20 +159,28 @@ paths of the documents in the docx file to document nodes of the parsed files.
         </teiHeader>
     </xsl:template>
 
-    <xsl:template name="fileDesc" as="element(tei:fileDesc)" visibility="public">
+    <xsl:template name="fileDesc" as="element()?" visibility="public">
+        <xsl:context-item as="element(w:document)" use="required"/>
         <fileDesc/>
     </xsl:template>
 
-    <xsl:template name="encodingDesc" as="element(tei:encodingDesc)*" visibility="public"/>
+    <xsl:template name="encodingDesc" as="element()*" visibility="public">
+        <xsl:context-item as="element(w:document)" use="required"/>
+    </xsl:template>
 
-    <xsl:template name="profileDesc" as="element(tei:profileDesc)*" visibility="public"/>
+    <xsl:template name="profileDesc" as="element()*" visibility="public">
+        <xsl:context-item as="element(w:document)" use="required"/>
+    </xsl:template>
 
-    <xsl:template name="revisionDesc" as="element(tei:revisionDesc)" visibility="public">
+    <xsl:template name="revisionDesc" as="element()*" visibility="public">
+        <xsl:context-item as="element(w:document)" use="required"/>
         <revisionDesc>
             <change>
-                <xsl:attribute name="who" select="system-property('user.name')"/>
+                <xsl:if test="$docx2t:user-name and $docx2t:user-name ne ''">
+                    <xsl:attribute name="who" select="$docx2t:user-name"/>
+                </xsl:if>
                 <xsl:attribute name="when"
-                    select="current-dateTime() => format-dateTime('[Y]-[M]-[D]')"/>
+                    select="current-dateTime() => format-dateTime('[Y0001]-[M01]-[D01]')"/>
                 <xsl:text>Converted from </xsl:text>
                 <ptr>
                     <xsl:attribute name="target" select="$input-file"/>
