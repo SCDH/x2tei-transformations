@@ -9,7 +9,8 @@ target/bin/xslt.sh -xsl:utils/saxon-dependencies.xsl -s:saxon-local.xml -o:saxon
 
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="#all" version="3.1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:err="http://www.w3.org/2005/xqt-errors"
+    exclude-result-prefixes="#all" version="3.1"
     xpath-default-namespace="http://saxon.sf.net/ns/configuration">
 
     <!-- where to find dependencies, relative from source input file -->
@@ -20,8 +21,13 @@ target/bin/xslt.sh -xsl:utils/saxon-dependencies.xsl -s:saxon-local.xml -o:saxon
     <xsl:param name="configuration-uris" as="xs:anyURI"
         select="resolve-uri(concat($dependencies-directory, '?recurse=yes&amp;select=saxon.xml'), base-uri())"/>
 
-    <xsl:variable name="configurations" as="document-node()*"
-        select="collection($configuration-uris)"/>
+    <xsl:variable name="configurations" as="document-node()*">
+        <!-- When the $dependencies-directory does not exist (no dependencies), collection(...) will fail.
+                So we need try/catch. -->
+        <xsl:try select="collection($configuration-uris)">
+            <xsl:catch errors="err:FODC0002" select="()"/>
+        </xsl:try>
+    </xsl:variable>
 
     <xsl:global-context-item as="document-node()" use="required"/>
 
@@ -48,7 +54,8 @@ target/bin/xslt.sh -xsl:utils/saxon-dependencies.xsl -s:saxon-local.xml -o:saxon
                 <xsl:text>&#xa;        </xsl:text>
                 <xsl:copy select="self::*">
                     <xsl:apply-templates mode="dependency" select="attribute() | node()">
-                        <xsl:with-param name="rel-path" as="xs:string" select="$rel-path" tunnel="true"/>
+                        <xsl:with-param name="rel-path" as="xs:string" select="$rel-path"
+                            tunnel="true"/>
                     </xsl:apply-templates>
                 </xsl:copy>
             </xsl:for-each>
