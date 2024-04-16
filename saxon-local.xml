@@ -7,4 +7,10 @@ http://www.saxonica.com/documentation/index/configuration-file.html
 -->
 <configuration edition="HE" xmlns="http://saxon.sf.net/ns/configuration">
 
+    <xsltPackages>
+        <package
+            name="https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/x2tei-transformations/xsl/docx/docx2tei.xsl"
+            version="1.0.0" sourceLocation="xsl/docx/docx2tei.xsl"/>
+    </xsltPackages>
+
 </configuration>
