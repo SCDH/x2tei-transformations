@@ -1,5 +1,12 @@
 # Changes
 
+## 0.2.1
+
+- `xsl/docx/doxc2tei.xsl`:
+  - All visible named components, that were in the null namespace, are
+    now in the `docx2t` namespace.
+  - do not reproduce paragraphs inside footnotes
+
 ## 0.2.0
 
 - `xsl/docx/doxc2tei.xsl`:
