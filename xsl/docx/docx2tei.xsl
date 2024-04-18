@@ -6,7 +6,7 @@ Most simply, you can call the initial template and pass a docx file to the 'inpu
 Saxon's default collection finder will be used do unpack the docx file and parse the contained XML files.
 
 USAGE:
-java -jar saxon.jar -xsl:docx2tei.xsl -it input-file=YOUR.docx
+java -jar saxon.jar -xsl:docx2tei.xsl -it {http://scdh.wwu.de/transform/docx2tei#}input-file=YOUR.docx
 
 
 alternative USAGE:
@@ -33,14 +33,18 @@ paths of the documents in the docx file to document nodes of the parsed files.
     <xsl:output method="xml" indent="true"/>
 
     <!-- URI of/path to the docx file -->
-    <xsl:param name="input-file" as="xs:anyURI?" select="()" required="false"/>
+    <xsl:param name="docx2t:input-file" as="xs:anyURI?" select="()" required="false"/>
 
     <!-- list of files inside docx zip archive, absolute paths from archive root -->
-    <xsl:param name="zipped-files" as="xs:string*" required="false"
+    <xsl:param name="docx2t:zipped-files" as="xs:string*" required="false"
         select="('/word/document.xml', '/word/footnotes.xml', '/word/styles.xml')"/>
 
     <!-- XML ID of the user that does the file conversion -->
     <xsl:param name="docx2t:user-name" as="xs:string?" select="system-property('user.name')"/>
+
+    <!-- the name of the transformer, used in revision description -->
+    <xsl:variable name="docx2t:stylesheet" as="xs:string" select="static-base-uri()"
+        visibility="public"/>
 
     <!-- entry points -->
 
@@ -49,13 +53,13 @@ paths of the documents in the docx file to document nodes of the parsed files.
         java -jar saxon.jar -xsl:docx2tei.xsl -it input-file=YOUR.docx
     -->
     <xsl:template name="xsl:initial-template" visibility="final">
-        <xsl:if test="not($input-file)">
+        <xsl:if test="not($docx2t:input-file)">
             <xsl:message terminate="yes">
                 <xsl:text>You have to provide the stylesheet parameter 'input-file' if you call this transformation with the initial template 'xsl:initial-template'.</xsl:text>
             </xsl:message>
         </xsl:if>
         <xsl:variable name="files" as="document-node()*"
-            select="collection($input-file || '?on-error=ignore')"/>
+            select="collection($docx2t:input-file || '?on-error=ignore')"/>
         <xsl:message use-when="true() or system-property('debug') eq 'true'">
             <xsl:text>Input collection: </xsl:text>
             <xsl:for-each select="$files">
@@ -87,7 +91,7 @@ paths of the documents in the docx file to document nodes of the parsed files.
             <xsl:map>
                 <xsl:map-entry key="'/word/document.xml'" select="."/>
                 <xsl:variable name="base" select="base-uri(.)"/>
-                <xsl:for-each select="$zipped-files[. ne '/word/document.xml']">
+                <xsl:for-each select="$docx2t:zipped-files[. ne '/word/document.xml']">
                     <!-- the relative path from document.xml will be used for finding the file -->
                     <xsl:variable name="rel-path" select="concat('..', .)"/>
                     <xsl:variable name="uri" as="xs:anyURI" select="resolve-uri($rel-path, $base)"/>
@@ -111,8 +115,8 @@ paths of the documents in the docx file to document nodes of the parsed files.
 
     <xsl:template mode="docx2t:convert" match="w:document">
         <TEI>
-            <xsl:call-template name="rootAttributes"/>
-            <xsl:call-template name="teiHeader"/>
+            <xsl:call-template name="docx2t:rootAttributes"/>
+            <xsl:call-template name="docx2t:teiHeader"/>
             <text>
                 <body>
                     <xsl:apply-templates mode="#current"/>
@@ -144,35 +148,35 @@ paths of the documents in the docx file to document nodes of the parsed files.
 
     <!-- named templates for the header etc. -->
 
-    <xsl:template name="rootAttributes" as="attribute()*" visibility="public">
+    <xsl:template name="docx2t:rootAttributes" as="attribute()*" visibility="public">
         <xsl:context-item as="element(w:document)" use="required"/>
         <!--xsl:attribute name="xml:base" select="base-uri(.)"/-->
     </xsl:template>
 
-    <xsl:template name="teiHeader" as="element(tei:teiHeader)" visibility="public">
+    <xsl:template name="docx2t:teiHeader" as="element(tei:teiHeader)" visibility="public">
         <xsl:context-item as="element(w:document)" use="required"/>
         <teiHeader>
-            <xsl:call-template name="fileDesc"/>
-            <xsl:call-template name="profileDesc"/>
-            <xsl:call-template name="encodingDesc"/>
-            <xsl:call-template name="revisionDesc"/>
+            <xsl:call-template name="docx2t:fileDesc"/>
+            <xsl:call-template name="docx2t:profileDesc"/>
+            <xsl:call-template name="docx2t:encodingDesc"/>
+            <xsl:call-template name="docx2t:revisionDesc"/>
         </teiHeader>
     </xsl:template>
 
-    <xsl:template name="fileDesc" as="element()?" visibility="public">
+    <xsl:template name="docx2t:fileDesc" as="element()?" visibility="public">
         <xsl:context-item as="element(w:document)" use="required"/>
         <fileDesc/>
     </xsl:template>
 
-    <xsl:template name="encodingDesc" as="element()*" visibility="public">
+    <xsl:template name="docx2t:encodingDesc" as="element()*" visibility="public">
         <xsl:context-item as="element(w:document)" use="required"/>
     </xsl:template>
 
-    <xsl:template name="profileDesc" as="element()*" visibility="public">
+    <xsl:template name="docx2t:profileDesc" as="element()*" visibility="public">
         <xsl:context-item as="element(w:document)" use="required"/>
     </xsl:template>
 
-    <xsl:template name="revisionDesc" as="element()*" visibility="public">
+    <xsl:template name="docx2t:revisionDesc" as="element()*" visibility="public">
         <xsl:context-item as="element(w:document)" use="required"/>
         <revisionDesc>
             <change>
@@ -183,11 +187,18 @@ paths of the documents in the docx file to document nodes of the parsed files.
                     select="current-dateTime() => format-dateTime('[Y0001]-[M01]-[D01]')"/>
                 <xsl:text>Converted from </xsl:text>
                 <ptr>
-                    <xsl:attribute name="target" select="$input-file"/>
+                    <xsl:choose>
+                        <xsl:when test="$docx2t:input-file">
+                            <xsl:attribute name="target" select="$docx2t:input-file"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="target" select="base-uri(.)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </ptr>
                 <xsl:text> using </xsl:text>
                 <ptr>
-                    <xsl:attribute name="target" select="static-base-uri()"/>
+                    <xsl:attribute name="target" select="$docx2t:stylesheet"/>
                 </ptr>
                 <xsl:text>.</xsl:text>
             </change>
