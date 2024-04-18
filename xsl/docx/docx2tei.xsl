@@ -109,9 +109,11 @@ paths of the documents in the docx file to document nodes of the parsed files.
 
 
 
-    <!-- the mode docx2t does the conversion -->
-
+    <!-- the mode docx2t:convert does the conversion -->
     <xsl:mode name="docx2t:convert" on-no-match="shallow-skip" visibility="public"/>
+
+    <!-- the mode docx2t:footnote converts footnotes and overlaps with docx2t:convert -->
+    <xsl:mode name="docx2t:footnote" on-no-match="shallow-skip" visibility="public"/>
 
     <xsl:template mode="docx2t:convert" match="w:document">
         <TEI>
@@ -125,10 +127,11 @@ paths of the documents in the docx file to document nodes of the parsed files.
         </TEI>
     </xsl:template>
 
-    <xsl:template mode="docx2t:convert" match="w:t/text()">
+    <xsl:template mode="docx2t:convert docx2t:footnote" match="w:t/text()">
         <xsl:copy/>
     </xsl:template>
 
+    <!-- paragraphs are not reproduced inside footnotes -->
     <xsl:template mode="docx2t:convert" match="w:p">
         <p>
             <xsl:apply-templates mode="#current"/>
@@ -139,7 +142,7 @@ paths of the documents in the docx file to document nodes of the parsed files.
         <xsl:param name="files" as="map(xs:string, document-node())" tunnel="true"/>
         <xsl:variable name="id" select="@w:id"/>
         <note>
-            <xsl:apply-templates mode="#current"
+            <xsl:apply-templates mode="docx2t:footnote"
                 select="map:get($files, '/word/footnotes.xml')//w:footnote[@w:id eq $id]"/>
         </note>
     </xsl:template>
