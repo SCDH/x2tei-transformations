@@ -5,7 +5,7 @@
 <plugin
     id="${project.groupId}.${project.artifactId}"
     name="${project.name}"
-    description="SEED XSLT and XQuery library for processing TEI"
+    description="${project.description}"
     version="${project.version}"
     class="ro.sync.exml.plugin.Plugin">
 

@@ -11,51 +11,75 @@
    </formats>
 
    <fileSets>
-
       <fileSet>
-         <directory>${project.basedir}/xsl</directory>
-         <outputDirectory>/${id-prefix}/xsl</outputDirectory>
+         <directory>${project.basedir}</directory>
+         <outputDirectory>/${project.artifactId}</outputDirectory>
          <includes>
             <include>**/*.xsl</include>
+            <include>**/*.xq*</include>
             <include>**/*.json</include>
             <include>**/*.js</include>
             <include>**/*.css</include>
             <include>**/*.sty</include>
+            <include>**/*.tex</include>
          </includes>
          <excludes>
             <exclude>**/xspec/**.xsl</exclude>
             <exclude>distribution/**</exclude>
+            <exclude>scripts/**</exclude>
             <exclude>doc/**</exclude>
             <exclude>test/**</exclude>
             <exclude>utils/**</exclude>
-            <exclude>test/**</exclude>
             <exclude>target/**</exclude>
             <exclude>frameworks/**</exclude>
          </excludes>
       </fileSet>
-
-      <!-- dependency resources are packetized, too -->
       <fileSet>
-         <directory>${project.build.directory}/dependencies</directory>
-         <outputDirectory>target/dependencies</outputDirectory>
-      </fileSet>
-
-      <fileSet>
-         <directory>distribution/seed</directory>
-         <outputDirectory>/</outputDirectory>
+         <!-- include all dependencies unpacked in target/dependencies -->
+         <directory>target/dependencies</directory>
+         <outputDirectory>/${project.artifactId}/target/dependencies</outputDirectory>
          <includes>
-            <include>saxon.xml</include>
+            <include>**/*</include>
          </includes>
       </fileSet>
-
       <fileSet>
+         <directory>${project.basedir}</directory>
+         <outputDirectory>/${project.artifactId}</outputDirectory>
+         <includes>
+            <include>saxon.xml</include>
+            <include>saxon-local.xml</include>
+         </includes>
+      </fileSet>
+      <fileSet>
+         <directory>${project.build.directory}/generated-resources/xml/xslt</directory>
+         <outputDirectory>/${project.artifactId}</outputDirectory>
+         <includes>
+            <include>saxon.*.xml</include>
+         </includes>
+      </fileSet>
+      <fileSet>
+         <directory>distribution/seed</directory>
+         <outputDirectory>/${project.artifactId}</outputDirectory>
+         <includes>
+            <include>hardened-saxon-config.xml</include>
+         </includes>
+      </fileSet>
+      <fileSet>
+         <!-- the yaml config file goes into the package's base directory -->
          <directory>${project.build.directory}</directory>
          <outputDirectory>/</outputDirectory>
          <includes>
-            <include>seed-config.yaml</include>
+            <include>${project.artifactId}.yaml</include>
          </includes>
       </fileSet>
-
+      <fileSet>
+         <!-- the user-provided yaml config file overwrites the generated one -->
+         <directory>${project.basedir}</directory>
+         <outputDirectory>/</outputDirectory>
+         <includes>
+            <include>${project.artifactId}.yaml</include>
+         </includes>
+      </fileSet>
    </fileSets>
 
 </assembly>
