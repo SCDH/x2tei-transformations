@@ -43,6 +43,9 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- whether or not to move &lt;lb>, i.e., line beginnings, to the end of the previous line -->
     <xsl:param name="p2t:lb-at-eol" as="xs:boolean" select="false()"/>
 
+    <!-- whether or not to keep words -->
+    <xsl:param name="p2t:words" as="xs:boolean" select="true()"/>
+
     <!-- whether ot not to keep coordinate points in the TEI output -->
     <xsl:param name="p2t:coords" as="xs:boolean" select="false()"/>
 
@@ -244,8 +247,20 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:template mode="page" match="TextLine/TextEquiv"/>
 
     <xsl:template mode="page" match="Word[position() > 1]">
-        <xsl:text> </xsl:text>
-        <xsl:apply-templates mode="page"/>
+        <xsl:choose>
+            <xsl:when test="$p2t:words">
+                <w>
+                    <xsl:attribute name="xml:id" select="p2t:make-id(@id)"/>
+                    <xsl:call-template name="p2t:coordinates"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:apply-templates mode="page"/>
+                </w>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text> </xsl:text>
+                <xsl:apply-templates mode="page"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template mode="page" match="Word[1]">
