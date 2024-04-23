@@ -252,10 +252,10 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:template mode="page" match="Word[position() > 1]">
         <xsl:choose>
             <xsl:when test="$p2t:words">
+                <xsl:text>&#x20;</xsl:text>
                 <w>
                     <xsl:attribute name="xml:id" select="p2t:make-id(@id)"/>
                     <xsl:call-template name="p2t:coordinates"/>
-                    <xsl:text> </xsl:text>
                     <xsl:apply-templates mode="page"/>
                 </w>
             </xsl:when>
@@ -267,7 +267,18 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
     <xsl:template mode="page" match="Word[1]">
-        <xsl:apply-templates mode="page"/>
+        <xsl:choose>
+            <xsl:when test="$p2t:words">
+                <w>
+                    <xsl:attribute name="xml:id" select="p2t:make-id(@id)"/>
+                    <xsl:call-template name="p2t:coordinates"/>
+                    <xsl:apply-templates mode="page"/>
+                </w>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates mode="page"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- drop white space text nodes -->
