@@ -40,7 +40,7 @@
 
     <properties>
         <!-- the main author or contributors who gain credits for this project; used in metadata of build artifacts -->
-        <author>\${env.GITLAB_USER_NAME}</author>
+        <author>Christian Lück</author>
         <!-- where to find the software license for this project; content is used in metadata of build artifacts -->
         <license.file>LICENSE</license.file>
 
