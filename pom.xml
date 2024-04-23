@@ -592,6 +592,7 @@
                                                 <include>xsl/usx/usx2tei.xsl</include>
                                                 <include>xsl/accordance/txt2tei.xsl</include>
                                                 <include>xsl/docx/docx2tei.xsl</include>
+                                                <include>xsl/pagexml/pagecontent2tei.xsl</include>
                                             </includes>
                                             <parameters>
                                                 <parameter>
