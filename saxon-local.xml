@@ -11,6 +11,9 @@ http://www.saxonica.com/documentation/index/configuration-file.html
         <package
             name="https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/x2tei-transformations/xsl/docx/docx2tei.xsl"
             version="1.0.0" sourceLocation="xsl/docx/docx2tei.xsl"/>
+        <package
+            name="https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/x2tei-transformations/xsl/pagexml/pagecontent2tei.xsl"
+            version="1.0.0" sourceLocation="xsl/pagexml/pagecontent2tei.xsl"/>
     </xsltPackages>
 
 </configuration>
