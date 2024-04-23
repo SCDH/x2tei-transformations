@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:p2t="http://scdh.wwu.de/transform/pagexml2tei#" xmlns:t="http://www.tei-c.org/ns/1.0"
     stylesheet="pagecontent2tei.xsl" run-as="external">
 
@@ -33,6 +34,28 @@
         <x:expect label="1 page" test="count(/t:TEI/t:text//t:pb)" select="1"/>
         <x:expect label="4 paragraphs" test="count(/t:TEI/t:text//t:p)" select="4"/>
         <x:expect label="25 lines" test="count(/t:TEI/t:text//t:lb)" select="25"/>
+    </x:scenario>
+
+    <x:scenario label="initial template xsl:initial-template">
+        <x:param name="p2t:collection-uri"
+            select="xs:anyURI('../../test/samples/pagexml_chronicle?select=*_p*.xml')"/>
+        <x:call template="xsl:initial-template"/>
+        <x:expect label="2 pages" test="count(/t:TEI/t:text//t:pb)" select="2"/>
+    </x:scenario>
+
+    <x:scenario label="initial template pt2:collection">
+        <x:param name="p2t:collection-uri"
+            select="xs:anyURI('../../test/samples/pagexml_chronicle/collection.xml')"/>
+        <x:call template="p2t:collection"/>
+        <x:expect label="2 pages" test="count(/t:TEI/t:text//t:pb)" select="2"/>
+    </x:scenario>
+
+    <x:scenario label="initial template pt2:collection-string"
+        pending="we do not touch the test template p2t:collection because it works in the frontend">
+        <x:param name="p2t:collection"
+            select="unparsed-text('../../../test/samples/pagexml_chronicle/collection.xml')"/>
+        <x:call template="p2t:collection-string"/>
+        <x:expect label="2 pages" test="count(/t:TEI/t:text//t:pb)" select="2"/>
     </x:scenario>
 
 
