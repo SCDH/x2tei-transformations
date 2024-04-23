@@ -353,7 +353,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                     <xsl:text>, levels: </xsl:text>
                     <xsl:value-of select="$context/self::Coords/@level"/>
                     <xsl:text>, points: </xsl:text>
-                    <xsl:value-of select="$context/self::Coords/@* ! name(.)"/>
+                    <xsl:value-of select="$context/self::Coords/@points"/>
                 </xsl:message>
                 <xsl:attribute name="{$p2t:coords-att}"
                     select="$context/self::Coords[@level eq $level]/@points => p2t:merge-coords()"/>
