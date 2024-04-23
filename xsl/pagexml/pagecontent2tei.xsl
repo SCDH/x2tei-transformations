@@ -43,6 +43,12 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- whether or not to move &lt;lb>, i.e., line beginnings, to the end of the previous line -->
     <xsl:param name="p2t:lb-at-eol" as="xs:boolean" select="false()"/>
 
+    <!-- whether ot not to keep coordinate points in the TEI output -->
+    <xsl:param name="p2t:coords" as="xs:boolean" select="false()"/>
+
+    <!-- the name of the attribute to keep the coordinate points in -->
+    <xsl:param name="p2t:coords-att" as="xs:QName" select="xs:QName('facs')"/>
+
     <!-- collection URI when started with xsl:initial-template or
         a URI of a collection catalog when started with p2t:collection -->
     <xsl:param name="p2t:collection-uri" as="xs:anyURI"/>
@@ -137,6 +143,11 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                                 <p>
                                     <xsl:attribute name="xml:id"
                                         select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"/>
+                                    <xsl:call-template name="p2t:coordinates">
+                                        <xsl:with-param name="context"
+                                            select="current-group()/descendant-or-self::Coords"/>
+                                        <xsl:with-param name="level" select="'TextRegion'"/>
+                                    </xsl:call-template>
                                     <xsl:apply-templates mode="text-regions"
                                         select="current-group()"/>
                                 </p>
@@ -211,10 +222,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:choose>
             <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
                 <xsl:text>&#xa;</xsl:text>
-                <lb xml:id="{p2t:make-id(@id)}"/>
+                <lb xml:id="{p2t:make-id(@id)}">
+                    <xsl:call-template name="p2t:coordinates"/>
+                </lb>
             </xsl:when>
             <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
-                <lb xml:id="{p2t:make-id(@id)}"/>
+                <lb xml:id="{p2t:make-id(@id)}">
+                    <xsl:call-template name="p2t:coordinates"/>
+                </lb>
                 <xsl:text>&#xa;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
@@ -242,11 +257,27 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:value-of select="."/>
     </xsl:template>
 
+    <!-- We keep Coords in this mode in order to be able to reproduce them
+        for alignment information. We add a @level attribute to it to 
+        keep track if it is on a TextRegion, TextLine etc. -->
+    <xsl:template mode="page" match="Coords">
+        <xsl:message use-when="system-property('debug') eq 'true'">
+            <xsl:text>copying coords at level </xsl:text>
+            <xsl:value-of select="parent::* => local-name()"/>
+        </xsl:message>
+        <xsl:copy>
+            <xsl:attribute name="level" select="parent::* => local-name()"/>
+            <xsl:copy-of select="attribute() | node()"/>
+        </xsl:copy>
+    </xsl:template>
+
 
     <!-- text-regions is the mode for the second pass -->
     <xsl:mode name="text-regions" on-no-match="shallow-copy"/>
 
     <xsl:template mode="text-regions" match="TextRegionStart"/>
+
+    <xsl:template mode="text-regions" match="Coords"/>
 
 
     <!-- p-joiner is the mode for the third pass -->
@@ -282,5 +313,47 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="ids" as="xs:string*"/>
         <xsl:sequence select="string-join($ids, '_MERGE_')"/>
     </xsl:function>
+
+    <xsl:function name="p2t:merge-coords" as="xs:string">
+        <xsl:param name="coords" as="xs:string*"/>
+        <xsl:sequence select="string-join($coords, ' MERGE ')"/>
+    </xsl:function>
+
+    <!-- this template reproduces coordinates on a context item or on a context
+        that is explicitly passed in as the context parameter -->
+    <xsl:template name="p2t:coordinates" as="attribute()?" visibility="public">
+        <xsl:context-item as="node()" use="required"/>
+        <xsl:param name="context" as="element()+" select="." required="false"/>
+        <xsl:param name="level" select="$context => local-name()" required="false"/>
+        <xsl:choose>
+            <xsl:when test="not($p2t:coords)"/>
+            <xsl:when test="$context/self::Coords">
+                <xsl:message use-when="system-property('debug') eq 'true'">
+                    <xsl:text>directyl looking for Coords at level </xsl:text>
+                    <xsl:value-of select="$level"/>
+                    <xsl:text>, found </xsl:text>
+                    <xsl:value-of select="$context/self::Coords[@level eq $level] => count()"/>
+                    <xsl:text>, levels: </xsl:text>
+                    <xsl:value-of select="$context/self::Coords/@level"/>
+                    <xsl:text>, points: </xsl:text>
+                    <xsl:value-of select="$context/self::Coords/@* ! name(.)"/>
+                </xsl:message>
+                <xsl:attribute name="{$p2t:coords-att}"
+                    select="$context/self::Coords[@level eq $level]/@points => p2t:merge-coords()"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message use-when="system-property('debug') eq 'true'">
+                    <xsl:text>looking for coords on level </xsl:text>
+                    <xsl:value-of select="$level"/>
+                    <xsl:text>, found </xsl:text>
+                    <xsl:value-of select="$context/child::Coords => count()"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="$context/child::Coords/@*"/>
+                </xsl:message>
+                <xsl:attribute name="{$p2t:coords-att}"
+                    select="$context/child::Coords/@points => p2t:merge-coords()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
 </xsl:package>
