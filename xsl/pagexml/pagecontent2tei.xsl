@@ -37,6 +37,12 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- whether or not to join pages -->
     <xsl:param name="p2t:join-pages" as="xs:boolean" select="true()"/>
 
+    <!-- whether or not to have &lt;lb>, i.e., line beginnings -->
+    <xsl:param name="p2t:lb" as="xs:boolean" select="true()"/>
+
+    <!-- whether or not to move &lt;lb>, i.e., line beginnings, to the end of the previous line -->
+    <xsl:param name="p2t:lb-at-eol" as="xs:boolean" select="false()"/>
+
     <!-- collection URI when started with xsl:initial-template or
         a URI of a collection catalog when started with p2t:collection -->
     <xsl:param name="p2t:collection-uri" as="xs:anyURI"/>
@@ -129,6 +135,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                             <xsl:for-each-group select="$flat-regions/node()"
                                 group-starting-with="TextRegionStart[not(preceding::node()[1][self::tei:pb])]">
                                 <p>
+                                    <xsl:attribute name="xml:id"
+                                        select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"/>
                                     <xsl:apply-templates mode="text-regions"
                                         select="current-group()"/>
                                 </p>
@@ -176,7 +184,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="single-source" as="xs:boolean" select="false()" tunnel="true"/>
         <xsl:text>&#xa;</xsl:text>
         <xsl:if test="not($p2t:join-pages) and not($single-source)">
-            <pc:TextRegionStart/>
+            <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
         </xsl:if>
         <pb>
             <xsl:if test="$p2t:with-metadata">
@@ -185,7 +193,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             </xsl:if>
         </pb>
         <xsl:if test="not($p2t:join-pages) or $single-source">
-            <pc:TextRegionStart/>
+            <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
         </xsl:if>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
@@ -195,13 +203,24 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             In order to join paragraphs that join pages we do not wrap the content of ta TextRegion into tei:p
             but add a flat TextRegionStart and use a second pass and xsl:for-each-group 
         -->
-        <pc:TextRegionStart/>
+        <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
 
     <xsl:template mode="page" match="TextLine">
-        <xsl:text>&#xa;</xsl:text>
-        <lb xml:id="{@id}"/>
+        <xsl:choose>
+            <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
+                <xsl:text>&#xa;</xsl:text>
+                <lb xml:id="{p2t:make-id(@id)}"/>
+            </xsl:when>
+            <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
+                <lb xml:id="{p2t:make-id(@id)}"/>
+                <xsl:text>&#xa;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>&#xa;</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
 
@@ -243,5 +262,25 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:attribute name="n" select="count(preceding::tei:pb) + 1"/>
         </xsl:copy>
     </xsl:template>
+
+
+    <!-- functions -->
+
+    <xsl:function name="p2t:make-id" as="xs:string" visibility="final">
+        <xsl:param name="att" as="attribute()"/>
+        <xsl:sequence select="p2t:id-prefix($att) || string($att)"/>
+    </xsl:function>
+
+    <xsl:function name="p2t:id-prefix" as="xs:string" visibility="public">
+        <xsl:param name="context" as="node()"/>
+        <xsl:sequence
+            select="'p' || root($context)/PcGts/Page/@imageFilename => replace('\.(img|jpg)$', '') || '_-_'"
+        />
+    </xsl:function>
+
+    <xsl:function name="p2t:merge-ids" as="xs:string" visibility="public">
+        <xsl:param name="ids" as="xs:string*"/>
+        <xsl:sequence select="string-join($ids, '_MERGE_')"/>
+    </xsl:function>
 
 </xsl:package>
