@@ -274,13 +274,13 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:function name="p2t:id-prefix" as="xs:string" visibility="public">
         <xsl:param name="context" as="node()"/>
         <xsl:sequence
-            select="'p' || root($context)/PcGts/Page/@imageFilename => replace('\.(img|jpg)$', '') || '_-_'"
+            select="'p' || root($context)/PcGts/Page/@imageFilename => replace('\.(img|jpg)$', '') || '.'"
         />
     </xsl:function>
 
     <xsl:function name="p2t:merge-ids" as="xs:string" visibility="public">
         <xsl:param name="ids" as="xs:string*"/>
-        <xsl:sequence select="string-join($ids, '_MERGE_')"/>
+        <xsl:sequence select="string-join($ids, '.MERGE.')"/>
     </xsl:function>
 
 </xsl:package>
