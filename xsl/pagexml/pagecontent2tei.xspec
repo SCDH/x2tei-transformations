@@ -26,6 +26,8 @@
             test="every $p in /t:TEI/t:text//t:lb/parent::* satisfies name($p) eq 'p'"/>
         <x:expect label="all text in paragraphs"
             test="every $p in /t:TEI/t:text//text()[normalize-space(.) ne '']/parent::* satisfies name($p) eq 'p'"/>
+        <x:expect label="every element in text has an ID"
+            test="every $el in /t:TEI/t:text//t:body/t:div//* satisfies exists($el/@xml:id)"/>
         <!--x:expect label="result"/-->
     </x:scenario>
 
