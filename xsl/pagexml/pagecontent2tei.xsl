@@ -211,8 +211,10 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <xsl:template mode="page" match="TextRegion">
         <!-- 
-            In order to join paragraphs that join pages we do not wrap the content of ta TextRegion into tei:p
-            but add a flat TextRegionStart and use a second pass and xsl:for-each-group 
+            In order to join paragraphs that cross page boundaries
+            we do not wrap the content of ta TextRegion into tei:p
+            but add a flat TextRegionStart and use a second pass
+            and xsl:for-each-group 
         -->
         <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
         <xsl:apply-templates mode="page"/>
