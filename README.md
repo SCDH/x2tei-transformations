@@ -8,14 +8,44 @@ This is an XSLT library for transforming various input formats to TEI-XML. Input
 - [Accordance](https://www.accordancebible.com/) plain text files of
   books of the Bible to TEI P5
 - docx
+- PageXML
 
 ## Getting started
 
-### Web UI
+This project uses
+[Tooling](https://zivgitlab.uni-muenster.de/SCDH/tei-processing/tooling)
+for *simple*, *extensible* and *reproducible* download of tools for
+using the project's components.
 
-A user interface is online on the web:
+To get Saxon for using this project's transformation simply run:
+
+```
+./mvnw package
+```
+
+After this, you have a nice wrapper script in `target/bin/xslt.sh`
+
+```
+target/bin/xslt.sh -?
+Saxon-HE 10.9J from Saxonica
+Usage: see http://www.saxonica.com/documentation/index.html#!using-xsl/commandline
+Format: net.sf.saxon.Transform options params
+Options available: -? -a -catalog -config -cr -diag -dtd -ea -expand -explain -export -ext -im -init -it -jit -l -lib -license -m -nogo -now -ns -o -opt -or -outval -p -quit -r -relocate -repeat -s -sa -scmin -strip -t -T -target -TB -threads -TJ -Tlevel -Tout -TP -traceout -tree -u -val -versionmsg -warnings -x -xi -xmlversion -xsd -xsdversion -xsiloc -xsl -y --?
+Use -XYZ:? for details of option XYZ
+Params: 
+  param=value           Set stylesheet string parameter
+  +param=filename       Set stylesheet document parameter
+  ?param=expression     Set stylesheet parameter using XPath
+  !param=value          Set serialization parameter
+```
+
+Usage notes on the transformation can be found in the comments at the
+beginning of the xsl files.
+
+Operators also provide [Wiki](https://zivgitlab.uni-muenster.de/SCDH/tei-processing/seed-xml-transformer-scdh-instance/-/wikis/home) entries on the usage.
 
 
+## Web Interface
 
 ### Local Deployment
 
