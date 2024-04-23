@@ -5,10 +5,15 @@ USAGE:
 
 java -jar saxon.jar -xsl:xsl/pagexml/pagecontent2tei.xsl -s:test/samples/pagexml_chronicle/0007_p007.xml
 
-USAGE for joining all page xml files from a folder:
-
+USAGE for joining all page xml files from a folder using a file pattern:
+target/bin/xslt.sh -xsl:xsl/pagexml/pagecontent2tei.xsl -it {http://scdh.wwu.de/transform/pagexml2tei#}collection-uri=../../test/samples/pagexml_chronicle?select=*_p*.xml
 
 USAGE with a collection catalog:
+target/bin/xslt.sh -xsl:xsl/pagexml/pagecontent2tei.xsl -it:{http://scdh.wwu.de/transform/pagexml2tei#}collection {http://scdh.wwu.de/transform/pagexml2tei#}collection-uri=../../test/samples/pagexml_chronicle/collection.xml
+
+or with an absolute path gotten by the realpath shell program:
+
+target/bin/xslt.sh -xsl:xsl/pagexml/pagecontent2tei.xsl -it:{http://scdh.wwu.de/transform/pagexml2tei#}collection {http://scdh.wwu.de/transform/pagexml2tei#}collection-uri=$(realpath test/samples/pagexml_chronicle/collection.xml)
 
 See also:
 Collection URIs: https://www.saxonica.com/documentation12/index.html#!sourcedocs/collections/collection-directories
