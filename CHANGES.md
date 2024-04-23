@@ -1,5 +1,10 @@
 # Changes
 
+## 0.3.0
+
+- `xsl/pagexml/pagecontent2tei.xsl` new:
+  - convert PageXML to TEI
+
 ## 0.2.1
 
 - `xsl/docx/doxc2tei.xsl`:
