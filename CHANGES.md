@@ -1,5 +1,10 @@
 # Changes
 
+## 0.4.0
+
+- `xsl/pagexml/tei-pagexml-mapping.xsl` new:
+  - generate a mapping from derived TEI back to PageXML preimage
+
 ## 0.3.3
 
 - `xsl/pagexml/pagecontent2tei.xsl` new:
