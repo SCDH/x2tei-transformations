@@ -184,7 +184,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="single-source" as="xs:boolean" select="false()" tunnel="true"/>
         <xsl:text>&#xa;</xsl:text>
         <xsl:if test="not($p2t:join-pages) and not($single-source)">
-            <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
+            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id)}"/>
         </xsl:if>
         <pb>
             <xsl:if test="$p2t:with-metadata">
@@ -193,7 +193,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             </xsl:if>
         </pb>
         <xsl:if test="not($p2t:join-pages) or $single-source">
-            <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
+            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id)}"/>
         </xsl:if>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
