@@ -19,15 +19,13 @@
 
     <!-- default rule: run all tests -->
     <target name="test">
-        <!--antcall target="test-xsl-projects-alea-latex-prose.xsl"/-->
+        <antcall target="test-xsl-pagexml-pagecontent2tei.xsl"/>
     </target>
 
-    <!-- Example
-    <target name="test-xsl-projects-alea-latex-prose.xsl">
+    <target name="test-xsl-pagexml-pagecontent2tei.xsl">
         <antcall target="xspec.xspec" inheritall="false">
-            <param name="xspec.xml" location="${basedir}/xsl/projects/alea/latex/prose.xspec"/>
+            <param name="xspec.xml" location="${basedir}/xsl/pagexml/pagecontent2tei.xspec"/>
         </antcall>
     </target>
-    -->
 
 </project>

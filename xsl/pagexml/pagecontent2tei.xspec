@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:p2t="http://scdh.wwu.de/transform/pagexml2tei#" xmlns:t="http://www.tei-c.org/ns/1.0"
+    stylesheet="pagecontent2tei.xsl" run-as="external">
+
+    <x:scenario label="general structure">
+        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
+        <x:expect label="TEI root element" test="exists(/t:TEI)"/>
+        <x:expect label="has header" test="exists(/t:TEI/t:teiHeader)"/>
+        <x:expect label="has file description" test="exists(/t:TEI/t:teiHeader/t:fileDesc)"/>
+        <x:expect label="has title statement"
+            test="exists(/t:TEI/t:teiHeader/t:fileDesc/t:titleStmt)"/>
+        <x:expect label="has publication statement"
+            test="exists(/t:TEI/t:teiHeader/t:fileDesc/t:publicationStmt)"/>
+        <x:expect label="has source description"
+            test="exists(/t:TEI/t:teiHeader/t:fileDesc/t:sourceDesc)"/>
+        <x:expect label="has text" test="exists(/t:TEI/t:text)"/>
+        <x:expect label="has body" test="exists(/t:TEI/t:text/t:body)"/>
+        <x:expect label="has div" test="exists(/t:TEI/t:text/t:body/t:div)"/>
+        <x:expect label="div starts with a pb"
+            test="t:TEI/t:text/t:body/t:div/element()[1] ! name(.)" select="'pb'"/>
+        <x:expect label="has paragraphs" test="exists(t:TEI/t:text/t:body/t:div/t:p)"/>
+        <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:div/t:p/t:lb)"/>
+        <x:expect label="every lb is in a paragraph"
+            test="every $p in /t:TEI/t:text//t:lb/parent::* satisfies name($p) eq 'p'"/>
+        <x:expect label="all text in paragraphs"
+            test="every $p in /t:TEI/t:text//text()[normalize-space(.) ne '']/parent::* satisfies name($p) eq 'p'"/>
+        <!--x:expect label="result"/-->
+    </x:scenario>
+
+    <x:scenario label="p2t:source initial mode on chronicle 0007">
+        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
+        <x:expect label="1 page" test="count(/t:TEI/t:text//t:pb)" select="1"/>
+        <x:expect label="4 paragraphs" test="count(/t:TEI/t:text//t:p)" select="4"/>
+        <x:expect label="25 lines" test="count(/t:TEI/t:text//t:lb)" select="25"/>
+    </x:scenario>
+
+
+</x:description>
