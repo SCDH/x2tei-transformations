@@ -589,9 +589,9 @@
                                             <!-- Include every transformation resource for the SEED XML Transformer
                                                 in an <include>path</include> element! -->
                                             <includes>
-					        <include>xsl/usx/usx2tei.xsl</include>
-					        <include>xsl/accordance/txt2tei.xsl</include>
-					        <include>xsl/docx/docx2tei.xsl</include>
+                                                <include>xsl/usx/usx2tei.xsl</include>
+                                                <include>xsl/accordance/txt2tei.xsl</include>
+                                                <include>xsl/docx/docx2tei.xsl</include>
                                             </includes>
                                             <parameters>
                                                 <parameter>
