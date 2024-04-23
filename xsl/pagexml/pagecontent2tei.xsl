@@ -146,11 +146,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                                 <p>
                                     <xsl:attribute name="xml:id"
                                         select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"/>
-                                    <xsl:call-template name="p2t:coordinates">
-                                        <xsl:with-param name="context"
-                                            select="current-group()/descendant-or-self::Coords"/>
-                                        <xsl:with-param name="level" select="'TextRegion'"/>
-                                    </xsl:call-template>
+                                    <xsl:if
+                                        test="exists(current-group()/descendant-or-self::Coords)">
+                                        <xsl:call-template name="p2t:coordinates">
+                                            <xsl:with-param name="context"
+                                                select="current-group()/descendant-or-self::Coords"/>
+                                            <xsl:with-param name="level" select="'TextRegion'"/>
+                                        </xsl:call-template>
+                                    </xsl:if>
                                     <xsl:apply-templates mode="text-regions"
                                         select="current-group()"/>
                                 </p>
