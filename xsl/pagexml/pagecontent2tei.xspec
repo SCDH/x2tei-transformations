@@ -29,13 +29,6 @@
         <!--x:expect label="result"/-->
     </x:scenario>
 
-    <x:scenario label="p2t:source initial mode on chronicle 0007">
-        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
-        <x:expect label="1 page" test="count(/t:TEI/t:text//t:pb)" select="1"/>
-        <x:expect label="4 paragraphs" test="count(/t:TEI/t:text//t:p)" select="4"/>
-        <x:expect label="25 lines" test="count(/t:TEI/t:text//t:lb)" select="25"/>
-    </x:scenario>
-
     <x:scenario label="initial template xsl:initial-template">
         <x:param name="p2t:collection-uri"
             select="xs:anyURI('../../test/samples/pagexml_chronicle?select=*_p*.xml')"/>
@@ -56,6 +49,31 @@
             select="unparsed-text('../../../test/samples/pagexml_chronicle/collection.xml')"/>
         <x:call template="p2t:collection-string"/>
         <x:expect label="2 pages" test="count(/t:TEI/t:text//t:pb)" select="2"/>
+    </x:scenario>
+
+
+
+    <x:scenario label="content: chronicle 0007">
+        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
+        <x:expect label="1 page" test="count(/t:TEI/t:text//t:pb)" select="1"/>
+        <x:expect label="4 paragraphs" test="count(/t:TEI/t:text//t:p)" select="4"/>
+        <x:expect label="25 lines" test="count(/t:TEI/t:text//t:lb)" select="25"/>
+    </x:scenario>
+
+    <x:scenario label="content: chronicle 0008">
+        <x:context href="../../test/samples/pagexml_chronicle/0008_p008.xml" mode="p2t:source"/>
+        <x:expect label="1 page" test="count(/t:TEI/t:text//t:pb)" select="1"/>
+        <x:expect label="1+1 paragraphs" test="count(/t:TEI/t:text//t:p)" select="2"/>
+        <x:expect label="27 lines" test="count(/t:TEI/t:text//t:lb)" select="27"/>
+    </x:scenario>
+
+    <x:scenario label="merged pages: chronicle 0007 and 0008">
+        <x:param name="p2t:collection-uri"
+            select="xs:anyURI('../../test/samples/pagexml_chronicle/collection.xml')"/>
+        <x:call template="p2t:collection"/>
+        <x:expect label="2 pages" test="count(/t:TEI/t:text//t:pb)" select="2"/>
+        <x:expect label="count of paragraphs" test="count(/t:TEI/t:text//t:p)" select="5"/>
+        <x:expect label="count of lines" test="count(/t:TEI/t:text//t:lb)" select="52"/>
     </x:scenario>
 
 
