@@ -1,6 +1,6 @@
 # Changes
 
-## 0.3.0
+## 0.3.2
 
 - `xsl/pagexml/pagecontent2tei.xsl` new:
   - convert PageXML to TEI
