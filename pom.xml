@@ -167,6 +167,8 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <packaging>pom</packaging>
+
     <build>
         <plugins>
 
