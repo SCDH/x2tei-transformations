@@ -70,6 +70,7 @@ push-packages:
     - apk add unzip
   script:
     - ./mvnw -Drevision=$CI_COMMIT_TAG -Dchangelist="" verify
+    - ./mvnw -Drevision=$CI_COMMIT_TAG -Dchangelist="" -Pseed-config package
     - target/bin/test.sh
     - ./mvnw -Drevision=$CI_COMMIT_TAG -Dchangelist="" deploy -s ci_settings.xml
   artifacts:
