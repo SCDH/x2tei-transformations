@@ -238,10 +238,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:choose>
             <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
                 <xsl:text>&#xa;</xsl:text>
-                <lb xml:id="{p2t:make-id(@id, $page-number)}"/>
+                <lb xml:id="{p2t:make-id(@id, $page-number)}">
+                    <xsl:call-template name="p2t:coordinates"/>
+                </lb>
             </xsl:when>
             <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
-                <lb xml:id="{p2t:make-id(@id, $page-number)}"/>
+                <lb xml:id="{p2t:make-id(@id, $page-number)}">
+                    <xsl:call-template name="p2t:coordinates"/>
+                </lb>
                 <xsl:text>&#xa;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
