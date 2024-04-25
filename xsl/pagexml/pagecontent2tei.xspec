@@ -5,6 +5,7 @@
     stylesheet="pagecontent2tei.xsl" run-as="external">
 
     <x:scenario label="general structure">
+        <x:param name="p2t:words" select="false()"/>
         <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
         <x:expect label="TEI root element" test="exists(/t:TEI)"/>
         <x:expect label="has header" test="exists(/t:TEI/t:teiHeader)"/>
@@ -26,8 +27,33 @@
             test="every $p in /t:TEI/t:text//t:lb/parent::* satisfies name($p) eq 'p'"/>
         <x:expect label="all text in paragraphs"
             test="every $p in /t:TEI/t:text//text()[normalize-space(.) ne '']/parent::* satisfies name($p) eq 'p'"/>
+        <x:expect label="every element in text has an ID"
+            test="every $el in /t:TEI/t:text//(t:p | t:lb | t:w) satisfies exists($el/@xml:id)"/>
         <!--x:expect label="result"/-->
     </x:scenario>
+
+    <x:scenario label="general structure with words">
+        <x:param name="p2t:words" select="true()"/>
+        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
+        <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:div/t:p/t:w)"/>
+        <x:expect label="every words is in a paragraph"
+            test="every $p in /t:TEI/t:text//t:w/parent::* satisfies name($p) eq 'p'"/>
+        <x:expect label="all text in paragraphs"
+            test="every $p in /t:TEI/t:text//text()[normalize-space(.) ne '']/parent::* satisfies name($p) eq 'w'"/>
+        <x:expect label="every element in text has an ID"
+            test="every $el in /t:TEI/t:text//(t:p | t:lb | t:w) satisfies exists($el/@xml:id)"/>
+        <!--x:expect label="result"/-->
+    </x:scenario>
+
+    <x:scenario label="coordinates">
+        <x:param name="p2t:words" select="true()"/>
+        <x:param name="p2t:coords" select="true()"/>
+        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
+        <x:expect label="every element in text has coordinates"
+            test="every $el in /t:TEI/t:text//(t:p | t:lb | t:w) satisfies exists($el/@facs)"/>
+        <!--x:expect label="result"/-->
+    </x:scenario>
+
 
     <x:scenario label="initial template xsl:initial-template">
         <x:param name="p2t:collection-uri"
