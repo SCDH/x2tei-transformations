@@ -1,11 +1,9 @@
 # Changes
 
-## 0.3.4
+## 0.4.0
 
-- `xsl/pagexml/pageccontent2tei.xsl`
-  - get Identifiers on all levels
-  - optionally reproduce words
-  - optionally reproduce coordinats on all levels
+- `xsl/pagexml/tei-pagexml-mapping.xsl` new:
+  - generate a mapping from derived TEI back to PageXML preimage
 
 ## 0.3.3
 

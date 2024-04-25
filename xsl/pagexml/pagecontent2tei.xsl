@@ -131,10 +131,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                         <!-- first pass with mode flat-regions which flattens regions (paragraphs) to a
                             milestone markup which can be upcycled again in the second pass. -->
                         <xsl:variable name="flat-regions">
-                            <xsl:apply-templates select="$pages" mode="page">
-                                <!-- assert, that the collection is ordered lexically by file name -->
-                                <!--xsl:sort select="base-uri()"/-->
-                            </xsl:apply-templates>
+                            <xsl:for-each select="$pages">
+                                <xsl:apply-templates select="." mode="page">
+                                    <xsl:with-param name="page-number" as="xs:integer"
+                                        select="position()" tunnel="true"/>
+                                    <!-- assert, that the collection is ordered lexically by file name -->
+                                    <!--xsl:sort select="base-uri()"/-->
+                                </xsl:apply-templates>
+                            </xsl:for-each>
                         </xsl:variable>
                         <!--xsl:apply-templates select="$flat-regions/node()" mode="text-regions"/-->
                         <!-- second pass: upcycled region milestones to paragraphs, but only when they
@@ -199,45 +203,45 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <xsl:template mode="page" match="Page">
         <xsl:param name="single-source" as="xs:boolean" select="false()" tunnel="true"/>
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:text>&#xa;</xsl:text>
         <xsl:if test="not($p2t:join-pages) and not($single-source)">
-            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id)}"/>
+            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id, $page-number)}"/>
         </xsl:if>
         <pb>
             <xsl:if test="$p2t:with-metadata">
                 <xsl:attribute name="pc:imageFilename" select="@imageFilename"/>
                 <xsl:attribute name="pc:source" select="tokenize(base-uri(.), '/')[last()]"/>
             </xsl:if>
+            <xsl:attribute name="pc:pageIdPrefix" select="p2t:id-prefix(., $page-number)"/>
         </pb>
         <xsl:if test="not($p2t:join-pages) or $single-source">
-            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id)}"/>
+            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id, $page-number)}"/>
         </xsl:if>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
 
     <xsl:template mode="page" match="TextRegion">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <!-- 
             In order to join paragraphs that cross page boundaries
             we do not wrap the content of ta TextRegion into tei:p
             but add a flat TextRegionStart and use a second pass
             and xsl:for-each-group 
         -->
-        <pc:TextRegionStart xml:id="{p2t:make-id(@id)}"/>
+        <pc:TextRegionStart xml:id="{p2t:make-id(@id, $page-number)}"/>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
 
     <xsl:template mode="page" match="TextLine">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:choose>
             <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
                 <xsl:text>&#xa;</xsl:text>
-                <lb xml:id="{p2t:make-id(@id)}">
-                    <xsl:call-template name="p2t:coordinates"/>
-                </lb>
+                <lb xml:id="{p2t:make-id(@id, $page-number)}"/>
             </xsl:when>
             <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
-                <lb xml:id="{p2t:make-id(@id)}">
-                    <xsl:call-template name="p2t:coordinates"/>
-                </lb>
+                <lb xml:id="{p2t:make-id(@id, $page-number)}"/>
                 <xsl:text>&#xa;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
@@ -338,6 +342,18 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:sequence
             select="'p' || root($context)/PcGts/Page/@imageFilename => replace('\.(img|jpg)$', '') || '.'"
         />
+    </xsl:function>
+
+    <xsl:function name="p2t:make-id" as="xs:string" visibility="final">
+        <xsl:param name="att" as="attribute()"/>
+        <xsl:param name="page-number" as="xs:integer"/>
+        <xsl:sequence select="p2t:id-prefix($att, $page-number) || string($att)"/>
+    </xsl:function>
+
+    <xsl:function name="p2t:id-prefix" as="xs:string" visibility="public">
+        <xsl:param name="context" as="node()"/>
+        <xsl:param name="page-number" as="xs:integer"/>
+        <xsl:value-of select="'p' || $page-number || '.'"/>
     </xsl:function>
 
     <xsl:function name="p2t:merge-ids" as="xs:string" visibility="public">
