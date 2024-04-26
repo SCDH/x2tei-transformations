@@ -15,9 +15,8 @@ This is an XSLT library for transforming various input formats to TEI-XML. Input
 Usage notes on the transformation can be found in the comments at the
 beginning of the xsl files in the [`xsl`](xsl) folder.
 
-Operators also provide
-[Wiki](https://zivgitlab.uni-muenster.de/SCDH/tei-processing/seed-xml-transformer-scdh-instance/-/wikis/home)
-entries on the usage.
+There are also [Wiki](../../wikis/home) entries on the usage. Users
+are welcome to add their own usage notes there.
 
 This project uses
 [Tooling](https://zivgitlab.uni-muenster.de/SCDH/tei-processing/tooling)
