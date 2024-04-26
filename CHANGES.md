@@ -1,5 +1,15 @@
 # Changes
 
+## 0.5.0
+
+- `xsl/pagexml/pagecontent2tei.xsl`:
+  - option to keep line beginnings
+  - option to keep words
+  - option to include coordinates into a configurable attribute
+  - simple and readable prefix for elements on a page: `p1.`, `p2.`,
+    `p3.`, ...
+  - `xml:id` on `<pb>`
+
 ## 0.4.0
 
 - `xsl/pagexml/tei-pagexml-mapping.xsl` new:
