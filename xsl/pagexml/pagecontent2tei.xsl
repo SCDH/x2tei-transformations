@@ -61,7 +61,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <!-- Use this initial template to transform all documents found in a directory.
         @seed:it@ -->
-    <xsl:template name="xsl:initial-template" visibility="public">
+    <xsl:template name="p2t:collection-uri" visibility="final">
         <xsl:message use-when="system-property('debug') eq 'true'">
             <xsl:text>Input Collection: </xsl:text>
             <xsl:value-of select="uri-collection($p2t:collection-uri)"/>
@@ -69,6 +69,11 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:call-template name="tei-template">
             <xsl:with-param name="pages" select="collection($p2t:collection-uri)"/>
         </xsl:call-template>
+    </xsl:template>
+
+    <!-- Use this initial template to transform all documents found in a directory. -->
+    <xsl:template name="xsl:initial-template">
+        <xsl:call-template name="p2t:collection-uri"/>
     </xsl:template>
 
     <!--
