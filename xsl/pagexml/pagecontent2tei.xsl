@@ -260,7 +260,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:apply-templates mode="page"/>
     </xsl:template>
 
-    <xsl:template mode="page" match="TextLine/TextEquiv"/>
+    <!-- if we have Words, drop TextLine/TextEquiv -->
+    <xsl:template mode="page" match="TextLine/TextEquiv[preceding-sibling::Word]"/>
 
     <xsl:template mode="page" match="Word[position() > 1]">
         <xsl:choose>

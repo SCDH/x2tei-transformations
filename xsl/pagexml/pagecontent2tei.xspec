@@ -38,7 +38,7 @@
         <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:div/t:p/t:w)"/>
         <x:expect label="every words is in a paragraph"
             test="every $p in /t:TEI/t:text//t:w/parent::* satisfies name($p) eq 'p'"/>
-        <x:expect label="all text in paragraphs"
+        <x:expect label="all text in words"
             test="every $p in /t:TEI/t:text//text()[normalize-space(.) ne '']/parent::* satisfies name($p) eq 'w'"/>
         <x:expect label="every element in text has an ID"
             test="every $el in /t:TEI/t:text//(t:p | t:lb | t:w) satisfies exists($el/@xml:id)"/>
@@ -107,6 +107,15 @@
         <x:expect label="2 pages" test="count(/t:TEI/t:text//t:pb)" select="2"/>
         <x:expect label="count of paragraphs" test="count(/t:TEI/t:text//t:p)" select="5"/>
         <x:expect label="count of lines" test="count(/t:TEI/t:text//t:lb)" select="52"/>
+    </x:scenario>
+
+
+    <x:scenario label="PageXML without Word elements: hsde 121030, 01">
+        <x:context href="../../test/samples/pagexml_hsde_121030/121030_01.xml"/>
+        <x:expect label="some paragraphs" test="count(/t:TEI/t:text//t:lb) gt 0"/>
+        <x:expect label="text present"
+            test="count(/t:TEI/t:text//text()[normalize-space(.) ne '']) eq count(/t:TEI/t:text//t:lb)"
+        />
     </x:scenario>
 
 
