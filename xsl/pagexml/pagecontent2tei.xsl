@@ -175,7 +175,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <!-- named templates for making the header -->
 
-    <xsl:template name="p2t:tei-header">
+    <xsl:template name="p2t:tei-header" visibility="public">
         <xsl:param name="pages" as="node()*"/>
         <teiHeader>
             <fileDesc>
