@@ -72,7 +72,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
     <!-- Use this initial template to transform all documents found in a directory. -->
-    <xsl:template name="xsl:initial-template">
+    <xsl:template name="xsl:initial-template" visibility="public">
         <xsl:call-template name="p2t:collection-uri"/>
     </xsl:template>
 
