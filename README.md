@@ -4,11 +4,11 @@ This is an XSLT library for transforming various input formats to TEI-XML. Input
 
 - [USX](https://ubsicap.github.io/usx/) as used by *Deutsche
   Bibelgesellschaft*, currently transforming USX 3.0 documents to TEI
-  P5: [XSLT](xsl/usx) [Wiki](-/wikis/usx)
+  P5: [XSLT](xsl/usx) [Wiki](../../wikis/usx)
 - [Accordance](https://www.accordancebible.com/) plain text files of
-  books of the Bible to TEI P5: [XSLT](xsl/accordance) [Wiki](-/wikis/accordance)
-- docx: [XSLT](xsl/docx) [Wiki](-/wikis/docx)
-- PageXML: [XSLT](xsl/pagexml) [Wiki](-/wikis/pagexml)
+  books of the Bible to TEI P5: [XSLT](xsl/accordance) [Wiki](../../wikis/accordance)
+- docx: [XSLT](xsl/docx) [Wiki](../../wikis/docx)
+- PageXML: [XSLT](xsl/pagexml) [Wiki](../../wikis/pagexml)
 
 ## Getting started
 
