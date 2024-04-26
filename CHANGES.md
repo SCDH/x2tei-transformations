@@ -1,5 +1,14 @@
 # Changes
 
+## 0.5.1
+
+- `xsl/pagexml/pagecontent2tei.xsl`:
+  - issue #1: fixed problems with importing xsl:initial-template in downstream packages
+  - issue #2: use `TextLine/TextEquiv` when there are not `Word`
+    elements present; added unit test with hsde test sample
+  - issue #3: changed visibility of named template `p2t:tei-header` to
+    *public*, so that downstream packages can provide their own header
+
 ## 0.5.0
 
 - `xsl/pagexml/pagecontent2tei.xsl`:
