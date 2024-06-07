@@ -364,20 +364,6 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         </xsl:if>
     </xsl:template>
 
-    <!-- We keep Coords in this mode in order to be able to reproduce them
-        for alignment information. We add a @level attribute to it to 
-        keep track if it is on a TextRegion, TextLine etc. -->
-    <xsl:template mode="page" match="Coords">
-        <xsl:message use-when="system-property('debug') eq 'true'">
-            <xsl:text>copying coords at level </xsl:text>
-            <xsl:value-of select="parent::* => local-name()"/>
-        </xsl:message>
-        <xsl:copy>
-            <xsl:attribute name="level" select="parent::* => local-name()"/>
-            <xsl:copy-of select="attribute() | node()"/>
-        </xsl:copy>
-    </xsl:template>
-
 
     <!-- text-regions is the mode for the second pass -->
     <xsl:mode name="text-regions" on-no-match="shallow-copy"/>
