@@ -36,11 +36,10 @@
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Word']/@start satisfies exists(id(substring($s, 2)))"/>
         <x:expect label="has text" test="exists(/t:TEI/t:text)"/>
         <x:expect label="has body" test="exists(/t:TEI/t:text/t:body)"/>
-        <x:expect label="has div" test="exists(/t:TEI/t:text/t:body/t:div)"/>
         <x:expect label="div starts with a pb"
-            test="t:TEI/t:text/t:body/t:div/element()[1] ! name(.)" select="'pb'"/>
-        <x:expect label="has paragraphs" test="exists(t:TEI/t:text/t:body/t:div/t:p)"/>
-        <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:div/t:p/t:lb)"/>
+            test="t:TEI/t:text/t:body/element()[1] ! name(.)" select="'pb'"/>
+        <x:expect label="has paragraphs" test="exists(t:TEI/t:text/t:body/t:p)"/>
+        <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:p/t:lb)"/>
         <x:expect label="every lb is in a paragraph"
             test="every $p in /t:TEI/t:text//t:lb/parent::* satisfies name($p) eq 'p'"/>
         <x:expect label="all text in paragraphs"
@@ -57,7 +56,7 @@
     <x:scenario label="general structure with words">
         <x:param name="p2t:words" select="true()"/>
         <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
-        <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:div/t:p/t:w)"/>
+        <x:expect label="has line words" test="exists(t:TEI/t:text/t:body/t:p/t:w)"/>
         <x:expect label="every words is in a paragraph"
             test="every $p in /t:TEI/t:text//t:w/parent::* satisfies name($p) eq 'p'"/>
         <x:expect label="all text in words"

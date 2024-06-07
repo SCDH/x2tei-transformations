@@ -34,6 +34,9 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- whether or not to include metadata from the pagexml header -->
     <xsl:param name="p2t:with-facsimile" as="xs:boolean" select="true()"/>
 
+    <!-- say p2t:only="'text'" or "'facsimile'" to only output facsimile or text -->
+    <xsl:param name="p2t:only" as="xs:string?" select="()"/>
+
     <!-- whether or not to join pages -->
     <xsl:param name="p2t:join-pages" as="xs:boolean" select="true()"/>
 
@@ -131,7 +134,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:call-template name="p2t:tei-header">
                 <xsl:with-param name="pages" as="node()*" select="$pages"/>
             </xsl:call-template>
-            <xsl:if test="$p2t:with-facsimile">
+            <xsl:if test="$p2t:with-facsimile and (empty($p2t:only) or $p2t:only eq 'facsimile')">
                 <facsimile>
                     <xsl:for-each select="$pages">
                         <xsl:apply-templates select="." mode="facsimile">
@@ -143,9 +146,9 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                     </xsl:for-each>
                 </facsimile>
             </xsl:if>
-            <text>
-                <body>
-                    <div>
+            <xsl:if test="empty($p2t:only) or $p2t:only eq 'text'">
+                <text>
+                    <body>
                         <!-- first pass with mode flat-regions which flattens regions (paragraphs) to a
                             milestone markup which can be upcycled again in the second pass. -->
                         <xsl:variable name="flat-regions">
@@ -183,9 +186,9 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                         <!-- third/final pass -->
                         <xsl:apply-templates mode="p-joiner" select="$with-paragraphs"/>
                         <xsl:text>&#xa;</xsl:text>
-                    </div>
-                </body>
-            </text>
+                    </body>
+                </text>
+            </xsl:if>
         </TEI>
     </xsl:template>
 
