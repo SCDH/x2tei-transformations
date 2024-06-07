@@ -130,6 +130,16 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:call-template name="p2t:tei-header">
                 <xsl:with-param name="pages" as="node()*" select="$pages"/>
             </xsl:call-template>
+            <facsimile>
+                <xsl:for-each select="$pages">
+                    <xsl:apply-templates select="." mode="facsimile">
+                        <xsl:with-param name="page-number" as="xs:integer" select="position()"
+                            tunnel="true"/>
+                        <!-- assert, that the collection is ordered lexically by file name -->
+                        <!--xsl:sort select="base-uri()"/-->
+                    </xsl:apply-templates>
+                </xsl:for-each>
+            </facsimile>
             <text>
                 <body>
                     <div>
@@ -197,7 +207,17 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                     </p>
                 </sourceDesc>
             </fileDesc>
+            <xsl:call-template name="p2t:encoding-desc"/>
         </teiHeader>
+    </xsl:template>
+
+    <xsl:template name="p2t:encoding-desc">
+        <encodingDesc>
+            <listPrefixDef>
+                <prefixDef ident="facs" matchPattern="(.*)"
+                    replacementPattern="https://facsimiles.your.com/$1"/>
+            </listPrefixDef>
+        </encodingDesc>
     </xsl:template>
 
 
@@ -340,6 +360,64 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
 
+    <!-- facsimile -->
+
+    <xsl:mode name="facsimile" on-no-match="shallow-skip"/>
+
+    <xsl:template mode="facsimile" match="Page">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <surface>
+            <xsl:attribute name="xml:id" select="p2t:facs-id-prefix(., $page-number)"/>
+            <xsl:attribute name="n" select="$page-number"/>
+            <xsl:call-template name="p2t:page-xml-source-doc"/>
+            <xsl:call-template name="p2t:facs-surface-coords"/>
+            <graphic>
+                <xsl:attribute name="url" select="'facs:' || @imageFilename"/>
+            </graphic>
+            <xsl:call-template name="p2t:facs-zone-page"/>
+            <xsl:apply-templates mode="#current"/>
+        </surface>
+    </xsl:template>
+
+    <xsl:template name="p2t:page-xml-source-doc" as="attribute()*">
+        <xsl:context-item as="node()" use="required"/>
+        <xsl:attribute name="source" select="tokenize(base-uri(.), '/')[last()]"/>
+    </xsl:template>
+
+    <xsl:template name="p2t:facs-surface-coords" as="attribute()*">
+        <xsl:context-item as="element(Page)" use="required"/>
+        <xsl:attribute name="ulx">0</xsl:attribute>
+        <xsl:attribute name="uly">0</xsl:attribute>
+        <xsl:attribute name="lrx" select="@imageWidth"/>
+        <xsl:attribute name="lry" select="@imageHeight"/>
+    </xsl:template>
+
+    <xsl:template name="p2t:facs-zone-page">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <zone type="Page">
+            <xsl:attribute name="xml:id" select="p2t:facs-id-prefix(., $page-number)"/>
+            <xsl:call-template name="p2t:facs-surface-coords"/>
+        </zone>
+    </xsl:template>
+
+    <xsl:template mode="facsimile" match="TextRegion | TextLine | Word">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <zone>
+            <xsl:attribute name="xml:id" select="p2t:make-facs-id(@id, $page-number)"/>
+            <xsl:attribute name="start" select="'#' || p2t:make-id(@id, $page-number)"/>
+            <xsl:attribute name="type" select="local-name(.)"/>
+            <xsl:call-template name="p2t:make-coords"/>
+        </zone>
+        <xsl:apply-templates mode="facsimile"/>
+    </xsl:template>
+
+    <!-- override this with some math to make a rectangle -->
+    <xsl:template name="p2t:make-coords" as="attribute()*">
+        <xsl:context-item as="element()" use="required"/>
+        <xsl:attribute name="coords" select="Coords[1]/@points"/>
+    </xsl:template>
+
+
     <!-- functions -->
 
     <xsl:function name="p2t:make-id" as="xs:string" visibility="final">
@@ -364,6 +442,18 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="context" as="node()"/>
         <xsl:param name="page-number" as="xs:integer"/>
         <xsl:value-of select="'p' || $page-number || '.'"/>
+    </xsl:function>
+
+    <xsl:function name="p2t:make-facs-id" as="xs:string" visibility="final">
+        <xsl:param name="att" as="attribute()"/>
+        <xsl:param name="page-number" as="xs:integer"/>
+        <xsl:sequence select="p2t:facs-id-prefix($att, $page-number) || string($att)"/>
+    </xsl:function>
+
+    <xsl:function name="p2t:facs-id-prefix" as="xs:string" visibility="public">
+        <xsl:param name="context" as="node()"/>
+        <xsl:param name="page-number" as="xs:integer"/>
+        <xsl:value-of select="'f' || $page-number || '.'"/>
     </xsl:function>
 
     <xsl:function name="p2t:merge-ids" as="xs:string" visibility="public">
