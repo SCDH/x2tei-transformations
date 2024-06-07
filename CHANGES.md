@@ -1,5 +1,14 @@
 # Changes
 
+## 0.6.0
+
+- `xsl/pagexml/pagecontent2tei.xsl`:
+  - use `<facsimile>` container for information about the image source
+    as described in TEI guidelines, chapeter 11.1 and 11.2
+  - use `@facs` on elements in the `<text>` container as links to
+    facsimile, i.e. linking text and image sources
+  - optionally use `@start` to link from facsimile to text elements
+
 ## 0.5.1
 
 - `xsl/pagexml/pagecontent2tei.xsl`:
