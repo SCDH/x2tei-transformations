@@ -30,14 +30,16 @@
             test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextLine']/@coords)"/>
         <x:expect label="has zone/@coords for text region"
             test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextRegion']/@coords)"/>
+        <x:expect label="every zone has an @start, except for pages"
+            test="every $z in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Page'] satisfies exists($z/@start)"/>
         <x:expect label="every @start in facsimile can be dereferenced" pending="word zones present"
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone/@start satisfies exists(id(substring($s, 2)))"/>
         <x:expect label="every @start in facsimile can be dereferenced, except words"
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Word']/@start satisfies exists(id(substring($s, 2)))"/>
         <x:expect label="has text" test="exists(/t:TEI/t:text)"/>
         <x:expect label="has body" test="exists(/t:TEI/t:text/t:body)"/>
-        <x:expect label="div starts with a pb"
-            test="t:TEI/t:text/t:body/element()[1] ! name(.)" select="'pb'"/>
+        <x:expect label="div starts with a pb" test="t:TEI/t:text/t:body/element()[1] ! name(.)"
+            select="'pb'"/>
         <x:expect label="has paragraphs" test="exists(t:TEI/t:text/t:body/t:p)"/>
         <x:expect label="has line beginnings" test="exists(t:TEI/t:text/t:body/t:p/t:lb)"/>
         <x:expect label="every lb is in a paragraph"
@@ -70,6 +72,21 @@
         <x:expect label="every @start in facsimile can be dereferenced"
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone/@start satisfies exists(id(substring($s, 2)))"/>
         <!--x:expect label="result"/-->
+    </x:scenario>
+
+    <x:scenario label="general structure without text IDs">
+        <x:param name="p2t:with-start" select="false()"/>
+        <x:param name="p2t:with-text-ids" select="false()"/>
+        <x:context href="../../test/samples/pagexml_chronicle/0007_p007.xml" mode="p2t:source"/>
+        <x:expect label="every zone has an @start"
+            test="every $z in /t:TEI/t:facsimile/t:surface/t:zone satisfies not(exists($z/@start))"/>
+        <x:expect label="every element in text has no ID"
+            test="every $el in /t:TEI/t:text//(t:pb | t:p | t:lb | t:w) satisfies not(exists($el/@xml:id))"/>
+        <x:expect label="every element in text has @facs"
+            test="every $el in /t:TEI/t:text//(t:pb | t:p | t:lb | t:w) satisfies exists($el/@facs)"/>
+        <x:expect label="every facs pointer can be dereferenced"
+            test="every $facs in /t:TEI/t:text//@facs ! tokenize(.) satisfies exists(id(substring($facs, 2)))"
+        />
     </x:scenario>
 
     <x:scenario label="initial template xsl:initial-template">

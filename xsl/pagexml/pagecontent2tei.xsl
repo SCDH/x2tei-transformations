@@ -31,8 +31,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <xsl:output method="xml" indent="true" encoding="UTF-8"/>
 
-    <!-- whether or not to include metadata from the pagexml header -->
+    <!-- whether or not to add @facs attribute to text elements -->
     <xsl:param name="p2t:with-facsimile" as="xs:boolean" select="true()"/>
+
+    <!-- whether or not to add @start attribute to facsimile elements -->
+    <xsl:param name="p2t:with-start" as="xs:boolean" select="true()"/>
+
+    <!-- whether ot not to add @xml:id attributes to text elements -->
+    <xsl:param name="p2t:with-text-ids" as="xs:boolean" select="true()"/>
 
     <!-- say p2t:only="'text'" or "'facsimile'" to only output facsimile or text -->
     <xsl:param name="p2t:only" as="xs:string?" select="()"/>
@@ -169,9 +175,12 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                             <xsl:for-each-group select="$flat-regions/node()"
                                 group-starting-with="TextRegionStart[not(preceding::node()[1][self::tei:pb])]">
                                 <p>
-                                    <xsl:attribute name="xml:id"
-                                        select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"/>
-
+                                    <xsl:if
+                                        test="current-group()/descendant-or-self::TextRegionStart/@xml:id">
+                                        <xsl:attribute name="xml:id"
+                                            select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"
+                                        />
+                                    </xsl:if>
                                     <xsl:if
                                         test="current-group()/descendant-or-self::TextRegionStart/@facs">
                                         <xsl:attribute name="facs"
@@ -238,7 +247,10 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:text>&#xa;</xsl:text>
         <xsl:if test="not($p2t:join-pages) and not($single-source)">
-            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id, $page-number)}">
+            <pc:TextRegionStart>
+                <xsl:call-template name="p2t:id">
+                    <xsl:with-param name="context" select="child::TextRegion[1]"/>
+                </xsl:call-template>
                 <xsl:call-template name="p2t:facs">
                     <xsl:with-param name="context" select="child::TextRegion[1]"/>
                 </xsl:call-template>
@@ -248,7 +260,10 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:call-template name="p2t:facs"/>
         </pb>
         <xsl:if test="not($p2t:join-pages) or $single-source">
-            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id, $page-number)}">
+            <pc:TextRegionStart>
+                <xsl:call-template name="p2t:id">
+                    <xsl:with-param name="context" select="child::TextRegion[1]"/>
+                </xsl:call-template>
                 <xsl:call-template name="p2t:facs">
                     <xsl:with-param name="context" select="child::TextRegion[1]"/>
                 </xsl:call-template>
@@ -265,7 +280,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             but add a flat TextRegionStart and use a second pass
             and xsl:for-each-group 
         -->
-        <pc:TextRegionStart xml:id="{p2t:make-id(@id, $page-number)}">
+        <pc:TextRegionStart>
+            <xsl:call-template name="p2t:id"/>
             <xsl:call-template name="p2t:facs"/>
         </pc:TextRegionStart>
         <xsl:apply-templates mode="page"/>
@@ -276,12 +292,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:choose>
             <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
                 <xsl:text>&#xa;</xsl:text>
-                <lb xml:id="{p2t:make-id(@id, $page-number)}">
+                <lb>
+                    <xsl:call-template name="p2t:id"/>
                     <xsl:call-template name="p2t:facs"/>
                 </lb>
             </xsl:when>
             <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
-                <lb xml:id="{p2t:make-id(@id, $page-number)}">
+                <lb>
+                    <xsl:call-template name="p2t:id"/>
                     <xsl:call-template name="p2t:facs"/>
                 </lb>
                 <xsl:text>&#xa;</xsl:text>
@@ -302,7 +320,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:when test="$p2t:words">
                 <xsl:text>&#x20;</xsl:text>
                 <w>
-                    <xsl:attribute name="xml:id" select="p2t:make-id(@id, $page-number)"/>
+                    <xsl:call-template name="p2t:id"/>
                     <xsl:call-template name="p2t:facs"/>
                     <xsl:apply-templates mode="page"/>
                 </w>
@@ -319,7 +337,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:choose>
             <xsl:when test="$p2t:words">
                 <w>
-                    <xsl:attribute name="xml:id" select="p2t:make-id(@id, $page-number)"/>
+                    <xsl:call-template name="p2t:id"/>
                     <xsl:call-template name="p2t:facs"/>
                     <xsl:apply-templates mode="page"/>
                 </w>
@@ -335,6 +353,15 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <xsl:template mode="page" match="text()">
         <xsl:value-of select="."/>
+    </xsl:template>
+
+    <xsl:template name="p2t:id">
+        <xsl:context-item as="element()" use="required"/>
+        <xsl:param name="context" as="element()" select="." required="false"/>
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <xsl:if test="$p2t:with-start or $p2t:with-text-ids">
+            <xsl:attribute name="xml:id" select="p2t:make-id($context/@id, $page-number)"/>
+        </xsl:if>
     </xsl:template>
 
     <!-- We keep Coords in this mode in order to be able to reproduce them
@@ -430,11 +457,18 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <zone>
             <xsl:attribute name="xml:id" select="p2t:make-facs-id(@id, $page-number)"/>
-            <xsl:attribute name="start" select="'#' || p2t:make-id(@id, $page-number)"/>
             <xsl:attribute name="type" select="local-name(.)"/>
+            <xsl:call-template name="p2t:start"/>
             <xsl:call-template name="p2t:make-coords"/>
         </zone>
         <xsl:apply-templates mode="facsimile"/>
+    </xsl:template>
+
+    <xsl:template name="p2t:start">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <xsl:if test="$p2t:with-start">
+            <xsl:attribute name="start" select="'#' || p2t:make-id(@id, $page-number)"/>
+        </xsl:if>
     </xsl:template>
 
     <!-- override this with some math to make a rectangle -->
