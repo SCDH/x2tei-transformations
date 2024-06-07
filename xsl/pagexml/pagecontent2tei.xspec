@@ -26,10 +26,10 @@
             test="every $z in /t:TEI/t:facsimile/t:surface/t:zone satisfies exists($z/@xml:id)"/>
         <x:expect label="has zone/@ulx for page"
             test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'Page']/@ulx)"/>
-        <x:expect label="has zone/@coords for text line"
-            test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextLine']/@coords)"/>
-        <x:expect label="has zone/@coords for text region"
-            test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextRegion']/@coords)"/>
+        <x:expect label="has zone/@points+ for text line"
+            test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextLine']/@points)"/>
+        <x:expect label="has zone/@points for text region"
+            test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextRegion']/@points)"/>
         <x:expect label="every zone has an @start, except for pages"
             test="every $z in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Page'] satisfies exists($z/@start)"/>
         <x:expect label="every @start in facsimile can be dereferenced" pending="word zones present"

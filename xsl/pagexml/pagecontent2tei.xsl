@@ -460,7 +460,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- override this with some math to make a rectangle -->
     <xsl:template name="p2t:make-coords" as="attribute()*">
         <xsl:context-item as="element()" use="required"/>
-        <xsl:attribute name="coords" select="Coords[1]/@points"/>
+        <xsl:attribute name="points" select="Coords[1]/@points"/>
     </xsl:template>
 
 
