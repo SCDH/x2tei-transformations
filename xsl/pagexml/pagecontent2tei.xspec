@@ -53,6 +53,14 @@
             test="every $el in /t:TEI/t:text//(t:p | t:lb | t:w) satisfies exists($el/@facs)"/>
         <!--x:expect label="result"/-->
     </x:scenario>
+    
+    <x:scenario label="hyphenation">
+        <x:param name="p2t:lb" select="true()"/>
+        <x:param name="p2t:no-break-hyphenation" select="true()"/>
+        <x:context href="../../test/samples/pagexml_hsde_121030/121030_01.xml" mode="p2t:source"/>
+        <x:expect label="result"/>
+    </x:scenario>
+    
 
 
     <x:scenario label="initial template xsl:initial-template">

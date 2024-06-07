@@ -52,6 +52,9 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- the name of the attribute to keep the coordinate points in -->
     <xsl:param name="p2t:coords-att" as="xs:QName" select="xs:QName('facs')"/>
 
+    <!-- whether or not to handle hyphenation on page and line breaks -->
+    <xsl:param name="p2t:no-break-hyphenation" as="xs:boolean" select="true()"/>
+
     <!-- collection URI when started with xsl:initial-template or
         a URI of a collection catalog when started with p2t:collection -->
     <xsl:param name="p2t:collection-uri" as="xs:anyURI"/>
@@ -240,15 +243,35 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <xsl:template mode="page" match="TextLine">
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <xsl:variable name="this-line" as="node()*">
+            <xsl:apply-templates mode="page"/>
+        </xsl:variable>
+        <!-- getting previous and next line for hyhenation check -->
+        <xsl:variable name="prev-line" as="node()*">
+            <xsl:apply-templates mode="page" select="preceding-sibling::TextLine[1]/*"/>
+        </xsl:variable>
+        <xsl:variable name="this-line-continues-prev"
+            select="p2t:unit-continued($prev-line, $this-line)"/>
+        <xsl:variable name="next-line" as="node()*">
+            <xsl:apply-templates mode="page" select="following-sibling::TextLine[1]/*"/>
+        </xsl:variable>
+        <xsl:variable name="next-line-continues-this"
+            select="p2t:unit-continued($this-line, $next-line)"/>
         <xsl:choose>
             <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
                 <xsl:text>&#xa;</xsl:text>
                 <lb xml:id="{p2t:make-id(@id, $page-number)}">
+                    <xsl:if test="$this-line-continues-prev">
+                        <xsl:attribute name="break">no</xsl:attribute>
+                    </xsl:if>
                     <xsl:call-template name="p2t:coordinates"/>
                 </lb>
             </xsl:when>
             <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
                 <lb xml:id="{p2t:make-id(@id, $page-number)}">
+                    <xsl:if test="$this-line-continues-prev">
+                        <xsl:attribute name="break">no</xsl:attribute>
+                    </xsl:if>
                     <xsl:call-template name="p2t:coordinates"/>
                 </lb>
                 <xsl:text>&#xa;</xsl:text>
@@ -257,7 +280,37 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                 <xsl:text>&#xa;</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:apply-templates mode="page"/>
+        <xsl:sequence select="$this-line"/>
+    </xsl:template>
+
+    <!-- test if hyphen at end of unit and next unit starting with lower case letter -->
+    <xsl:function name="p2t:unit-continued" as="xs:boolean" visibility="final">
+        <xsl:param name="unit1" as="node()*"/>
+        <xsl:param name="unit2" as="node()*"/>
+        <xsl:choose>
+            <xsl:when test="not($p2t:no-break-hyphenation)">
+                <xsl:sequence select="false()"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence
+                    select="(string-join($unit1) => normalize-space() => matches('-$')) and (string-join($unit2) => normalize-space() => matches('^\p{Ll}'))"
+                />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:template name="p2t:break-att" visibility="final">
+        <xsl:param name="this-unit" as="node()*"/>
+        <xsl:param name="prev-unit" as="node()*"/>
+        <xsl:choose>
+            <xsl:when test="not($p2t:no-break-hyphenation)"/>
+            <xsl:when
+                test="(string-join($prev-unit) => normalize-space() => matches('-$')) and (string-join($this-unit) => normalize-space() => matches('^\p{Ll}'))">
+                <!-- hyphen at end of line and next line starting with lower case letter  -->
+                <xsl:attribute name="break" select="'no'"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <!-- if we have Words, drop TextLine/TextEquiv -->
