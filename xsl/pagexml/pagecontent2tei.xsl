@@ -31,8 +31,17 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <xsl:output method="xml" indent="true" encoding="UTF-8"/>
 
-    <!-- whether or not to include metadata from the pagexml header -->
-    <xsl:param name="p2t:with-metadata" as="xs:boolean" select="true()"/>
+    <!-- whether or not to add @facs attribute to text elements -->
+    <xsl:param name="p2t:with-facsimile" as="xs:boolean" select="true()"/>
+
+    <!-- whether or not to add @start attribute to facsimile elements -->
+    <xsl:param name="p2t:with-start" as="xs:boolean" select="true()"/>
+
+    <!-- whether ot not to add @xml:id attributes to text elements -->
+    <xsl:param name="p2t:with-text-ids" as="xs:boolean" select="true()"/>
+
+    <!-- say p2t:only="'text'" or "'facsimile'" to only output facsimile or text -->
+    <xsl:param name="p2t:only" as="xs:string?" select="()"/>
 
     <!-- whether or not to join pages -->
     <xsl:param name="p2t:join-pages" as="xs:boolean" select="true()"/>
@@ -44,13 +53,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:param name="p2t:lb-at-eol" as="xs:boolean" select="false()"/>
 
     <!-- whether or not to keep words -->
-    <xsl:param name="p2t:words" as="xs:boolean" select="true()"/>
-
-    <!-- whether ot not to keep coordinate points in the TEI output -->
-    <xsl:param name="p2t:coords" as="xs:boolean" select="false()"/>
-
-    <!-- the name of the attribute to keep the coordinate points in -->
-    <xsl:param name="p2t:coords-att" as="xs:QName" select="xs:QName('facs')"/>
+    <xsl:param name="p2t:words" as="xs:boolean" select="false()"/>
 
     <!-- collection URI when started with xsl:initial-template or
         a URI of a collection catalog when started with p2t:collection -->
@@ -58,6 +61,20 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
     <!-- string serialization of a collection catalog -->
     <xsl:param name="p2t:collection" as="xs:string"/>
+
+    <!-- the match part of how to make facs links -->
+    <xsl:param name="p2t:facs-prefix-match" as="xs:string" select="'(.*)'"/>
+
+    <!-- the replacement part of how to make facs links -->
+    <xsl:param name="p2t:facs-prefix-replacement" as="xs:string"
+        select="'https://facsimiles.your.com/$1'"/>
+
+    <!-- the match part of how to make facs links -->
+    <xsl:param name="p2t:pxml-prefix-match" as="xs:string" select="'(.*)'"/>
+
+    <!-- the replacement part of how to make facs links -->
+    <xsl:param name="p2t:pxml-prefix-replacement" as="xs:string" select="'$1'"/>
+
 
     <!-- Use this initial template to transform all documents found in a directory.
         @seed:it@ -->
@@ -130,9 +147,21 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:call-template name="p2t:tei-header">
                 <xsl:with-param name="pages" as="node()*" select="$pages"/>
             </xsl:call-template>
-            <text>
-                <body>
-                    <div>
+            <xsl:if test="$p2t:with-facsimile and (empty($p2t:only) or $p2t:only eq 'facsimile')">
+                <facsimile>
+                    <xsl:for-each select="$pages">
+                        <xsl:apply-templates select="." mode="facsimile">
+                            <xsl:with-param name="page-number" as="xs:integer" select="position()"
+                                tunnel="true"/>
+                            <!-- assert, that the collection is ordered lexically by file name -->
+                            <!--xsl:sort select="base-uri()"/-->
+                        </xsl:apply-templates>
+                    </xsl:for-each>
+                </facsimile>
+            </xsl:if>
+            <xsl:if test="empty($p2t:only) or $p2t:only eq 'text'">
+                <text>
+                    <body>
                         <!-- first pass with mode flat-regions which flattens regions (paragraphs) to a
                             milestone markup which can be upcycled again in the second pass. -->
                         <xsl:variable name="flat-regions">
@@ -153,15 +182,17 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                             <xsl:for-each-group select="$flat-regions/node()"
                                 group-starting-with="TextRegionStart[not(preceding::node()[1][self::tei:pb])]">
                                 <p>
-                                    <xsl:attribute name="xml:id"
-                                        select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"/>
                                     <xsl:if
-                                        test="exists(current-group()/descendant-or-self::Coords)">
-                                        <xsl:call-template name="p2t:coordinates">
-                                            <xsl:with-param name="context"
-                                                select="current-group()/descendant-or-self::Coords"/>
-                                            <xsl:with-param name="level" select="'TextRegion'"/>
-                                        </xsl:call-template>
+                                        test="current-group()/descendant-or-self::TextRegionStart/@xml:id">
+                                        <xsl:attribute name="xml:id"
+                                            select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"
+                                        />
+                                    </xsl:if>
+                                    <xsl:if
+                                        test="current-group()/descendant-or-self::TextRegionStart/@facs">
+                                        <xsl:attribute name="facs"
+                                            select="current-group()/descendant-or-self::TextRegionStart/@facs"
+                                        />
                                     </xsl:if>
                                     <xsl:apply-templates mode="text-regions"
                                         select="current-group()"/>
@@ -171,9 +202,9 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                         <!-- third/final pass -->
                         <xsl:apply-templates mode="p-joiner" select="$with-paragraphs"/>
                         <xsl:text>&#xa;</xsl:text>
-                    </div>
-                </body>
-            </text>
+                    </body>
+                </text>
+            </xsl:if>
         </TEI>
     </xsl:template>
 
@@ -197,7 +228,21 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                     </p>
                 </sourceDesc>
             </fileDesc>
+            <xsl:call-template name="p2t:encoding-desc"/>
         </teiHeader>
+    </xsl:template>
+
+    <xsl:template name="p2t:encoding-desc">
+        <encodingDesc>
+            <listPrefixDef>
+                <xsl:if test="$p2t:with-facsimile">
+                    <prefixDef ident="facs" matchPattern="{$p2t:facs-prefix-match}"
+                        replacementPattern="{$p2t:facs-prefix-replacement}"/>
+                    <prefixDef ident="pxml" matchPattern="{$p2t:pxml-prefix-match}"
+                        replacementPattern="{$p2t:pxml-prefix-replacement}"/>
+                </xsl:if>
+            </listPrefixDef>
+        </encodingDesc>
     </xsl:template>
 
 
@@ -211,17 +256,27 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:text>&#xa;</xsl:text>
         <xsl:if test="not($p2t:join-pages) and not($single-source)">
-            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id, $page-number)}"/>
+            <pc:TextRegionStart>
+                <xsl:call-template name="p2t:id">
+                    <xsl:with-param name="context" select="child::TextRegion[1]"/>
+                </xsl:call-template>
+                <xsl:call-template name="p2t:facs">
+                    <xsl:with-param name="context" select="child::TextRegion[1]"/>
+                </xsl:call-template>
+            </pc:TextRegionStart>
         </xsl:if>
         <pb>
-            <xsl:if test="$p2t:with-metadata">
-                <xsl:attribute name="pc:imageFilename" select="@imageFilename"/>
-                <xsl:attribute name="pc:source" select="tokenize(base-uri(.), '/')[last()]"/>
-            </xsl:if>
-            <xsl:attribute name="pc:pageIdPrefix" select="p2t:id-prefix(., $page-number)"/>
+            <xsl:call-template name="p2t:facs"/>
         </pb>
         <xsl:if test="not($p2t:join-pages) or $single-source">
-            <pc:TextRegionStart xml:id="{p2t:make-id(child::TextRegion[1]/@id, $page-number)}"/>
+            <pc:TextRegionStart>
+                <xsl:call-template name="p2t:id">
+                    <xsl:with-param name="context" select="child::TextRegion[1]"/>
+                </xsl:call-template>
+                <xsl:call-template name="p2t:facs">
+                    <xsl:with-param name="context" select="child::TextRegion[1]"/>
+                </xsl:call-template>
+            </pc:TextRegionStart>
         </xsl:if>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
@@ -234,7 +289,10 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             but add a flat TextRegionStart and use a second pass
             and xsl:for-each-group 
         -->
-        <pc:TextRegionStart xml:id="{p2t:make-id(@id, $page-number)}"/>
+        <pc:TextRegionStart>
+            <xsl:call-template name="p2t:id"/>
+            <xsl:call-template name="p2t:facs"/>
+        </pc:TextRegionStart>
         <xsl:apply-templates mode="page"/>
     </xsl:template>
 
@@ -243,13 +301,15 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:choose>
             <xsl:when test="$p2t:lb and not($p2t:lb-at-eol)">
                 <xsl:text>&#xa;</xsl:text>
-                <lb xml:id="{p2t:make-id(@id, $page-number)}">
-                    <xsl:call-template name="p2t:coordinates"/>
+                <lb>
+                    <xsl:call-template name="p2t:id"/>
+                    <xsl:call-template name="p2t:facs"/>
                 </lb>
             </xsl:when>
             <xsl:when test="$p2t:lb and $p2t:lb-at-eol">
-                <lb xml:id="{p2t:make-id(@id, $page-number)}">
-                    <xsl:call-template name="p2t:coordinates"/>
+                <lb>
+                    <xsl:call-template name="p2t:id"/>
+                    <xsl:call-template name="p2t:facs"/>
                 </lb>
                 <xsl:text>&#xa;</xsl:text>
             </xsl:when>
@@ -264,12 +324,13 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:template mode="page" match="TextLine/TextEquiv[preceding-sibling::Word]"/>
 
     <xsl:template mode="page" match="Word[position() > 1]">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:choose>
             <xsl:when test="$p2t:words">
                 <xsl:text>&#x20;</xsl:text>
                 <w>
-                    <xsl:attribute name="xml:id" select="p2t:make-id(@id)"/>
-                    <xsl:call-template name="p2t:coordinates"/>
+                    <xsl:call-template name="p2t:id"/>
+                    <xsl:call-template name="p2t:facs"/>
                     <xsl:apply-templates mode="page"/>
                 </w>
             </xsl:when>
@@ -281,11 +342,12 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
     <xsl:template mode="page" match="Word[1]">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:choose>
             <xsl:when test="$p2t:words">
                 <w>
-                    <xsl:attribute name="xml:id" select="p2t:make-id(@id)"/>
-                    <xsl:call-template name="p2t:coordinates"/>
+                    <xsl:call-template name="p2t:id"/>
+                    <xsl:call-template name="p2t:facs"/>
                     <xsl:apply-templates mode="page"/>
                 </w>
             </xsl:when>
@@ -302,18 +364,13 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:value-of select="."/>
     </xsl:template>
 
-    <!-- We keep Coords in this mode in order to be able to reproduce them
-        for alignment information. We add a @level attribute to it to 
-        keep track if it is on a TextRegion, TextLine etc. -->
-    <xsl:template mode="page" match="Coords">
-        <xsl:message use-when="system-property('debug') eq 'true'">
-            <xsl:text>copying coords at level </xsl:text>
-            <xsl:value-of select="parent::* => local-name()"/>
-        </xsl:message>
-        <xsl:copy>
-            <xsl:attribute name="level" select="parent::* => local-name()"/>
-            <xsl:copy-of select="attribute() | node()"/>
-        </xsl:copy>
+    <xsl:template name="p2t:id">
+        <xsl:context-item as="element()" use="required"/>
+        <xsl:param name="context" as="element()" select="." required="false"/>
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <xsl:if test="$p2t:with-start or $p2t:with-text-ids">
+            <xsl:attribute name="xml:id" select="p2t:make-id($context/@id, $page-number)"/>
+        </xsl:if>
     </xsl:template>
 
 
@@ -340,19 +397,93 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
 
+    <!-- facsimile -->
+
+    <!-- a template for making the facs attribute in other modes -->
+    <xsl:template name="p2t:facs" as="attribute(facs)?">
+        <xsl:context-item as="element()" use="required"/>
+        <xsl:param name="context" as="element()" select="." required="false"/>
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <xsl:if test="$p2t:with-facsimile">
+            <xsl:attribute name="facs" select="'#' || p2t:make-facs-id(@id, $page-number)"/>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- mode for making facsimile section -->
+    <xsl:mode name="facsimile" on-no-match="shallow-skip"/>
+
+    <xsl:template mode="facsimile" match="Page">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <surface>
+            <xsl:attribute name="n" select="$page-number"/>
+            <xsl:call-template name="p2t:page-xml-source-link"/>
+            <xsl:call-template name="p2t:facs-surface-coords"/>
+            <graphic>
+                <xsl:attribute name="url" select="'facs:' || @imageFilename"/>
+            </graphic>
+            <xsl:call-template name="p2t:facs-zone-page"/>
+            <xsl:apply-templates mode="#current"/>
+        </surface>
+    </xsl:template>
+
+    <xsl:template name="p2t:page-xml-source-link" as="attribute()*">
+        <xsl:context-item as="node()" use="required"/>
+        <xsl:choose>
+            <xsl:when test="exists(@id)">
+                <xsl:attribute name="sameAs"
+                    select="'pxml:' || tokenize(base-uri(.), '/')[last()] || '#' || @id"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="source" select="'pxml:' || tokenize(base-uri(.), '/')[last()]"
+                />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="p2t:facs-surface-coords" as="attribute()*">
+        <xsl:context-item as="element(Page)" use="required"/>
+        <xsl:attribute name="ulx">0</xsl:attribute>
+        <xsl:attribute name="uly">0</xsl:attribute>
+        <xsl:attribute name="lrx" select="@imageWidth"/>
+        <xsl:attribute name="lry" select="@imageHeight"/>
+    </xsl:template>
+
+    <xsl:template name="p2t:facs-zone-page">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <zone type="Page">
+            <xsl:attribute name="xml:id" select="p2t:facs-id-prefix(., $page-number)"/>
+            <!--xsl:call-template name="p2t:page-xml-source-link"/-->
+            <xsl:call-template name="p2t:facs-surface-coords"/>
+        </zone>
+    </xsl:template>
+
+    <xsl:template mode="facsimile" match="TextRegion | TextLine | Word">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <zone>
+            <xsl:attribute name="xml:id" select="p2t:make-facs-id(@id, $page-number)"/>
+            <xsl:attribute name="type" select="local-name(.)"/>
+            <xsl:call-template name="p2t:start"/>
+            <xsl:call-template name="p2t:page-xml-source-link"/>
+            <xsl:call-template name="p2t:make-coords"/>
+        </zone>
+        <xsl:apply-templates mode="facsimile"/>
+    </xsl:template>
+
+    <xsl:template name="p2t:start">
+        <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
+        <xsl:if test="$p2t:with-start">
+            <xsl:attribute name="start" select="'#' || p2t:make-id(@id, $page-number)"/>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- override this with some math to make a rectangle -->
+    <xsl:template name="p2t:make-coords" as="attribute()*">
+        <xsl:context-item as="element()" use="required"/>
+        <xsl:attribute name="points" select="Coords[1]/@points"/>
+    </xsl:template>
+
+
     <!-- functions -->
-
-    <xsl:function name="p2t:make-id" as="xs:string" visibility="final">
-        <xsl:param name="att" as="attribute()"/>
-        <xsl:sequence select="p2t:id-prefix($att) || string($att)"/>
-    </xsl:function>
-
-    <xsl:function name="p2t:id-prefix" as="xs:string" visibility="public">
-        <xsl:param name="context" as="node()"/>
-        <xsl:sequence
-            select="'p' || root($context)/PcGts/Page/@imageFilename => replace('\.(img|jpg)$', '') || '.'"
-        />
-    </xsl:function>
 
     <xsl:function name="p2t:make-id" as="xs:string" visibility="final">
         <xsl:param name="att" as="attribute()"/>
@@ -366,51 +497,21 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:value-of select="'p' || $page-number || '.'"/>
     </xsl:function>
 
+    <xsl:function name="p2t:make-facs-id" as="xs:string" visibility="final">
+        <xsl:param name="att" as="attribute()?"/>
+        <xsl:param name="page-number" as="xs:integer"/>
+        <xsl:sequence select="p2t:facs-id-prefix($att, $page-number) || string($att)"/>
+    </xsl:function>
+
+    <xsl:function name="p2t:facs-id-prefix" as="xs:string" visibility="public">
+        <xsl:param name="context" as="node()?"/>
+        <xsl:param name="page-number" as="xs:integer"/>
+        <xsl:value-of select="'f' || $page-number || '.'"/>
+    </xsl:function>
+
     <xsl:function name="p2t:merge-ids" as="xs:string" visibility="public">
         <xsl:param name="ids" as="xs:string*"/>
         <xsl:sequence select="string-join($ids, '.MERGE.')"/>
     </xsl:function>
-
-    <xsl:function name="p2t:merge-coords" as="xs:string">
-        <xsl:param name="coords" as="xs:string*"/>
-        <xsl:sequence select="string-join($coords, ' MERGE ')"/>
-    </xsl:function>
-
-    <!-- this template reproduces coordinates on a context item or on a context
-        that is explicitly passed in as the context parameter -->
-    <xsl:template name="p2t:coordinates" as="attribute()?" visibility="public">
-        <xsl:context-item as="node()" use="required"/>
-        <xsl:param name="context" as="element()+" select="." required="false"/>
-        <xsl:param name="level" select="$context => local-name()" required="false"/>
-        <xsl:choose>
-            <xsl:when test="not($p2t:coords)"/>
-            <xsl:when test="$context/self::Coords">
-                <xsl:message use-when="system-property('debug') eq 'true'">
-                    <xsl:text>directyl looking for Coords at level </xsl:text>
-                    <xsl:value-of select="$level"/>
-                    <xsl:text>, found </xsl:text>
-                    <xsl:value-of select="$context/self::Coords[@level eq $level] => count()"/>
-                    <xsl:text>, levels: </xsl:text>
-                    <xsl:value-of select="$context/self::Coords/@level"/>
-                    <xsl:text>, points: </xsl:text>
-                    <xsl:value-of select="$context/self::Coords/@points"/>
-                </xsl:message>
-                <xsl:attribute name="{$p2t:coords-att}"
-                    select="$context/self::Coords[@level eq $level]/@points => p2t:merge-coords()"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:message use-when="system-property('debug') eq 'true'">
-                    <xsl:text>looking for coords on level </xsl:text>
-                    <xsl:value-of select="$level"/>
-                    <xsl:text>, found </xsl:text>
-                    <xsl:value-of select="$context/child::Coords => count()"/>
-                    <xsl:text> </xsl:text>
-                    <xsl:value-of select="$context/child::Coords/@*"/>
-                </xsl:message>
-                <xsl:attribute name="{$p2t:coords-att}"
-                    select="$context/child::Coords/@points => p2t:merge-coords()"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
 
 </xsl:package>
