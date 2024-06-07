@@ -69,6 +69,13 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:param name="p2t:facs-prefix-replacement" as="xs:string"
         select="'https://facsimiles.your.com/$1'"/>
 
+    <!-- the match part of how to make facs links -->
+    <xsl:param name="p2t:pxml-prefix-match" as="xs:string" select="'(.*)'"/>
+
+    <!-- the replacement part of how to make facs links -->
+    <xsl:param name="p2t:pxml-prefix-replacement" as="xs:string" select="'$1'"/>
+
+
     <!-- Use this initial template to transform all documents found in a directory.
         @seed:it@ -->
     <xsl:template name="p2t:collection-uri" visibility="final">
@@ -231,6 +238,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                 <xsl:if test="$p2t:with-facsimile">
                     <prefixDef ident="facs" matchPattern="{$p2t:facs-prefix-match}"
                         replacementPattern="{$p2t:facs-prefix-replacement}"/>
+                    <prefixDef ident="pxml" matchPattern="{$p2t:pxml-prefix-match}"
+                        replacementPattern="{$p2t:pxml-prefix-replacement}"/>
                 </xsl:if>
             </listPrefixDef>
         </encodingDesc>
@@ -406,9 +415,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:template mode="facsimile" match="Page">
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <surface>
-            <xsl:attribute name="xml:id" select="p2t:facs-id-prefix(., $page-number)"/>
             <xsl:attribute name="n" select="$page-number"/>
-            <xsl:call-template name="p2t:page-xml-source-doc"/>
+            <xsl:call-template name="p2t:page-xml-source-link"/>
             <xsl:call-template name="p2t:facs-surface-coords"/>
             <graphic>
                 <xsl:attribute name="url" select="'facs:' || @imageFilename"/>
@@ -418,9 +426,18 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         </surface>
     </xsl:template>
 
-    <xsl:template name="p2t:page-xml-source-doc" as="attribute()*">
+    <xsl:template name="p2t:page-xml-source-link" as="attribute()*">
         <xsl:context-item as="node()" use="required"/>
-        <xsl:attribute name="source" select="tokenize(base-uri(.), '/')[last()]"/>
+        <xsl:choose>
+            <xsl:when test="exists(@id)">
+                <xsl:attribute name="sameAs"
+                    select="'pxml:' || tokenize(base-uri(.), '/')[last()] || '#' || @id"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="source" select="'pxml:' || tokenize(base-uri(.), '/')[last()]"
+                />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="p2t:facs-surface-coords" as="attribute()*">
@@ -435,6 +452,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <zone type="Page">
             <xsl:attribute name="xml:id" select="p2t:facs-id-prefix(., $page-number)"/>
+            <!--xsl:call-template name="p2t:page-xml-source-link"/-->
             <xsl:call-template name="p2t:facs-surface-coords"/>
         </zone>
     </xsl:template>
@@ -445,6 +463,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:attribute name="xml:id" select="p2t:make-facs-id(@id, $page-number)"/>
             <xsl:attribute name="type" select="local-name(.)"/>
             <xsl:call-template name="p2t:start"/>
+            <xsl:call-template name="p2t:page-xml-source-link"/>
             <xsl:call-template name="p2t:make-coords"/>
         </zone>
         <xsl:apply-templates mode="facsimile"/>
