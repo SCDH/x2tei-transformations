@@ -59,6 +59,13 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- string serialization of a collection catalog -->
     <xsl:param name="p2t:collection" as="xs:string"/>
 
+    <!-- the match part of how to make facs links -->
+    <xsl:param name="p2t:facs-prefix-match" as="xs:string" select="'(.*)'"/>
+
+    <!-- the replacement part of how to make facs links -->
+    <xsl:param name="p2t:facs-prefix-replacement" as="xs:string"
+        select="'https://facsimiles.your.com/$1'"/>
+
     <!-- Use this initial template to transform all documents found in a directory.
         @seed:it@ -->
     <xsl:template name="p2t:collection-uri" visibility="final">
@@ -214,8 +221,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:template name="p2t:encoding-desc">
         <encodingDesc>
             <listPrefixDef>
-                <prefixDef ident="facs" matchPattern="(.*)"
-                    replacementPattern="https://facsimiles.your.com/$1"/>
+                <prefixDef ident="facs" matchPattern="{$p2t:facs-prefix-match}"
+                    replacementPattern="{$p2t:facs-prefix-replacement}"/>
             </listPrefixDef>
         </encodingDesc>
     </xsl:template>
