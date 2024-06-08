@@ -16,11 +16,17 @@
             test="exists(/t:TEI/t:teiHeader/t:fileDesc/t:publicationStmt)"/>
         <x:expect label="has source description"
             test="exists(/t:TEI/t:teiHeader/t:fileDesc/t:sourceDesc)"/>
+        <x:expect label="prefix definition for protocol facs:"
+            test="exists(/t:TEI/t:teiHeader/t:encodingDesc//t:prefixDef[@ident eq 'facs'])"/>
+        <x:expect label="prefix definition for protocol pxml:"
+            test="exists(/t:TEI/t:teiHeader/t:encodingDesc//t:prefixDef[@ident eq 'pxml'])"/>
         <x:expect label="has facsimile" test="exists(/t:TEI/t:facsimile)"/>
         <x:expect label="has surface" test="exists(/t:TEI/t:facsimile/t:surface)"/>
         <x:expect label="has graphic" test="exists(/t:TEI/t:facsimile/t:surface/t:graphic)"/>
         <x:expect label="has graphic/@url"
             test="exists(/t:TEI/t:facsimile/t:surface/t:graphic/@url)"/>
+        <x:expect label="graphic/@url is a facs: link"
+            test="matches(/t:TEI/t:facsimile/t:surface/t:graphic/@url, '^facs:')"/>
         <x:expect label="has zone" test="exists(/t:TEI/t:facsimile/t:surface/t:zone)"/>
         <x:expect label="every zone has an xml:id"
             test="every $z in /t:TEI/t:facsimile/t:surface/t:zone satisfies exists($z/@xml:id)"/>
@@ -36,6 +42,10 @@
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone/@start satisfies exists(id(substring($s, 2)))"/>
         <x:expect label="every @start in facsimile can be dereferenced, except words"
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Word']/@start satisfies exists(id(substring($s, 2)))"/>
+        <x:expect label="every zone has an @sameAs, except for pages"
+            test="every $z in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Page'] satisfies exists($z/@sameAs)"/>
+        <x:expect label="every zone/@sameAs is an pxml: link"
+            test="every $z in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Page']/@sameAs satisfies matches($z, '^pxml:')"/>
         <x:expect label="has text" test="exists(/t:TEI/t:text)"/>
         <x:expect label="has body" test="exists(/t:TEI/t:text/t:body)"/>
         <x:expect label="div starts with a pb" test="t:TEI/t:text/t:body/element()[1] ! name(.)"
