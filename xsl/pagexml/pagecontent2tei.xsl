@@ -232,7 +232,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         </teiHeader>
     </xsl:template>
 
-    <xsl:template name="p2t:encoding-desc">
+    <xsl:template name="p2t:encoding-desc" visibility="public">
         <encodingDesc>
             <listPrefixDef>
                 <xsl:if test="$p2t:with-facsimile">
@@ -247,7 +247,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
 
     <!-- page is the mode is a first pass -->
-    <xsl:mode name="page" on-no-match="shallow-skip"/>
+    <xsl:mode name="page" on-no-match="shallow-skip" visibility="public"/>
 
     <xsl:template mode="page" match="Metadata"/>
 
@@ -375,7 +375,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
 
     <!-- text-regions is the mode for the second pass -->
-    <xsl:mode name="text-regions" on-no-match="shallow-copy"/>
+    <xsl:mode name="text-regions" on-no-match="shallow-copy" visibility="public"/>
 
     <xsl:template mode="text-regions" match="TextRegionStart"/>
 
@@ -383,7 +383,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
 
 
     <!-- p-joiner is the mode for the third pass -->
-    <xsl:mode name="p-joiner" on-no-match="shallow-copy"/>
+    <xsl:mode name="p-joiner" on-no-match="shallow-copy" visibility="public"/>
 
     <xsl:template mode="p-joiner" match="tei:p[child::tei:pb and normalize-space(.) eq '']">
         <xsl:copy-of select="tei:pb"/>
@@ -400,7 +400,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- facsimile -->
 
     <!-- a template for making the facs attribute in other modes -->
-    <xsl:template name="p2t:facs" as="attribute(facs)?">
+    <xsl:template name="p2t:facs" as="attribute(facs)?" visibility="final">
         <xsl:context-item as="element()" use="required"/>
         <xsl:param name="context" as="element()" select="." required="false"/>
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
@@ -410,7 +410,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
     <!-- mode for making facsimile section -->
-    <xsl:mode name="facsimile" on-no-match="shallow-skip"/>
+    <xsl:mode name="facsimile" on-no-match="shallow-skip" visibility="public"/>
 
     <xsl:template mode="facsimile" match="Page">
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
@@ -426,7 +426,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         </surface>
     </xsl:template>
 
-    <xsl:template name="p2t:page-xml-source-link" as="attribute()*">
+    <xsl:template name="p2t:page-xml-source-link" as="attribute()*" visibility="public">
         <xsl:context-item as="node()" use="required"/>
         <xsl:choose>
             <xsl:when test="exists(@id)">
@@ -440,7 +440,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template name="p2t:facs-surface-coords" as="attribute()*">
+    <xsl:template name="p2t:facs-surface-coords" as="attribute()*" visibility="public">
         <xsl:context-item as="element(Page)" use="required"/>
         <xsl:attribute name="ulx">0</xsl:attribute>
         <xsl:attribute name="uly">0</xsl:attribute>
@@ -448,7 +448,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:attribute name="lry" select="@imageHeight"/>
     </xsl:template>
 
-    <xsl:template name="p2t:facs-zone-page">
+    <xsl:template name="p2t:facs-zone-page" visibility="public">
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <zone type="Page">
             <xsl:attribute name="xml:id" select="p2t:facs-id-prefix(., $page-number)"/>
@@ -481,7 +481,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:apply-templates mode="facsimile"/>
     </xsl:template>
 
-    <xsl:template name="p2t:start">
+    <xsl:template name="p2t:start" visibility="public">
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <xsl:if test="$p2t:with-start">
             <xsl:attribute name="start" select="'#' || p2t:make-id(@id, $page-number)"/>
@@ -489,7 +489,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     </xsl:template>
 
     <!-- override this with some math to make a rectangle -->
-    <xsl:template name="p2t:make-coords" as="attribute()*">
+    <xsl:template name="p2t:make-coords" as="attribute()*" visibility="public">
         <xsl:context-item as="element()" use="required"/>
         <xsl:attribute name="points" select="Coords[1]/@points"/>
     </xsl:template>
