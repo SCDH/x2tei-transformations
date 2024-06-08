@@ -69,12 +69,14 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <xsl:param name="p2t:facs-prefix-replacement" as="xs:string"
         select="'https://facsimiles.your.com/$1'"/>
 
-    <!-- the match part of how to make facs links -->
+    <!-- the match part of how to make page XML links -->
     <xsl:param name="p2t:pxml-prefix-match" as="xs:string" select="'(.*)'"/>
 
-    <!-- the replacement part of how to make facs links -->
+    <!-- the replacement part of how to make page XML links -->
     <xsl:param name="p2t:pxml-prefix-replacement" as="xs:string" select="'$1'"/>
 
+    <!-- count of path segments to keep of the link to the page XML files -->
+    <xsl:param name="p2t:pxml-path-segments" as="xs:integer" select="1"/>
 
     <!-- Use this initial template to transform all documents found in a directory.
         @seed:it@ -->
@@ -419,11 +421,17 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
             <xsl:call-template name="p2t:page-xml-source-link"/>
             <xsl:call-template name="p2t:facs-surface-coords"/>
             <graphic>
-                <xsl:attribute name="url" select="'facs:' || @imageFilename"/>
+                <xsl:call-template name="p2t:facs-graphic-url"/>
             </graphic>
             <xsl:call-template name="p2t:facs-zone-page"/>
             <xsl:apply-templates mode="#current"/>
         </surface>
+    </xsl:template>
+
+    <!-- override this with some logic to get, e.g., a IIIF URL from the image filename -->
+    <xsl:template name="p2t:facs-graphic-url" as="attribute(url)?" visibility="public">
+        <xsl:context-item as="element(Page)" use="required"/>
+        <xsl:attribute name="url" select="'facs:' || @imageFilename"/>
     </xsl:template>
 
     <xsl:template name="p2t:page-xml-source-link" as="attribute()*" visibility="public">
@@ -431,10 +439,12 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         <xsl:choose>
             <xsl:when test="exists(@id)">
                 <xsl:attribute name="sameAs"
-                    select="'pxml:' || tokenize(base-uri(.), '/')[last()] || '#' || @id"/>
+                    select="'pxml:' || tokenize(base-uri(.), '/')[position() gt last() - $p2t:pxml-path-segments] => string-join('/') || '#' || @id"
+                />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:attribute name="source" select="'pxml:' || tokenize(base-uri(.), '/')[last()]"
+                <xsl:attribute name="source"
+                    select="'pxml:' || tokenize(base-uri(.), '/')[position() gt last() - $p2t:pxml-path-segments] => string-join('/')"
                 />
             </xsl:otherwise>
         </xsl:choose>
