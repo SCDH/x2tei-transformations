@@ -457,7 +457,19 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         </zone>
     </xsl:template>
 
-    <xsl:template mode="facsimile" match="TextRegion | TextLine | Word">
+    <xsl:template mode="facsimile" match="TextRegion">
+        <xsl:call-template name="p2t:facs-zone"/>
+    </xsl:template>
+
+    <xsl:template mode="facsimile" match="TextLine[$p2t:lb]">
+        <xsl:call-template name="p2t:facs-zone"/>
+    </xsl:template>
+
+    <xsl:template mode="facsimile" match="Word[$p2t:words]">
+        <xsl:call-template name="p2t:facs-zone"/>
+    </xsl:template>
+
+    <xsl:template name="p2t:facs-zone" visibility="final">
         <xsl:param name="page-number" as="xs:integer" tunnel="true"/>
         <zone>
             <xsl:attribute name="xml:id" select="p2t:make-facs-id(@id, $page-number)"/>

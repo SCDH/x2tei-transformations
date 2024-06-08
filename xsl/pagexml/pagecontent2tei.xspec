@@ -32,7 +32,7 @@
             test="exists(/t:TEI/t:facsimile/t:surface/t:zone[@type eq 'TextRegion']/@points)"/>
         <x:expect label="every zone has an @start, except for pages"
             test="every $z in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Page'] satisfies exists($z/@start)"/>
-        <x:expect label="every @start in facsimile can be dereferenced" pending="word zones present"
+        <x:expect label="every @start in facsimile can be dereferenced"
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone/@start satisfies exists(id(substring($s, 2)))"/>
         <x:expect label="every @start in facsimile can be dereferenced, except words"
             test="every $s in /t:TEI/t:facsimile/t:surface/t:zone[@type ne 'Word']/@start satisfies exists(id(substring($s, 2)))"/>
