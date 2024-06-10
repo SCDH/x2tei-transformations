@@ -1,5 +1,11 @@
 # Changes
 
+## 0.6.1
+
+- `xsl/pagexml/pagecontent2tei.xsl`:
+  - fixed visibility of components
+  - minor fixes
+
 ## 0.6.0
 
 - `xsl/pagexml/pagecontent2tei.xsl`:
