@@ -1,5 +1,12 @@
 # Changes
 
+## 0.6.2
+- `xsl/pagexml/pagecontent2tei.xsl`:
+  - offer `p2t:post-proc` mode for running custom post processing
+    transformations
+  - separate templates for parts of the encoding description increase
+    the re-useability
+
 ## 0.6.1
 
 - `xsl/pagexml/pagecontent2tei.xsl`:
