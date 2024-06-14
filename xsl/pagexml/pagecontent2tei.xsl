@@ -145,70 +145,79 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     <!-- a common entry point used by initial templates and the initial p2t:source mode -->
     <xsl:template name="tei-template" visibility="final">
         <xsl:param name="pages" as="document-node()*"/>
-        <TEI>
-            <xsl:call-template name="p2t:tei-header">
-                <xsl:with-param name="pages" as="node()*" select="$pages"/>
-            </xsl:call-template>
-            <xsl:if test="$p2t:with-facsimile and (empty($p2t:only) or $p2t:only eq 'facsimile')">
-                <facsimile>
-                    <xsl:for-each select="$pages">
-                        <xsl:apply-templates select="." mode="facsimile">
-                            <xsl:with-param name="page-number" as="xs:integer" select="position()"
-                                tunnel="true"/>
-                            <!-- assert, that the collection is ordered lexically by file name -->
-                            <!--xsl:sort select="base-uri()"/-->
-                        </xsl:apply-templates>
-                    </xsl:for-each>
-                </facsimile>
-            </xsl:if>
-            <xsl:if test="empty($p2t:only) or $p2t:only eq 'text'">
-                <text>
-                    <body>
-                        <!-- first pass with mode flat-regions which flattens regions (paragraphs) to a
+        <xsl:variable name="tei">
+            <TEI>
+                <xsl:call-template name="p2t:tei-header">
+                    <xsl:with-param name="pages" as="node()*" select="$pages"/>
+                </xsl:call-template>
+                <xsl:if
+                    test="$p2t:with-facsimile and (empty($p2t:only) or $p2t:only eq 'facsimile')">
+                    <facsimile>
+                        <xsl:for-each select="$pages">
+                            <xsl:apply-templates select="." mode="facsimile">
+                                <xsl:with-param name="page-number" as="xs:integer"
+                                    select="position()" tunnel="true"/>
+                                <!-- assert, that the collection is ordered lexically by file name -->
+                                <!--xsl:sort select="base-uri()"/-->
+                            </xsl:apply-templates>
+                        </xsl:for-each>
+                    </facsimile>
+                </xsl:if>
+                <xsl:if test="empty($p2t:only) or $p2t:only eq 'text'">
+                    <text>
+                        <body>
+                            <!-- first pass with mode flat-regions which flattens regions (paragraphs) to a
                             milestone markup which can be upcycled again in the second pass. -->
-                        <xsl:variable name="flat-regions">
-                            <xsl:for-each select="$pages">
-                                <xsl:apply-templates select="." mode="page">
-                                    <xsl:with-param name="page-number" as="xs:integer"
-                                        select="position()" tunnel="true"/>
-                                    <!-- assert, that the collection is ordered lexically by file name -->
-                                    <!--xsl:sort select="base-uri()"/-->
-                                </xsl:apply-templates>
-                            </xsl:for-each>
-                        </xsl:variable>
-                        <!--xsl:apply-templates select="$flat-regions/node()" mode="text-regions"/-->
-                        <!-- second pass: upcycled region milestones to paragraphs, but only when they
+                            <xsl:variable name="flat-regions">
+                                <xsl:for-each select="$pages">
+                                    <xsl:apply-templates select="." mode="page">
+                                        <xsl:with-param name="page-number" as="xs:integer"
+                                            select="position()" tunnel="true"/>
+                                        <!-- assert, that the collection is ordered lexically by file name -->
+                                        <!--xsl:sort select="base-uri()"/-->
+                                    </xsl:apply-templates>
+                                </xsl:for-each>
+                            </xsl:variable>
+                            <!--xsl:apply-templates select="$flat-regions/node()" mode="text-regions"/-->
+                            <!-- second pass: upcycled region milestones to paragraphs, but only when they
                             result from real paragraphs, not from page breaks (a page in pagexml
                             always starts with a new region). -->
-                        <xsl:variable name="with-paragraphs">
-                            <xsl:for-each-group select="$flat-regions/node()"
-                                group-starting-with="TextRegionStart[not(preceding::node()[1][self::tei:pb])]">
-                                <p>
-                                    <xsl:if
-                                        test="current-group()/descendant-or-self::TextRegionStart/@xml:id">
-                                        <xsl:attribute name="xml:id"
-                                            select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"
-                                        />
-                                    </xsl:if>
-                                    <xsl:if
-                                        test="current-group()/descendant-or-self::TextRegionStart/@facs">
-                                        <xsl:attribute name="facs"
-                                            select="current-group()/descendant-or-self::TextRegionStart/@facs"
-                                        />
-                                    </xsl:if>
-                                    <xsl:apply-templates mode="text-regions"
-                                        select="current-group()"/>
-                                </p>
-                            </xsl:for-each-group>
-                        </xsl:variable>
-                        <!-- third/final pass -->
-                        <xsl:apply-templates mode="p-joiner" select="$with-paragraphs"/>
-                        <xsl:text>&#xa;</xsl:text>
-                    </body>
-                </text>
-            </xsl:if>
-        </TEI>
+                            <xsl:variable name="with-paragraphs">
+                                <xsl:for-each-group select="$flat-regions/node()"
+                                    group-starting-with="TextRegionStart[not(preceding::node()[1][self::tei:pb])]">
+                                    <p>
+                                        <xsl:if
+                                            test="current-group()/descendant-or-self::TextRegionStart/@xml:id">
+                                            <xsl:attribute name="xml:id"
+                                                select="(current-group()/descendant-or-self::TextRegionStart/@xml:id) => p2t:merge-ids()"
+                                            />
+                                        </xsl:if>
+                                        <xsl:if
+                                            test="current-group()/descendant-or-self::TextRegionStart/@facs">
+                                            <xsl:attribute name="facs"
+                                                select="current-group()/descendant-or-self::TextRegionStart/@facs"
+                                            />
+                                        </xsl:if>
+                                        <xsl:apply-templates mode="text-regions"
+                                            select="current-group()"/>
+                                    </p>
+                                </xsl:for-each-group>
+                            </xsl:variable>
+                            <!-- third/final pass -->
+                            <xsl:apply-templates mode="p-joiner" select="$with-paragraphs"/>
+                            <xsl:text>&#xa;</xsl:text>
+                        </body>
+                    </text>
+                </xsl:if>
+            </TEI>
+        </xsl:variable>
+        <!-- run custom post processing on the generated TEI -->
+        <xsl:apply-templates mode="p2t:post-proc" select="$tei"/>
     </xsl:template>
+
+
+    <!-- the post processing mode is the identity transformation by default -->
+    <xsl:mode name="p2t:post-proc" on-no-match="shallow-copy" visibility="public"/>
 
 
     <!-- named templates for making the header -->
