@@ -239,21 +239,21 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
                     </p>
                 </sourceDesc>
             </fileDesc>
-            <xsl:call-template name="p2t:encoding-desc"/>
+            <encodingDesc>
+                <xsl:call-template name="p2t:prefix-defs"/>
+            </encodingDesc>
         </teiHeader>
     </xsl:template>
 
-    <xsl:template name="p2t:encoding-desc" visibility="public">
-        <encodingDesc>
-            <listPrefixDef>
-                <xsl:if test="$p2t:with-facsimile">
-                    <prefixDef ident="facs" matchPattern="{$p2t:facs-prefix-match}"
-                        replacementPattern="{$p2t:facs-prefix-replacement}"/>
-                    <prefixDef ident="pxml" matchPattern="{$p2t:pxml-prefix-match}"
-                        replacementPattern="{$p2t:pxml-prefix-replacement}"/>
-                </xsl:if>
-            </listPrefixDef>
-        </encodingDesc>
+    <xsl:template name="p2t:prefix-defs" visibility="public">
+        <listPrefixDef>
+            <xsl:if test="$p2t:with-facsimile">
+                <prefixDef ident="facs" matchPattern="{$p2t:facs-prefix-match}"
+                    replacementPattern="{$p2t:facs-prefix-replacement}"/>
+                <prefixDef ident="pxml" matchPattern="{$p2t:pxml-prefix-match}"
+                    replacementPattern="{$p2t:pxml-prefix-replacement}"/>
+            </xsl:if>
+        </listPrefixDef>
     </xsl:template>
 
 
