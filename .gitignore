@@ -31,3 +31,4 @@ test/*.usx
 *-report.html
 *-result.html
 xspec
+/test/samples/usx/
