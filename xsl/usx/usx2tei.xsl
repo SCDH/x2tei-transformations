@@ -120,7 +120,7 @@ The example USX document present during development has these features:
                 <change when="{current-date()}">
                     <xsl:text>Converted from </xsl:text>
                     <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
-                    <xsl:text> unsing </xsl:text>
+                    <xsl:text> using </xsl:text>
                     <xsl:value-of select="(static-base-uri() => tokenize('/'))[last()]"/>
                     <xsl:text>.</xsl:text>
                 </change>
