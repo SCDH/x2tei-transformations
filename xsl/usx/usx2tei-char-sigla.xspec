@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:t="http://www.tei-c.org/ns/1.0"
+    stylesheet="usx2tei-char-sigla.xsl" run-as="external">
+
+    <x:param name="witnesses" as="xs:string*" select="'A','S','C','M','E','l','𝔠','𝔟','𝔳'"/>
+
+
+    <!-- all tests in usx2tei.xspec must still work -->
+    <x:import href="usx2tei.xspec"/>
+
+    <x:scenario label="general structure">
+        <x:context select="$ezr.4.11"/>
+        <x:expect label="has witnesses"
+            test="exists(/t:TEI/t:teiHeader/t:fileDesc/t:sourceDesc/t:listWit//t:witness)"/>
+        <x:expect label="as many witnesses as given in parameter"
+            test="count(/t:TEI/t:teiHeader/t:fileDesc/t:sourceDesc/t:listWit//t:witness)"
+            select="count($witnesses)"/>
+        <x:expect label="tells about its variant encoding method"
+            test="t:TEI/t:teiHeader/t:encodingDesc/t:variantEncoding/@method ! string(.)"
+            select="'location-referenced'"/>
+        <x:expect label="tells about its variant encoding location"
+            test="t:TEI/t:teiHeader/t:encodingDesc/t:variantEncoding/@location ! string(.)"
+            select="'internal'"/>
+    </x:scenario>
+
+    <x:scenario label="apparatus on 4.11">
+        <x:context select="$ezr.4.11"/>
+        <x:expect label="has app" test="exists(/t:TEI/t:text//t:app)"/>
+        <x:expect label="has app/lem" test="exists(/t:TEI/t:text//t:app/t:lem)"/>
+        <x:expect label="has app/rdg" test="exists(/t:TEI/t:text//t:app/t:rdg)"/>
+        <x:expect label="every rdg has an @wit"
+            test="every $r in //t:rdg satisfies exists($r/@wit) "/>
+        <x:expect label="every rdg has an wit child"
+            test="every $r in //t:rdg satisfies exists($r//t:wit) "/>
+        <x:expect label="every note is an apparatus" test="count(/t:TEI/t:text//t:app)"
+            select="count($ezr.4.11//note)"/>
+    </x:scenario>
+
+</x:description>
