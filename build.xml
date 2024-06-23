@@ -20,11 +20,25 @@
     <!-- default rule: run all tests -->
     <target name="test">
         <antcall target="test-xsl-pagexml-pagecontent2tei.xsl"/>
+        <antcall target="test-xsl-usx-usx2tei.xsl"/>
+        <antcall target="test-xsl-usx-usx2tei-char-sigla.xsl"/>
     </target>
 
     <target name="test-xsl-pagexml-pagecontent2tei.xsl">
         <antcall target="xspec.xspec" inheritall="false">
             <param name="xspec.xml" location="${basedir}/xsl/pagexml/pagecontent2tei.xspec"/>
+        </antcall>
+    </target>
+
+    <target name="test-xsl-usx-usx2tei.xsl">
+        <antcall target="xspec.xspec" inheritall="false">
+            <param name="xspec.xml" location="${basedir}/xsl/usx/usx2tei.xspec"/>
+        </antcall>
+    </target>
+
+    <target name="test-xsl-usx-usx2tei-char-sigla.xsl">
+        <antcall target="xspec.xspec" inheritall="false">
+            <param name="xspec.xml" location="${basedir}/xsl/usx/usx2tei-char-sigla.xspec"/>
         </antcall>
     </target>
 
