@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:t="http://www.tei-c.org/ns/1.0" stylesheet="usx2tei.xsl" run-as="external">
+
+    <x:variable name="ezr.4.11">
+        <usx version="3.0">
+            <!-- this is a verse that overlaps paragraph boundaries -->
+            <chapter number="4" style="c" sid="2ES 4"/>
+            <para style="p">
+                <verse number="11" style="v" sid="2ES 4:11"/>et quomodo poterit vas tuum capere
+                Altissimi viam? ... Et iam exterritus<note caller="+" style="f"><char style="fr"
+                        closed="false">4,11 </char><char style="ft" closed="false">𝔊 et] <char
+                            style="it">lacunam indicavit</char> 𝔳., <char style="it">sequentia
+                            corrupta sunt</char></char></note> corrupto saeculo intellegere
+                    incorruptionem<note caller="+" style="f"><char style="fr" closed="false">4,11
+                        </char><char style="ft" closed="false">exteritus 𝔟𝔳.; exterius S
+                    𝔠</char></note>?</para>
+            <para style="p" vid="2ES 4:11">Et cum haec audissem<note caller="+" style="f"><char
+                        style="fr" closed="false">4,11 </char><char style="ft" closed="false"
+                        >corruptionem M 𝔠</char></note>, cecidi<note caller="+" style="f"><char
+                        style="fr" closed="false">4,11 </char><char style="ft" closed="false">et cum
+                        haec audissem cecidi 𝔟.] 𝔊 cecidi 𝔳.; euidentem AS 𝔠; et uidere
+                        CME</char></note> in faciem meam<note caller="+" style="f"><char style="fr"
+                        closed="false">4,11 </char><char style="ft" closed="false">in facie mea
+                        𝔠</char></note>
+                <verse eid="2ES 4:11"
+                /><!--verse number="12" style="v" sid="2ES 4:12"/>et dixi illi:
+                Melius erat nos non adesse<note caller="+" style="f"><char style="fr" closed="false"
+                        >4,12 </char><char style="ft" closed="false">non esse quam adhuc uiuentes
+                        𝔠</char></note>, quam advenientes vivere in impietatibus et pati et non
+                    intellegere<note caller="+" style="f"><char style="fr" closed="false">4,12
+                        </char><char style="ft" closed="false">intellexi ASC</char></note> de qua
+                re. <verse eid="2ES 4:12"/--></para>
+        </usx>
+    </x:variable>
+
+    <x:scenario label="verse 4.11">
+        <x:context select="$ezr.4.11"/>
+        <x:expect label="verse text" test="//t:lg/t:l/text() => string-join() => normalize-space()"
+            select="'et quomodo poterit vas tuum capere Altissimi viam? ... Et iam exterritus corrupto saeculo intellegere incorruptionem?Et cum haec audissem, cecidi in faciem meam'"/>
+        <x:expect label="one verse in two splits" test="//t:l => count()" select="2"/>
+        <x:expect label="aggregation of the verse with next" test="exists((//t:l)[1]/@next)"/>
+        <x:expect label="aggregation of the verse with next, referenced verse exists"
+            test="exists(id((//t:l)[1]/@next => substring(2))/self::t:l)"/>
+        <x:expect label="aggregation of the verse with prev" test="exists((//t:l)[2]/@prev)"/>
+        <x:expect label="aggregation of the verse with prev, referenced verse exists"
+            test="exists(id((//t:l)[2]/@prev => substring(2))/self::t:l)"/>
+    </x:scenario>
+
+</x:description>
