@@ -32,6 +32,11 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     <!-- this stylesheets is applicable on /usx as global context item -->
     <xsl:global-context-item as="document-node(element(usx))" use="required"/>
 
+    <xsl:template name="encodingDesc">
+        <encodingDesc>
+            <variantEncoding location="internal" method="location-referenced"/>
+        </encodingDesc>
+    </xsl:template>
 
     <xsl:template name="sourceDesc">
         <xsl:choose>
