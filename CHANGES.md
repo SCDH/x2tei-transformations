@@ -1,5 +1,13 @@
 # Changes
 
+## 0.6.3
+- `xsl/usx/usx2tei-char-sigla.xsl`:
+  - introduced new parameter for passing in a sequence of sigla groups as csv
+  - unit tests
+- `xsl/usx/usx2tei.xsl`:
+  - fixed typo
+  - unit tests
+
 ## 0.6.2
 - `xsl/pagexml/pagecontent2tei.xsl`:
   - offer `p2t:post-proc` mode for running custom post processing
