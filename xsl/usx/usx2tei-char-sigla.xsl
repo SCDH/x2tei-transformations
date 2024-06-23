@@ -27,7 +27,12 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     <xsl:param name="wrap-notes-app" as="xs:boolean" select="true()" required="false"/>
 
     <!-- a sequence of witnesses, the sequence is used for groups, strings will be split at whitespace -->
-    <xsl:param name="witnesses" as="xs:string*" select="()" required="false"/>
+    <xsl:param name="witnesses" as="xs:string*" select="tokenize($witnesses-csv, ',\s*')"
+        required="false"/>
+
+    <!-- a sequence of witnesses, groups as comma separated values -->
+    <xsl:param name="witnesses-csv" as="xs:string" select="''"
+        required="false"/>
 
     <!-- this stylesheets is applicable on /usx as global context item -->
     <xsl:global-context-item as="document-node(element(usx))" use="required"/>
