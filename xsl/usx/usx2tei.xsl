@@ -10,7 +10,7 @@ The example USX document present during development has these features:
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:scdh="http://scdh.wwu.de/scdh" exclude-result-prefixes="#all" version="3.1">
 
-    <xsl:output method="xml" indent="yes"/>
+    <xsl:output method="xml" indent="no"/>
 
     <!-- main language of the document -->
     <xsl:param name="language" as="xs:string" select="'la'" required="false"/>

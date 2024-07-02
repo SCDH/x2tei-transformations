@@ -19,7 +19,7 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     xpath-default-namspace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all"
     version="3.1">
 
-    <xsl:output method="xml" indent="yes"/>
+    <xsl:output method="xml" indent="no"/>
 
     <xsl:import href="usx2tei.xsl"/>
 
