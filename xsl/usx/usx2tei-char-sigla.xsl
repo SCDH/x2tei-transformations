@@ -31,8 +31,7 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
         required="false"/>
 
     <!-- a sequence of witnesses, groups as comma separated values -->
-    <xsl:param name="witnesses-csv" as="xs:string" select="''"
-        required="false"/>
+    <xsl:param name="witnesses-csv" as="xs:string" select="''" required="false"/>
 
     <!-- this stylesheets is applicable on /usx as global context item -->
     <xsl:global-context-item as="document-node(element(usx))" use="required"/>
@@ -40,6 +39,7 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     <xsl:template name="encodingDesc">
         <encodingDesc>
             <variantEncoding location="internal" method="location-referenced"/>
+            <xsl:call-template name="tagsDecl"/>
         </encodingDesc>
     </xsl:template>
 

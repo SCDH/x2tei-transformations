@@ -137,7 +137,35 @@ The example USX document present during development has these features:
         </sourceDesc>
     </xsl:template>
 
-    <xsl:template name="encodingDesc"/>
+    <xsl:template name="encodingDesc">
+        <encodingDesc>
+            <xsl:call-template name="tagsDecl"/>
+        </encodingDesc>
+    </xsl:template>
+
+    <xsl:template name="tagsDecl">
+        <tagsDecl>
+            <rendition xml:id="add" scheme="css">vertical-align: super</rendition>
+            <rendition xml:id="it" scheme="css">font-style: italic</rendition>
+            <rendition xml:id="id" scheme="css"/>
+            <rendition xml:id="ide" scheme="css"/>
+            <rendition xml:id="rem" scheme="css"/>
+            <rendition xml:id="h" scheme="css"/>
+            <rendition xml:id="toc3" scheme="css"/>
+            <rendition xml:id="toc2" scheme="css"/>
+            <rendition xml:id="toc1" scheme="css"/>
+            <rendition xml:id="mt1" scheme="css"/>
+            <rendition xml:id="f" scheme="css"/>
+            <rendition xml:id="fr" scheme="css"/>
+            <rendition xml:id="ft" scheme="css"/>
+            <rendition xml:id="c" scheme="css"/>
+            <rendition xml:id="p" scheme="css"/>
+            <rendition xml:id="v" scheme="css"/>
+            <rendition xml:id="xt" scheme="css"/>
+            <rendition xml:id="nb" scheme="css"/>
+            <rendition xml:id="mte1" scheme="css"/>
+        </tagsDecl>
+    </xsl:template>
 
     <xsl:template mode="title" match="para">
         <title>
@@ -361,7 +389,11 @@ The example USX document present during development has these features:
         <xsl:context-item as="element()" use="required"/>
         <xsl:choose>
             <xsl:when test="@style">
-                <xsl:attribute name="rend" select="@style"/>
+                <xsl:attribute name="rendition">
+                    <xsl:for-each select="tokenize(@style)">
+                        <xsl:value-of select="'#' || ."/>
+                    </xsl:for-each>
+                </xsl:attribute>
             </xsl:when>
         </xsl:choose>
     </xsl:template>

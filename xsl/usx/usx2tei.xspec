@@ -47,4 +47,49 @@
             test="exists(id((//t:l)[2]/@prev => substring(2))/self::t:l)"/>
     </x:scenario>
 
+    <x:scenario label="formatting">
+        <x:context select="$ezr.4.11"/>
+        <x:expect label="has hi elements" test="exists(/t:TEI/t:text//t:hi)"/>
+        <x:expect label="has as many hi elements as input has char elements"
+            pending="does not pass when imported" test="count(/t:TEI/t:text//t:hi)"
+            select="count($ezr.4.11//char)"/>
+        <x:expect label="has tagsDecl" test="exists(/t:TEI/t:teiHeader/t:encodingDesc/t:tagsDecl)"/>
+        <x:expect label="has tagsDecl"
+            test="exists(/t:TEI/t:teiHeader/t:encodingDesc/t:tagsDecl/t:rendition)"/>
+        <!--x:expect label="used styles" test="/t:TEI/t:text//@rendition ! tokenize(.)" select="()"/-->
+        <x:expect label="every used style is defined in a rendition element"
+            test="every $s in /t:TEI/t:text//@rendition ! tokenize(.) satisfies exists(id(substring($s, 2))/self::t:rendition)"
+        />
+    </x:scenario>
+
+    <x:variable name="ezr.3.7">
+        <usx version="3.0">
+            <!-- this is a verse that overlaps paragraph boundaries -->
+            <chapter number="4" style="c" sid="2ES 4"/>
+            <para style="p">
+                <verse number="7" style="v" sid="2ES 3:7"/>Et huic<note caller="+" style="f"><char
+                        style="fr" closed="false">3,7 </char><char style="ft" closed="false">huic]
+                        ad hunc 𝔳.; adhuc CME</char></note> mandasti diligentiam<note caller="+"
+                    style="f"><char style="fr" closed="false">3,7 </char><char style="ft"
+                        closed="false">diligere S<char style="add">2</char> 𝔠</char></note> unam
+                    tuam<note caller="+" style="f"><char style="fr" closed="false">3,7 </char><char
+                        style="ft" closed="false">∼ tuam unam CME; uiam tuam S<char style="add"
+                            >2</char> 𝔠</char></note>, et praeterivit eam, et statim instituisti in
+                    eum<note caller="+" style="f"><char style="fr" closed="false">3,7 </char><char
+                        style="ft" closed="false">in eo CME 𝔠</char></note> mortem et in nationibus
+                eius. Et natae<note caller="+" style="f"><char style="fr" closed="false">3,7
+                        </char><char style="ft" closed="false">natae] nati A</char></note> sunt ex
+                    eo<note caller="+" style="f"><char style="fr" closed="false">3,7 </char><char
+                        style="ft" closed="false">ex eo <char style="it">om.</char> 𝔠</char></note>
+                gentes et tribus, populi<note caller="+" style="f"><char style="fr" closed="false"
+                        >3,7 </char><char style="ft" closed="false">populique et ME; populi ubique
+                        et C; et populi et 𝔠</char></note> et cognationes, quorum<note caller="+"
+                    style="f"><char style="fr" closed="false">3,7 </char><char style="ft"
+                        closed="false">quarum CME 𝔠</char></note> non est numerus. <verse
+                    eid="2ES 3:7"/>
+            </para>
+        </usx>
+    </x:variable>
+
+
 </x:description>
