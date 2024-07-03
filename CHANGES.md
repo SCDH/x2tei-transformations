@@ -1,5 +1,11 @@
 # Changes
 
+## 0.6.4
+- `xsl/usx/usx2tei.xsl`:
+  - serialization property `indent="no"` fixes issue #6
+  - using TEI's `@rendition` for formatting from the controled
+    vocabulary of USX
+
 ## 0.6.3
 - `xsl/usx/usx2tei-char-sigla.xsl`:
   - introduced new parameter for passing in a sequence of sigla groups as csv
