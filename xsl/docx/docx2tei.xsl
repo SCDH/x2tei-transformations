@@ -116,6 +116,9 @@ paths of the documents in the docx file to document nodes of the parsed files.
     </xsl:template>
 
 
+    <!-- the docx2t:postproc mode is for post processing in downstream packages -->
+    <xsl:mode name="docx2t:postproc" on-no-match="shallow-copy" visibility="public"/>
+
 
     <!-- the mode docx2t:convert does the conversion -->
     <xsl:mode name="docx2t:convert" on-no-match="shallow-skip" visibility="public"/>
@@ -124,15 +127,18 @@ paths of the documents in the docx file to document nodes of the parsed files.
     <xsl:mode name="docx2t:footnote" on-no-match="shallow-skip" visibility="public"/>
 
     <xsl:template mode="docx2t:convert" match="w:document">
-        <TEI>
-            <xsl:call-template name="docx2t:rootAttributes"/>
-            <xsl:call-template name="docx2t:teiHeader"/>
-            <text>
-                <body>
-                    <xsl:apply-templates mode="#current"/>
-                </body>
-            </text>
-        </TEI>
+        <xsl:variable name="converted">
+            <TEI>
+                <xsl:call-template name="docx2t:rootAttributes"/>
+                <xsl:call-template name="docx2t:teiHeader"/>
+                <text>
+                    <body>
+                        <xsl:apply-templates mode="#current"/>
+                    </body>
+                </text>
+            </TEI>
+        </xsl:variable>
+        <xsl:apply-templates mode="docx2t:postproc" select="$converted"/>
     </xsl:template>
 
     <xsl:template mode="docx2t:convert docx2t:footnote" match="w:t/text()">
