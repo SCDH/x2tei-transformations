@@ -85,12 +85,12 @@
 
     <dependencies>
         <!-- Frontend -->
-        <dependency>
+        <!--dependency>
             <groupId>de.wwu.scdh.seed</groupId>
             <artifactId>seed-frontend-components-webjar</artifactId>
             <version>0.3.0</version>
             <scope>test</scope>
-        </dependency>
+        </dependency-->
 
         <!-- Tooling -->
         <dependency>
