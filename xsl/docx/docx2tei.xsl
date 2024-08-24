@@ -53,6 +53,14 @@ paths of the documents in the docx file to document nodes of the parsed files.
         java -jar saxon.jar -xsl:docx2tei.xsl -it input-file=YOUR.docx
     -->
     <xsl:template name="xsl:initial-template" visibility="final">
+        <xsl:call-template name="docx2t:read-docx"/>
+    </xsl:template>
+
+    <!-- initial template as entry point:
+        USAGE:
+        java -jar saxon.jar -xsl:docx2tei.xsl -it:{http://scdh.wwu.de/transform/docx2tei#}read-docx input-file=YOUR.docx
+    -->
+    <xsl:template name="docx2t:read-docx" visibility="final">
         <xsl:if test="not($docx2t:input-file)">
             <xsl:message terminate="yes">
                 <xsl:text>You have to provide the stylesheet parameter 'input-file' if you call this transformation with the initial template 'xsl:initial-template'.</xsl:text>
