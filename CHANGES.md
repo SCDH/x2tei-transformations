@@ -1,5 +1,14 @@
 # Changes
 
+## 0.7.0
+
+- `xsl/docx/docx2tei.xsl`:
+  - made reusable by downstream packages by providing initial template
+    `docx2t:read-docx`
+  - pass converted document through `docx2t:postproc` mode, which is
+    the identity transformation and can be overwritten by downstream
+    packages
+
 ## 0.6.4
 - `xsl/usx/usx2tei.xsl`:
   - serialization property `indent="no"` fixes issue #6
