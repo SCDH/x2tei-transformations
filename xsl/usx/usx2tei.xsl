@@ -283,6 +283,7 @@ The example USX document present during development has these features:
                     <xsl:for-each-group select="current-group()" group-starting-with="verse[@sid]">
                         <!-- drop whitespace before first starting verse element -->
                         <xsl:if test="current-group() => string-join() => normalize-space() ne ''">
+                            <xsl:text>&#xa;</xsl:text>
                             <l>
                                 <xsl:attribute name="n" select="current-group()[1]/@number"/>
                                 <xsl:sequence select="current-group()[1]/@sid => scdh:make-id()"/>
@@ -346,6 +347,7 @@ The example USX document present during development has these features:
                     </xsl:when>
                     <xsl:when test="current-group()[1][self::verse[@sid]]">
                         <!-- paragraph starting with a verse start -->
+                        <xsl:text>&#xa;</xsl:text>
                         <l>
                             <xsl:attribute name="n" select="current-group()[1]/@number"/>
                             <xsl:sequence select="current-group()[1]/@sid => scdh:make-id()"/>
@@ -362,6 +364,7 @@ The example USX document present during development has these features:
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- paragraph continuing a verse -->
+                        <xsl:text>&#xa;</xsl:text>
                         <l>
                             <!-- we use TEI's aggregation -->
                             <xsl:sequence
