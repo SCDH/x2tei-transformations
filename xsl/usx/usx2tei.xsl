@@ -145,7 +145,7 @@ The example USX document present during development has these features:
 
     <xsl:template name="tagsDecl">
         <tagsDecl>
-            <rendition xml:id="add" scheme="css">vertical-align: super</rendition>
+            <rendition xml:id="add" scheme="css">vertical-align: super; font-size: 0.7em</rendition>
             <rendition xml:id="it" scheme="css">font-style: italic</rendition>
             <rendition xml:id="id" scheme="css"/>
             <rendition xml:id="ide" scheme="css"/>
