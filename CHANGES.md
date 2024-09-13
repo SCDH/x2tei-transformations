@@ -1,5 +1,14 @@
 # Changes
 
+## 0.8.0
+
+- `xsl/usx/usx2tei.xsl`:
+  - improve generated TEI header
+  - introduced stylesheet parameter `source-url` to point to a
+    canonical URI, where the USX source file comes from. Defaults to
+    the input's basename.
+  - make a heading from the paragraph marked with the style `mt1`.
+
 ## 0.7.0
 
 - `xsl/docx/docx2tei.xsl`:
