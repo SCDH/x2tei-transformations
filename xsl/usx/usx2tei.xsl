@@ -24,6 +24,10 @@ The example USX document present during development has these features:
     <!-- whether or not to keep the notes from the USX in the main text -->
     <xsl:param name="notes" as="xs:boolean" select="true()" required="false"/>
 
+    <!-- canonical link to the source file. Default: Its basename. -->
+    <xsl:param name="source-url" as="xs:anyURI"
+        select="(base-uri(.) => tokenize('/'))[last()] => xs:anyURI()" required="false"/>
+
     <!-- this stylesheets is applicable on /usx as global context item -->
     <xsl:global-context-item as="document-node(element(usx))" use="required"/>
 
@@ -79,6 +83,7 @@ The example USX document present during development has these features:
                 <xsl:call-template name="header"/>
                 <text>
                     <body>
+                        <xsl:call-template name="heading"/>
                         <xsl:call-template name="content"/>
                     </body>
                 </text>
@@ -100,27 +105,22 @@ The example USX document present during development has these features:
         <teiHeader xml:lang="{$metadata-language}">
             <fileDesc>
                 <titleStmt>
+                    <xsl:apply-templates mode="title" select="//book[1]"/>
                     <xsl:apply-templates mode="title"
                         select="//chapter[1]/preceding-sibling::para[matches(@style, '^h\d*')]">
                         <xsl:sort select="@style"/>
                     </xsl:apply-templates>
+                    <xsl:call-template name="title-addon"/>
                 </titleStmt>
-                <publicationStmt>
-                    <p>
-                        <xsl:text>Converted from </xsl:text>
-                        <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
-                    </p>
-                    <xsl:apply-templates mode="publicationStmt"
-                        select="//chapter[1]/preceding-sibling::para"/>
-                </publicationStmt>
+                <xsl:call-template name="publicationStmt"/>
                 <xsl:call-template name="sourceDesc"/>
             </fileDesc>
             <xsl:call-template name="encodingDesc"/>
             <revisionDesc>
-                <change when="{current-date()}">
-                    <xsl:text>Converted from </xsl:text>
-                    <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
-                    <xsl:text> using </xsl:text>
+                <change xml:lang="en" when="{current-date()}">
+                    <xsl:text>Converted from USX source file </xsl:text>
+                    <ptr target="$source-url"/>
+                    <xsl:text> to TEI using </xsl:text>
                     <xsl:value-of select="(static-base-uri() => tokenize('/'))[last()]"/>
                     <xsl:text>.</xsl:text>
                 </change>
@@ -128,12 +128,34 @@ The example USX document present during development has these features:
         </teiHeader>
     </xsl:template>
 
+    <!-- use this macro for adding additional title data, author, editor etc. -->
+    <xsl:template name="title-addon">
+        <title type="sub" xml:lang="en">Digital Edition</title>
+    </xsl:template>
+
+    <xsl:template name="publicationStmt">
+        <publicationStmt>
+            <p xml:lang="en">
+                <xsl:text>Converted from </xsl:text>
+                <ptr target="{$source-url}"/>
+                <xsl:text>.</xsl:text>
+            </p>
+        </publicationStmt>
+    </xsl:template>
+
     <xsl:template name="sourceDesc">
         <sourceDesc>
-            <p>
-                <xsl:text>Converted from </xsl:text>
-                <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
-            </p>
+            <scriptStmt>
+                <p xml:lang="en">
+                    <xsl:text>Converted from USX source file </xsl:text>
+                    <ptr target="{$source-url}"/>
+                    <xsl:text> to TEI.</xsl:text>
+                </p>
+            </scriptStmt>
+            <scriptStmt source="{$source-url}">
+                <xsl:apply-templates mode="sourceDesc"
+                    select="//chapter[1]/preceding-sibling::node()"/>
+            </scriptStmt>
         </sourceDesc>
     </xsl:template>
 
@@ -167,16 +189,17 @@ The example USX document present during development has these features:
         </tagsDecl>
     </xsl:template>
 
-    <xsl:template mode="title" match="para">
+    <xsl:template mode="title" match="para | book">
         <title>
-            <xsl:attribute name="n" select="@style"/>
+            <xsl:attribute name="type" select="@style"/>
+            <xsl:attribute name="rendition" select="'#' || @style"/>
             <xsl:apply-templates mode="meta"/>
         </title>
     </xsl:template>
 
-    <xsl:template mode="publicationStmt" match="para">
+    <xsl:template mode="sourceDesc" match="para | book">
         <p>
-            <xsl:attribute name="n" select="@style"/>
+            <xsl:attribute name="rendition" select="'#' || @style"/>
             <xsl:apply-templates mode="meta"/>
         </p>
     </xsl:template>
@@ -193,6 +216,13 @@ The example USX document present during development has these features:
             <xsl:call-template name="formatting"/>
             <xsl:apply-templates mode="#current"/>
         </hi>
+    </xsl:template>
+
+    <xsl:template name="heading">
+        <head>
+            <xsl:value-of
+                select="//chapter[1]/preceding-sibling::para[matches(@style, '^mt\d*')][1]/text()"/>
+        </head>
     </xsl:template>
 
 

@@ -43,24 +43,6 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
         </encodingDesc>
     </xsl:template>
 
-    <xsl:template name="sourceDesc">
-        <xsl:choose>
-            <xsl:when test="empty($witnesses)">
-                <sourceDesc>
-                    <p>
-                        <xsl:text>Converted from </xsl:text>
-                        <xsl:value-of select="(base-uri(.) => tokenize('/'))[last()]"/>
-                    </p>
-                </sourceDesc>
-            </xsl:when>
-            <xsl:otherwise>
-                <sourceDesc>
-                    <xsl:call-template name="witnesses"/>
-                </sourceDesc>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
     <xsl:variable name="sigla-re" as="xs:string">
         <xsl:variable name="regex" as="xs:string">
             <xsl:value-of>
@@ -154,6 +136,15 @@ semicolon (;) is used as a separator for readings, all semicola are directly in 
     </xsl:variable>
 
     <xsl:variable name="witnesses-re" as="xs:string" select="$sigla-alternatives-re"/>
+
+
+    <!-- add list of witnesses to source description -->
+    <xsl:template mode="postproc" match="tei:sourceDesc">
+        <xsl:copy>
+            <xsl:apply-templates mode="#current" select="@* | node() | comment()"/>
+            <xsl:call-template name="witnesses"/>
+        </xsl:copy>
+    </xsl:template>
 
 
     <!-- upcycling apparatus -->
