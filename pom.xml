@@ -156,11 +156,11 @@
 
     <distributionManagement>
         <repository>
-            <id>git-instance-maven</id>
+            <id>github</id>
             <url>${distribution.url}</url>
         </repository>
         <snapshotRepository>
-            <id>git-instance-maven</id>
+            <id>github</id>
             <url>${distribution.url}</url>
         </snapshotRepository>
     </distributionManagement>
