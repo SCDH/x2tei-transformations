@@ -10,7 +10,7 @@
 
     <name>x2TEI Transformations</name>
     <description>XSLT Library for converting from various formats to TEI-XML</description>
-    <url>https://zivgitlab.uni-muenster.de/SCDH/tei-processing/usx</url>
+    <url>https://github.com/SCDH/x2tei-transformations</url>
 
     <developers>
         <developer>
@@ -45,9 +45,7 @@
         <license.file>LICENSE</license.file>
 
         <!-- project repository -->
-        <git.instance>zivgitlab.uni-muenster.de</git.instance>
-        <distribution.url>https://${git.instance}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
-        <git.repo.path>/SCDH/tei-processing/x2tei-transformations</git.repo.path>
+        <distribution.url>https://maven.pkg.github.com/SCDH/x2tei-transformations</distribution.url>
 
         <!-- XSLT resources for generating the configuration for the SEED distribution -->
         <seed-config-xsl.url>${project.basedir}/distribution/seed/seed-config.xsl</seed-config-xsl.url>
@@ -77,7 +75,7 @@
         <slf4j.version>2.0.6</slf4j.version>
         <jena.version>4.10.0</jena.version>
 
-        <upload.uri>https://scdh.zivgitlabpages.uni-muenster.de/tei-processing/x2tei-transformations/</upload.uri>
+        <upload.uri>https://scdh.github.io/seed-tei-transformations/</upload.uri>
         <release.url/>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
