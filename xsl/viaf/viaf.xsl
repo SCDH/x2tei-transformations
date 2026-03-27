@@ -85,10 +85,10 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
     <!-- entry point -->
     <xsl:template name="from-viaf" use-when="function-available('http:send-request', 3)">
-        <xsl:variable name="rdf" as="node()*" select="http:send-request($request, $viaf-url, ())"/>
-        <xsl:apply-templates select="$rdf" _mode="{$output-format}">
+        <xsl:variable name="graph" as="node()*" select="http:send-request($request, $viaf-url, ())"/>
+        <xsl:apply-templates select="$graph" _mode="{$output-format}">
             <xsl:with-param name="type" as="xs:anyURI*"
-                select="$rdf/rdf:RDF/rdf:Description[@rdf:about eq $viaf-resource] ! rdf:type(.)"
+                select="$graph/rdf:RDF/rdf:Description[@rdf:about eq $viaf-resource] ! rdf:type(.)"
                 tunnel="true"/>
         </xsl:apply-templates>
     </xsl:template>
