@@ -94,11 +94,16 @@ See https://github.com/expath/expath-http-client-java/tree/main
     <xsl:template name="from-viaf" use-when="function-available('http:send-request', 3)">
         <xsl:variable name="rdf" as="node()*" select="http:send-request($request, $viaf-url, ())"/>
         <xsl:apply-templates select="$rdf" _mode="{$output-format}">
-            <xsl:with-param name="type" as="xs:string?"
-                select="($rdf/rdf:RDF/rdf:Description[@rdf:about eq $viaf-resource]/rdf:type/@rdf:resource)[1]"
+            <xsl:with-param name="type" as="xs:anyURI*"
+                select="$rdf/rdf:RDF/rdf:Description[@rdf:about eq $viaf-resource] ! rdf:type(.)"
                 tunnel="true"/>
         </xsl:apply-templates>
     </xsl:template>
+
+    <xsl:function name="rdf:type" as="xs:anyURI*" visibility="public">
+        <xsl:param name="resource" as="element(rdf:Description)"/>
+        <xsl:sequence select="$resource/rdf:type/@rdf:resource ! xs:anyURI(.)"/>
+    </xsl:function>
 
     <xsl:template name="from-viaf" use-when="not(function-available('http:send-request', 3))">
         <xsl:message terminate="yes">
@@ -120,10 +125,10 @@ See https://github.com/expath/expath-http-client-java/tree/main
     <xsl:mode name="tei" on-no-match="shallow-skip"/>
 
     <xsl:template mode="tei" match="/rdf:RDF">
-        <xsl:param name="type" as="xs:string?" tunnel="true"/>
+        <xsl:param name="type" as="xs:anyURI*" tunnel="true"/>
         <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
         <xsl:choose>
-            <xsl:when test="$type eq 'http://schema.org/Person'">
+            <xsl:when test="$type = xs:anyURI('http://schema.org/Person')">
                 <person>
                     <xsl:call-template name="identifier"/>
                     <xsl:call-template name="names"/>
@@ -131,7 +136,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
                     <xsl:call-template name="idno"/>
                 </person>
             </xsl:when>
-            <xsl:when test="$type eq 'http://schema.org/Place'">
+            <xsl:when test="$type = xs:anyURI('http://schema.org/Place')">
                 <place>
                     <xsl:call-template name="identifier"/>
                     <xsl:call-template name="names"/>
@@ -195,7 +200,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
     <xsl:template name="names">
         <xsl:context-item as="element(rdf:RDF)" use="required"/>
-        <xsl:param name="type" as="xs:string?" tunnel="true"/>
+        <xsl:param name="type" as="xs:anyURI*" tunnel="true"/>
         <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
         <xsl:variable as="element()*" name="labels">
             <xsl:for-each select="$preferred-labels-ar-from">
@@ -220,13 +225,13 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <xsl:sequence select="$labels[1]"/>
     </xsl:template>
 
-    <xsl:function name="rdf:type-to-tei-name-element" as="xs:string">
-        <xsl:param name="type" as="xs:string?"/>
+    <xsl:function name="rdf:type-to-tei-name-element" as="xs:string" visibility="public">
+        <xsl:param name="type" as="xs:anyURI*"/>
         <xsl:choose>
-            <xsl:when test="$type eq 'http://schema.org/Person'">
+            <xsl:when test="$type = xs:anyURI('http://schema.org/Person')">
                 <xsl:value-of select="'persName'"/>
             </xsl:when>
-            <xsl:when test="$type eq 'http://schema.org/Place'">
+            <xsl:when test="$type = xs:anyURI('http://schema.org/Place')">
                 <xsl:value-of select="'placeName'"/>
             </xsl:when>
             <xsl:otherwise>
