@@ -169,17 +169,20 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
     <xsl:template name="dates">
         <xsl:context-item as="element(rdf:Description)" use="required"/>
-        <xsl:variable name="context" as="element(rdf:Description)" select="."/>
-        <birth calendar="gregorian">
-            <xsl:attribute name="when">
-                <xsl:value-of select="$context/schema:birthDate"/>
-            </xsl:attribute>
-        </birth>
-        <death calendar="gregorian">
-            <xsl:attribute name="when">
-                <xsl:value-of select="$context/schema:deathDate"/>
-            </xsl:attribute>
-        </death>
+        <xsl:if test="schema:birthDate">
+            <birth calendar="gregorian">
+                <xsl:attribute name="when">
+                    <xsl:value-of select="schema:birthDate"/>
+                </xsl:attribute>
+            </birth>
+        </xsl:if>
+        <xsl:if test="schema:deathDate">
+            <death calendar="gregorian">
+                <xsl:attribute name="when">
+                    <xsl:value-of select="schema:deathDate"/>
+                </xsl:attribute>
+            </death>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="names">

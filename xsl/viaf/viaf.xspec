@@ -66,4 +66,10 @@
             test="exists(/t:*/t:placeName[@xml:lang = 'ar' and matches(@sameAs, 'J9U')])"/>
     </x:scenario>
 
+    <x:scenario label="tei dates for a person">
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
+        <x:expect label="has birth" test="exists(/t:*/t:birth)"/>
+        <x:expect label="has death" test="exists(/t:*/t:death)"/>
+    </x:scenario>
+
 </x:description>
