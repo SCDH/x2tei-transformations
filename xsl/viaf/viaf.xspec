@@ -13,17 +13,14 @@
     </x:scenario>
 
     <x:scenario label="tei output type">
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml">
-            <x:param name="type" select="xs:anyURI('http://schema.org/Person')" tunnel="true"/>
-        </x:context>
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
         <x:expect label="tei output type" test="exists(/t:person)"/>
         <x:expect label="has persName entry" test="exists(/t:person/t:persName)"/>
+        <x:expect label="result"/>
     </x:scenario>
 
     <x:scenario label="tei idno">
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml">
-            <x:param name="type" select="xs:anyURI('http://schema.org/Person')" tunnel="true"/>
-        </x:context>
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
         <x:expect label="correct count of indo elements" test="count(/t:*/t:idno)" select="5"/>
         <x:expect label="has viaf idno"
             test="exists(/t:*/t:idno[@xml:base = 'http://viaf.org/viaf/'])"/>
@@ -37,9 +34,7 @@
     </x:scenario>
 
     <x:scenario label="tei names">
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml">
-            <x:param name="type" select="xs:anyURI('http://schema.org/Person')" tunnel="true"/>
-        </x:context>
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
         <x:expect label="has arabic name" test="exists(/t:*/t:persName[@xml:lang = 'ar'])"/>
         <x:expect label="has arabic name from EGA"
             test="exists(/t:*/t:persName[@xml:lang = 'ar' and matches(@sameAs, 'EGA')])"/>

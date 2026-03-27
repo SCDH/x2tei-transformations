@@ -25,9 +25,10 @@ See https://github.com/expath/expath-http-client-java/tree/main
     xmlns:pto="http://www.productontology.org/id/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:re="http://oclcsrw.google.code/redirect" xmlns:schema="http://schema.org/"
-    xmlns:umbel="http://umbel.org/umbel#" xmlns:wdt="http://www.wikidata.org/prop/direct/"
-    xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-    exclude-result-prefixes="#all" version="3.0" default-mode="oxy-action">
+    xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:umbel="http://umbel.org/umbel#"
+    xmlns:wdt="http://www.wikidata.org/prop/direct/" xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#" exclude-result-prefixes="#all" version="3.0"
+    default-mode="oxy-action">
 
     <xsl:output method="xml" indent="true"/>
 
@@ -124,44 +125,38 @@ See https://github.com/expath/expath-http-client-java/tree/main
     <!-- the tei mode outputs TEI from from VIAF RDF/XML -->
     <xsl:mode name="tei" on-no-match="shallow-skip"/>
 
-    <xsl:template mode="tei" match="/rdf:RDF">
-        <xsl:param name="type" as="xs:anyURI*" tunnel="true"/>
-        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
-        <xsl:choose>
-            <xsl:when test="$type = xs:anyURI('http://schema.org/Person')">
-                <person>
-                    <xsl:call-template name="identifier"/>
-                    <xsl:call-template name="names"/>
-                    <xsl:call-template name="dates"/>
-                    <xsl:call-template name="idno"/>
-                </person>
-            </xsl:when>
-            <xsl:when test="$type = xs:anyURI('http://schema.org/Place')">
-                <place>
-                    <xsl:call-template name="identifier"/>
-                    <xsl:call-template name="names"/>
-                    <xsl:call-template name="idno"/>
-                </place>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:message>
-                    <xsl:text>unknown type </xsl:text>
-                    <xsl:value-of select="$type"/>
-                </xsl:message>
-            </xsl:otherwise>
-        </xsl:choose>
+    <xsl:template mode="tei"
+        match="rdf:Description[rdf:type(.) = xs:anyURI('http://schema.org/Person')]">
+        <person>
+            <xsl:call-template name="identifier"/>
+            <xsl:call-template name="names"/>
+            <xsl:call-template name="dates"/>
+            <xsl:call-template name="idno"/>
+        </person>
     </xsl:template>
+
+    <xsl:template mode="tei"
+        match="rdf:Description[rdf:type(.) = xs:anyURI('http://schema.org/Place')]">
+        <place>
+            <xsl:call-template name="identifier"/>
+            <xsl:call-template name="names"/>
+            <xsl:call-template name="idno"/>
+        </place>
+    </xsl:template>
+
 
     <xsl:template name="identifier">
         <xsl:attribute name="xml:id" select="'viaf:' || $id"/>
     </xsl:template>
 
     <xsl:template name="idno">
-        <xsl:context-item as="element(rdf:RDF)"/>
-        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
-        <idno xml:base="http://viaf.org/viaf/">
-            <xsl:value-of select="$context/rdf:Description/dcterms:identifier"/>
-        </idno>
+        <xsl:context-item as="element(rdf:Description)"/>
+        <xsl:variable name="context" as="element(rdf:Description)" select="."/>
+        <xsl:if test="starts-with($context/@rdf:about, $viaf-base-uri)">
+            <idno xml:base="http://viaf.org/viaf/">
+                <xsl:value-of select="$context/dcterms:identifier"/>
+            </idno>
+        </xsl:if>
         <xsl:message use-when="system-property('debug') eq 'true'">
             <xsl:text>count of nafs </xsl:text>
             <xsl:value-of select="$config/* => count()"/>
@@ -169,7 +164,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <xsl:for-each select="$config/*:config/*:files/*:base">
             <xsl:variable name="naf" as="xs:string" select="."/>
             <xsl:variable name="naf-id" as="xs:string?"
-                select="($context/rdf:Description/schema:sameAs/rdf:Description/@rdf:about[starts-with(., $naf)] ! substring(., string-length($naf) + 1))[1]"/>
+                select="($context/schema:sameAs/rdf:Description/@rdf:about[starts-with(., $naf)] ! substring(., string-length($naf) + 1))[1]"/>
             <xsl:message use-when="system-property('debug') eq 'true'">
                 <xsl:text>idno of </xsl:text>
                 <xsl:value-of select="$naf"/>
@@ -184,32 +179,35 @@ See https://github.com/expath/expath-http-client-java/tree/main
     </xsl:template>
 
     <xsl:template name="dates">
-        <xsl:context-item as="element(rdf:RDF)" use="required"/>
-        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
+        <xsl:context-item as="element(rdf:Description)" use="required"/>
+        <xsl:variable name="context" as="element(rdf:Description)" select="."/>
         <birth calendar="gregorian">
             <xsl:attribute name="when">
-                <xsl:value-of select="$context/rdf:Description/schema:birthDate"/>
+                <xsl:value-of select="$context/schema:birthDate"/>
             </xsl:attribute>
         </birth>
         <death calendar="gregorian">
             <xsl:attribute name="when">
-                <xsl:value-of select="$context/rdf:Description/schema:deathDate"/>
+                <xsl:value-of select="$context/schema:deathDate"/>
             </xsl:attribute>
         </death>
     </xsl:template>
 
     <xsl:template name="names">
-        <xsl:context-item as="element(rdf:RDF)" use="required"/>
-        <xsl:param name="type" as="xs:anyURI*" tunnel="true"/>
-        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
+        <xsl:context-item as="element(rdf:Description)" use="required"/>
+        <xsl:variable name="context" as="element(rdf:Description)" select="."/>
+        <xsl:variable name="about" as="xs:string" select="@rdf:about"/>
+        <!-- graph: all resources focusing the current resource -->
+        <xsl:variable name="graph" as="element(rdf:Description)*"
+            select="., parent::rdf:RDF/rdf:Description[foaf:focus/@rdf:resource = $about]"/>
         <xsl:variable as="element()*" name="labels">
             <xsl:for-each select="$preferred-labels-ar-from">
                 <xsl:variable name="naf" as="xs:string" select="."/>
                 <xsl:variable name="naf-data" as="element(rdf:Description)?"
-                    select="$context/rdf:Description[matches(@rdf:about, concat($viaf-source-id-base, $naf))][1]"/>
+                    select="$graph[matches(@rdf:about, concat($viaf-source-id-base, $naf))][1]"/>
                 <xsl:choose>
                     <xsl:when test="$naf-data">
-                        <xsl:element name="{rdf:type-to-tei-name-element($type)}">
+                        <xsl:element name="{rdf:type($context) => rdf:type-to-tei-name-element()}">
                             <xsl:attribute name="xml:lang">ar</xsl:attribute>
                             <xsl:attribute name="sameAs" select="$naf-data/@rdf:about"/>
                             <xsl:value-of select="$naf-data/skos:prefLabel"/>
