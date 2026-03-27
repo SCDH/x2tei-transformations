@@ -16,7 +16,6 @@
         <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
         <x:expect label="tei output type" test="exists(/t:person)"/>
         <x:expect label="has persName entry" test="exists(/t:person/t:persName)"/>
-        <x:expect label="result"/>
     </x:scenario>
 
     <x:scenario label="tei idno">

@@ -28,7 +28,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
     xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:umbel="http://umbel.org/umbel#"
     xmlns:wdt="http://www.wikidata.org/prop/direct/" xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#" exclude-result-prefixes="#all" version="3.0"
-    default-mode="oxy-action">
+    default-mode="tei">
 
     <xsl:output method="xml" indent="true"/>
 
@@ -39,15 +39,6 @@ See https://github.com/expath/expath-http-client-java/tree/main
     <xsl:param name="viaf-base-uri" as="xs:string" select="'http://viaf.org/viaf/'"/>
 
     <xsl:param name="output-format" as="xs:string" select="'tei'" static="true"/>
-
-    <xsl:param name="nafs" as="xs:string*"
-        select="'http://d-nb.info/gnd/(.*)', 'http://id.loc.gov/authorities/names/(.*)', 'http://www.wikidata.org/entity/(.*)', 'http://isni.org/isni/(.*)'"/>
-
-    <xsl:param name="preferred-labels-ar-from" as="xs:string*" select="'LNL', 'EGAXA', 'UAE', 'J9U'"/>
-
-    <xsl:param name="preferred-labels-dmg-from" as="xs:string*" select="'DNB', 'BNF'"/>
-
-    <xsl:param name="preferred-labels-lc-translit-from" as="xs:string*" select="'LC'"/>
 
     <xsl:param name="config" as="document-node(element(config))">
         <xsl:document>
@@ -68,7 +59,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
                     <match>DNB</match>
                     <match>BNF</match>
                 </preferredLabel>
-                <preferredLabel xml:lang="en" type="loc">
+                <preferredLabel xml:lang="ar-Latn" type="loc">
                     <match>LC</match>
                 </preferredLabel>
             </config>
@@ -92,6 +83,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <xsl:call-template name="from-viaf"/>
     </xsl:template>
 
+    <!-- entry point -->
     <xsl:template name="from-viaf" use-when="function-available('http:send-request', 3)">
         <xsl:variable name="rdf" as="node()*" select="http:send-request($request, $viaf-url, ())"/>
         <xsl:apply-templates select="$rdf" _mode="{$output-format}">
@@ -101,21 +93,18 @@ See https://github.com/expath/expath-http-client-java/tree/main
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:function name="rdf:type" as="xs:anyURI*" visibility="public">
-        <xsl:param name="resource" as="element(rdf:Description)"/>
-        <xsl:sequence select="$resource/rdf:type/@rdf:resource ! xs:anyURI(.)"/>
-    </xsl:function>
-
+    <!-- alternative entry when http:send-request is not available -->
     <xsl:template name="from-viaf" use-when="not(function-available('http:send-request', 3))">
         <xsl:message terminate="yes">
             <xsl:text xml:space="preserve">function Q{http://expath.org/ns/http-client}send-request#3 not available</xsl:text>
         </xsl:message>
     </xsl:template>
 
-    <!-- the mode oxy-action is an entry point for use in an Oxygen XSLT author mode action where the curret -->
-    <xsl:template mode="oxy-action" match="/">
-        <xsl:call-template name="from-viaf"/>
-    </xsl:template>
+    <!-- returns all rdf:type s assigned to a resource -->
+    <xsl:function name="rdf:type" as="xs:anyURI*" visibility="public">
+        <xsl:param name="resource" as="element(rdf:Description)"/>
+        <xsl:sequence select="$resource/rdf:type/@rdf:resource ! xs:anyURI(.)"/>
+    </xsl:function>
 
     <!-- the rdf mode outputs the RDF/XML data from VIAF as is -->
     <xsl:template match="/" mode="rdf">
@@ -200,27 +189,31 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <!-- graph: all resources focusing the current resource -->
         <xsl:variable name="graph" as="element(rdf:Description)*"
             select="., parent::rdf:RDF/rdf:Description[foaf:focus/@rdf:resource = $about]"/>
-        <xsl:variable as="element()*" name="labels">
-            <xsl:for-each select="$preferred-labels-ar-from">
-                <xsl:variable name="naf" as="xs:string" select="."/>
-                <xsl:variable name="naf-data" as="element(rdf:Description)?"
-                    select="$graph[matches(@rdf:about, concat($viaf-source-id-base, $naf))][1]"/>
-                <xsl:choose>
-                    <xsl:when test="$naf-data">
-                        <xsl:element name="{rdf:type($context) => rdf:type-to-tei-name-element()}">
-                            <xsl:attribute name="xml:lang">ar</xsl:attribute>
-                            <xsl:attribute name="sameAs" select="$naf-data/@rdf:about"/>
-                            <xsl:value-of select="$naf-data/skos:prefLabel"/>
-                        </xsl:element>
-                        <xsl:message>
-                            <xsl:text>no name found in </xsl:text>
-                            <xsl:value-of select="$naf"/>
-                        </xsl:message>
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:for-each>
-        </xsl:variable>
-        <xsl:sequence select="$labels[1]"/>
+        <xsl:for-each select="$config/*:config/*:preferredLabel">
+            <xsl:variable name="preferredLabel" as="element()" select="."/>
+            <xsl:variable as="element()*" name="labels">
+                <xsl:for-each select="match">
+                    <xsl:variable name="match" as="xs:string" select="."/>
+                    <xsl:variable name="naf-data" as="element(rdf:Description)?"
+                        select="$graph[matches(@rdf:about, concat($viaf-source-id-base, $match))][1]"/>
+                    <xsl:choose>
+                        <xsl:when test="$naf-data">
+                            <xsl:element
+                                name="{rdf:type($context) => rdf:type-to-tei-name-element()}">
+                                <xsl:copy-of select="$preferredLabel/@*"/>
+                                <xsl:attribute name="sameAs" select="$naf-data/@rdf:about"/>
+                                <xsl:value-of select="$naf-data/skos:prefLabel"/>
+                            </xsl:element>
+                            <xsl:message>
+                                <xsl:text>no name found in </xsl:text>
+                                <xsl:value-of select="$match"/>
+                            </xsl:message>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:sequence select="$labels[1]"/>
+        </xsl:for-each>
     </xsl:template>
 
     <xsl:function name="rdf:type-to-tei-name-element" as="xs:string" visibility="public">
