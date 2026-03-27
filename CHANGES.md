@@ -1,5 +1,9 @@
 # Changes
 
+## 0.8.1
+
+- publishing on github
+
 ## 0.8.0
 
 - `xsl/usx/usx2tei.xsl`:
