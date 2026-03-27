@@ -48,6 +48,32 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
     <xsl:param name="preferred-labels-lc-translit-from" as="xs:string*" select="'LC'"/>
 
+    <xsl:param name="config" as="document-node(element(config))">
+        <xsl:document>
+            <config xmlns="">
+                <files>
+                    <base>http://d-nb.info/gnd/</base>
+                    <base>http://id.loc.gov/authorities/names/</base>
+                    <base>http://www.wikidata.org/entity/</base>
+                    <base>http://isni.org/isni/</base>
+                </files>
+                <preferredLabel xml:lang="ar">
+                    <match>LNL</match>
+                    <match>EGAXA</match>
+                    <match>UAE</match>
+                    <match>J9U</match>
+                </preferredLabel>
+                <preferredLabel xml:lang="ar-Latn" type="dmg">
+                    <match>DNB</match>
+                    <match>BNF</match>
+                </preferredLabel>
+                <preferredLabel xml:lang="en" type="loc">
+                    <match>LC</match>
+                </preferredLabel>
+            </config>
+        </xsl:document>
+    </xsl:param>
+
     <xsl:param name="viaf-source-id-base" as="xs:string" select="'http://viaf.org/viaf/sourceID/'"/>
 
     <xsl:variable name="viaf-resource" as="xs:string" select="$viaf-base-uri || $id"/>
@@ -131,14 +157,24 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <idno xml:base="http://viaf.org/viaf/">
             <xsl:value-of select="$context/rdf:Description/dcterms:identifier"/>
         </idno>
-        <xsl:for-each select="$nafs">
+        <xsl:message use-when="system-property('debug') eq 'true'">
+            <xsl:text>count of nafs </xsl:text>
+            <xsl:value-of select="$config/* => count()"/>
+        </xsl:message>
+        <xsl:for-each select="$config/*:config/*:files/*:base">
             <xsl:variable name="naf" as="xs:string" select="."/>
-            <idno>
-                <xsl:attribute name="xml:base" select="replace(., '\([^)]*\)', '')"/>
-                <xsl:value-of
-                    select="$context/rdf:Description/schema:sameAs/rdf:Description/@rdf:about[matches(., $naf)] => replace($naf, '$1')"
-                />
-            </idno>
+            <xsl:variable name="naf-id" as="xs:string?"
+                select="($context/rdf:Description/schema:sameAs/rdf:Description/@rdf:about[starts-with(., $naf)] ! substring(., string-length($naf) + 1))[1]"/>
+            <xsl:message use-when="system-property('debug') eq 'true'">
+                <xsl:text>idno of </xsl:text>
+                <xsl:value-of select="$naf"/>
+            </xsl:message>
+            <xsl:if test="$naf-id">
+                <idno>
+                    <xsl:attribute name="xml:base" select="$naf"/>
+                    <xsl:value-of select="$naf-id"/>
+                </idno>
+            </xsl:if>
         </xsl:for-each>
     </xsl:template>
 
