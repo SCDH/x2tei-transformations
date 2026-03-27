@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:bgn="http://bibliograph.net/"
+    xmlns:dbo="http://dbpedia.org/ontology/"
+    xmlns:genont="http://www.w3.org/2006/gen/ont#"
+    xmlns:pto="http://www.productontology.org/id/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:re="http://oclcsrw.google.code/redirect"
+    xmlns:schema="http://schema.org/"
+    xmlns:umbel="http://umbel.org/umbel#"
+    xmlns:wdt="http://www.wikidata.org/prop/direct/">
+
+<rdf:Description rdf:about="http://viaf.org/viaf/90045354/">
+<rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+<rdf:type rdf:resource="http://www.w3.org/2006/gen/ont#InformationResource"/>
+<void:inDataset xmlns:void="http://rdfs.org/ns/void#" rdf:resource="http://viaf.org/viaf/data"/>
+<foaf:primaryTopic xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/90045354">
+<dcterms:identifier xmlns:dcterms="http://purl.org/dc/terms/">90045354</dcterms:identifier>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<dbo:notableWork>
+<rdf:Description rdf:about="http://viaf.org/viaf/4093157416833416710004">
+<rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">سرح العيون : في شرح رسالة بن زيدون</rdfs:label>
+</rdf:Description>
+</dbo:notableWork>
+<dbo:notableWork>
+<rdf:Description rdf:about="http://viaf.org/viaf/943154622385544710003">
+<rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">Sarḥ al-ʻuyūn fī sharḥ Risālat Ibn Zaydūn</rdfs:label>
+</rdf:Description>
+</dbo:notableWork>
+<dbo:notableWork>
+<rdf:Description rdf:about="http://viaf.org/viaf/5835158006004702100002">
+<rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">Kitāb zahr al-manṯūr</rdfs:label>
+</rdf:Description>
+</dbo:notableWork>
+<dbo:notableWork>
+<rdf:Description rdf:about="http://viaf.org/viaf/1478164782045908600005">
+<rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">Taʻlīq al-dīwān</rdfs:label>
+</rdf:Description>
+</dbo:notableWork>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<schema:birthDate>1287-04-00</schema:birthDate>
+<rdf:type rdf:resource="http://schema.org/Person"/>
+<schema:deathDate>1366-10-00</schema:deathDate>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:givenName>Muḥammad b. Muḥammad</schema:givenName>
+<schema:name xml:lang="nl-NL">Muḥammad b. MuḥammadIbn Nubāta</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="nl-NL">Muḥammad b. MuḥammadIbn Nubāta</skos:prefLabel>
+<schema:name xml:lang="nl-NL">Muḥammad b. MuḥammadIbn Nubāta</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="nl-NL">Muḥammad b. MuḥammadIbn Nubāta</skos:prefLabel>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:givenName>Muḥammad ibn Muḥammad,</schema:givenName>
+<schema:name xml:lang="en-US">Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en-US">Muḥammad ibn MuḥammadIbn Nubātah</skos:prefLabel>
+<schema:name xml:lang="en-US">Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en-US">Muḥammad ibn MuḥammadIbn Nubātah</skos:prefLabel>
+<schema:name xml:lang="fr-FR">Muḥammad ibn MuḥammadIbn Nubātaẗ</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="fr-FR">Muḥammad ibn MuḥammadIbn Nubātaẗ</skos:prefLabel>
+<schema:name xml:lang="fr-FR">Muḥammad ibn MuḥammadIbn Nubātaẗ</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="fr-FR">Muḥammad ibn MuḥammadIbn Nubātaẗ</skos:prefLabel>
+<schema:familyName>Ibn Nubātaẗ</schema:familyName>
+<schema:givenName>Muḥammad ibn Muḥammad,</schema:givenName>
+<schema:name xml:lang="fr-FR">Muḥammad ibn MuḥammadIbn Nubātaẗ</schema:name>
+<schema:name xml:lang="fr-FR">Muḥammad ibn MuḥammadIbn Nubātaẗ</schema:name>
+<schema:name xml:lang="fr-CH">Ibn Nubātah al-Miṣrī</schema:name>
+<schema:name xml:lang="fr-CH">Ibn Nubātah al-Miṣrī</schema:name>
+<schema:name xml:lang="en">Ibn Nubātah al-Miṣrī</schema:name>
+<schema:name xml:lang="en">Ibn Nubātah al-Miṣrī</schema:name>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:givenName>Muḥammad ibn Muḥammad,</schema:givenName>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U' is undetermined. Name is 'Muḥammad ibn MuḥammadIbn Nubātah'.</rdfs:comment>
+<schema:name>Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U|987007306311905171' is undetermined. Name is 'Muḥammad ibn MuḥammadIbn Nubātah'.</rdfs:comment>
+<schema:name>Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:name xml:lang="ja-JP">Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<schema:name xml:lang="ja-JP">Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:givenName>Muḥammad ibn Muḥammad,</schema:givenName>
+<schema:name xml:lang="sv-SE">Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="sv-SE">Muḥammad ibn MuḥammadIbn Nubātah</skos:prefLabel>
+<schema:name xml:lang="sv-SE">Muḥammad ibn MuḥammadIbn Nubātah</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="sv-SE">Muḥammad ibn MuḥammadIbn Nubātah</skos:prefLabel>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:givenName>Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:name xml:lang="de-DE">Muḥammad Ibn-MuḥammadIbn-Nubāta</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="de-DE">Muḥammad Ibn-MuḥammadIbn-Nubāta</skos:prefLabel>
+<schema:name xml:lang="de-DE">Muḥammad Ibn-MuḥammadIbn-Nubāta</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="de-DE">Muḥammad Ibn-MuḥammadIbn-Nubāta</skos:prefLabel>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U' is undetermined. Name is 'ابن نباتة، محمد بن محمد،'.</rdfs:comment>
+<schema:name>ابن نباتة، محمد بن محمد،</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U|987007306311905171' is undetermined. Name is 'ابن نباتة، محمد بن محمد،'.</rdfs:comment>
+<schema:name>ابن نباتة، محمد بن محمد،</schema:name>
+<schema:name xml:lang="ar-EG">ابن نباتة، محمد بن محمد،</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="ar-EG">ابن نباتة، محمد بن محمد،</skos:prefLabel>
+<schema:name xml:lang="ar-EG">ابن نباتة، محمد بن محمد،</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="ar-EG">ابن نباتة، محمد بن محمد،</skos:prefLabel>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'WKP' is undetermined. Name is 'مُحمَّد بن مُحمَّد بن مُحمَّد بن الحسن الجذامي الفارقي المصري'.</rdfs:comment>
+<schema:name>مُحمَّد بن مُحمَّد بن مُحمَّد بن الحسن الجذامي الفارقي المصري</schema:name>
+<rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'WKP|Q1655892' is undetermined. Name is 'مُحمَّد بن مُحمَّد بن مُحمَّد بن الحسن الجذامي الفارقي المصري'.</rdfs:comment>
+<schema:name>مُحمَّد بن مُحمَّد بن مُحمَّد بن الحسن الجذامي الفارقي المصري</schema:name>
+<schema:alternateName>Abū Bakr Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubāhah</schema:alternateName>
+<schema:alternateName>Abū Bakr Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubāhah</schema:alternateName>
+<schema:alternateName>Abū Bakr ibn Nubātah al-Miṣrī a</schema:alternateName>
+<schema:alternateName>Abū Bakr ibn Nubātah al-Miṣrī a</schema:alternateName>
+<schema:alternateName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-MiṣrīFāriqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>Fāriqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-MiṣrīFāriqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>Fāriqī</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnFārūqī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Fārūqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn Nubātah al-MiṣrīFārūqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>Fārūqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn Nubātah al-MiṣrīFārūqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>Fārūqī</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnFārūqī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Fārūqī</schema:familyName>
+<schema:alternateName>Ǧamāl ad-Dīn Muḥammad Ibn Muḥammad Ibn Nubāta al-Miṣrī</schema:alternateName>
+<schema:alternateName>Ǧamāl-ad-Dīn Abū-Bakr Ibn-Nubāta al-Miṣrī al-Fāriqī</schema:alternateName>
+<schema:alternateName>Ǧamāl-ad-Dīn Ibn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:alternateName>Ibn Nabatah</schema:alternateName>
+<schema:alternateName>Ibn Nabatah</schema:alternateName>
+<schema:alternateName>Ibn Nabatah</schema:alternateName>
+<schema:alternateName>Ibn Nabatah</schema:alternateName>
+<schema:alternateName>Ibn Nabatah</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn MuḥammadIbn Nabāta</schema:alternateName>
+<schema:givenName>Muḥammad Ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nabāta</schema:familyName>
+<schema:alternateName>Djāmāl al Dīn Moḥammad ibn MoḥammadIbn Nobatāh al Misri</schema:alternateName>
+<schema:givenName>Djāmāl al Dīn Moḥammad ibn Moḥammad</schema:givenName>
+<schema:familyName>Ibn Nobatāh al Misri</schema:familyName>
+<schema:alternateName>Ibn Nobatāh al Misri</schema:alternateName>
+<schema:alternateName>Djāmāl al Dīn Moḥammad ibn MoḥammadIbn Nobatāh al Misri</schema:alternateName>
+<schema:givenName>Djāmāl al Dīn Moḥammad ibn Moḥammad</schema:givenName>
+<schema:familyName>Ibn Nobatāh al Misri</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubata</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubata</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubata</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubata</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta al-Fāriqī</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Fāriqī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad b. MuḥammadIbn Nubāta al-Fāriqī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Fāriqī</schema:familyName>
+<schema:alternateName>Muḥammad b. MuḥammadIbn Nubāta al-Fāriqī</schema:alternateName>
+<schema:givenName>Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Fāriqī</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta al-Maṣrī</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Maṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad b. MuḥammadIbn Nubāta al-Maṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Maṣrī</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad b. MuḥammadIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Muḥammad b. MuḥammadIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Ǧamāl ad-Dīn Muḥammad Ibn Muḥammad Ibn al-ḤasanIbn Nubāta</schema:alternateName>
+<schema:givenName>Ǧamāl ad-Dīn Muḥammad Ibn Muḥammad Ibn al-Ḥasan</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnIbn Nubāta</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Muḥammad Ibn MuḥammadIbn Nubāta</schema:alternateName>
+<schema:givenName>Muḥammad Ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Šihāb al-Dīn Muḥammad b. MuḥammadIbn Nubāta</schema:alternateName>
+<schema:givenName>Šihāb al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah al-Miṣrī</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah al-Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-DīnIbn Nubātah</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Jamāl al-DīnIbn Nubātah</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Muḥammad Ibn MuḥammadIbn Nubātah</schema:alternateName>
+<schema:givenName>Muḥammad Ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubātah</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnIbn Nubātaẗ al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubātaẗ al-Miṣrī</schema:familyName>
+<schema:alternateName>Ibn Nubātaẗ al-Miṣrī</schema:alternateName>
+<schema:alternateName>Ǧamāl al-Dīn Abū al-Fatḥ Abū Muḥammad ibn Muḥammad ibn Muḥammad al-Fāriqī al-MiṣrīIbn Nubātaẗ</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Abū al-Fatḥ Abū Muḥammad ibn Muḥammad ibn Muḥammad al-Fāriqī al-Miṣrī</schema:givenName>
+<schema:familyName>Ibn Nubātaẗ</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta al-Fāriqī</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Fāriqī</schema:familyName>
+<schema:alternateName>Muḥammad b. MuḥammadIbn Nubāta al-Fāriqī</schema:alternateName>
+<schema:givenName>Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Fāriqī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad b. MuḥammadIbn Nubāta al-Fāriqī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Fāriqī</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta al-Maṣrī</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Maṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad b. MuḥammadIbn Nubāta al-Maṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Maṣrī</schema:familyName>
+<schema:alternateName>Ibn Nubāta al-Miṣrī</schema:alternateName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Muḥammad b. MuḥammadIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad b. MuḥammadIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnIbn Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Abū Bakr Muḥammad b. MuḥammadIbn Nubāta</schema:alternateName>
+<schema:givenName>Abū Bakr Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Šihāb al-Dīn Muḥammad b. MuḥammadIbn Nubāta</schema:alternateName>
+<schema:givenName>Šihāb al-Dīn Muḥammad b. Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnIbn Nubāta</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubāta</schema:familyName>
+<schema:alternateName>Ibn Nubātah al- Miṣrī</schema:alternateName>
+<schema:alternateName>Ibn Nubātah al- Miṣrī</schema:alternateName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah al-Miṣrī</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah al-Miṣrī</schema:familyName>
+<schema:alternateName>Muḥammad ibn MuḥammadIbn Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah al-Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-DīnIbn Nubātah</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Jamāl al-DīnIbn Nubātah</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Muḥammad Ibn MuḥammadIbn Nubātah</schema:alternateName>
+<schema:givenName>Muḥammad Ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātah</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn Muḥammad ibn MuḥammadIbn Nubātaẗ al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn Muḥammad ibn Muḥammad</schema:givenName>
+<schema:familyName>Ibn Nubātaẗ al-Miṣrī</schema:familyName>
+<schema:alternateName>Ibn-Nabata</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-MuḥammadIbn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ibn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:alternateName>Abū-Bakr Ǧamāl-ad-DīnIbn-Nubāta</schema:alternateName>
+<schema:givenName>Abū-Bakr Ǧamāl-ad-Dīn</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Abū-Bakr Muḥammad Ibn-MuḥammadIbn-Nubāta</schema:alternateName>
+<schema:givenName>Abū-Bakr Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Ǧamāl-ad-Dīn Muḥammad Ibn-MuḥammadIbn-Nubāta</schema:alternateName>
+<schema:givenName>Ǧamāl-ad-Dīn Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad al-FārūqīIbn-Nubāta</schema:alternateName>
+<schema:givenName>Muḥammad Ibn-Muḥammad al-Fārūqī</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Muḥammad Ibn-MuḥammadIbn-Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubātah al-Miṣrī</schema:familyName>
+<schema:alternateName>Ibn-Nubātah al-Miṣrī</schema:alternateName>
+<schema:alternateName>Ǧamāl-ad-Dīn Abū-Bakr Muḥammad Ibn-Muḥammad Ibn-al-ḤasanIbn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl-ad-Dīn Abū-Bakr Muḥammad Ibn-Muḥammad Ibn-al-Ḥasan</schema:givenName>
+<schema:familyName>Ibn-Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl-ad-Dīn Muḥammad Ibn-MuḥammadIbn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl-ad-Dīn Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubāta al-Miṣrī</schema:familyName>
+<schema:alternateName>Ibn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:alternateName>Abū-Bakr Ǧamāl-ad-DīnIbn-Nubāta</schema:alternateName>
+<schema:givenName>Abū-Bakr Ǧamāl-ad-Dīn</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad al-FārūqīIbn-Nubāta</schema:alternateName>
+<schema:givenName>Muḥammad Ibn-Muḥammad al-Fārūqī</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Muḥammad Ibn-MuḥammadIbn-Nubāta</schema:alternateName>
+<schema:givenName>Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Ǧamāl-ad-Dīn Muḥammad Ibn-MuḥammadIbn-Nubāta</schema:alternateName>
+<schema:givenName>Ǧamāl-ad-Dīn Muḥammad Ibn-Muḥammad</schema:givenName>
+<schema:familyName>Ibn-Nubāta</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah al-Miṣrī</schema:alternateName>
+<schema:alternateName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah al-Miṣrī</schema:alternateName>
+<schema:alternateName>Ǧamāl al-Dīn ibn Nubātah al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn ibn Nubātah al-</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnMiṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-DīnMiṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl al-Dīn ibn NubātahMiṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl al-Dīn ibn Nubātah</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl-ad-Dīn Ibn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:givenName>Ǧamāl-ad-Dīn Ibn-Nubāta al-</schema:givenName>
+<schema:familyName>Miṣrī</schema:familyName>
+<schema:alternateName>Muḥammad Ibn Muḥammad Ibn Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad ibn Nubātah</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad ibn Nubātah</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad ibn Nubātah</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad ibn Nubatah</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad ibn Nubatah</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad ibn Nubātah</schema:alternateName>
+<schema:alternateName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrīal-Fāriqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>al-Fāriqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrīal-Fāriqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>al-Fāriqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn Nubātah al-Miṣrīal-Fārūqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>al-Fārūqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn ibn Nubātah al-Miṣrīal-Fārūqī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn ibn Nubātah al-Miṣrī</schema:givenName>
+<schema:familyName>al-Fārūqī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātahal-Miṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah</schema:givenName>
+<schema:familyName>al-Miṣrī</schema:familyName>
+<schema:alternateName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātahal-Miṣrī</schema:alternateName>
+<schema:givenName>Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah</schema:givenName>
+<schema:familyName>al-Miṣrī</schema:familyName>
+<schema:alternateName>Ǧamāl-ad-Dīn Ibn-Nubāta al-Miṣrī</schema:alternateName>
+<schema:alternateName>Ǧamāladdīn Abū Bakr ibn Nubāta l-Miṣrī l-Fāriqī</schema:alternateName>
+<schema:alternateName>Ǧamāladdīn Abū Bakr ibn Nubāta l-Miṣrī l-Fāriqī</schema:alternateName>
+<schema:alternateName>Ǧemâl-ed-dîn Abû Bekr Ibn Nubâta el-Maṣrî el-Fâriqî</schema:alternateName>
+<schema:alternateName>Ǧemâl-ed-dîn Abû Bekr Ibn Nubâta el-Maṣrî el-Fâriqî</schema:alternateName>
+<schema:alternateName>إبن نباتة، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>إبن نباتة، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>ابن النباتة، محمد بن محمد، جمال الدين،</schema:alternateName>
+<schema:alternateName>ابن النباتة، محمد بن محمد، جمال الدين،</schema:alternateName>
+<schema:alternateName>جمال الدين محمد بن محمدابن نبابة المصري</schema:alternateName>
+<schema:givenName>جمال الدين محمد بن محمد</schema:givenName>
+<schema:familyName>ابن نبابة المصري</schema:familyName>
+<schema:alternateName>ابن نباتة المصرى، جمال الدين،</schema:alternateName>
+<schema:alternateName>ابن نباتة المصري</schema:alternateName>
+<schema:alternateName>ابن نباتة المصري، جمال الدين،</schema:alternateName>
+<schema:alternateName>ابن نباتة المصري، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>ابن نباتة المصري، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>ابن نباتة المصري، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>جمال الدين أبو الفتح أبو  محمد بن محمد بن محمد الفارقي المصريابن نباتة</schema:alternateName>
+<schema:givenName>جمال الدين أبو الفتح أبو  محمد بن محمد بن محمد الفارقي المصري</schema:givenName>
+<schema:familyName>ابن نباتة</schema:familyName>
+<schema:alternateName>محمد بن محمدابن نباتة</schema:alternateName>
+<schema:givenName>محمد بن محمد</schema:givenName>
+<schema:familyName>ابن نباتة</schema:familyName>
+<schema:alternateName>محمد بن محمدابن نباتة</schema:alternateName>
+<schema:givenName>محمد بن محمد</schema:givenName>
+<schema:familyName>ابن نباتة</schema:familyName>
+<schema:alternateName>محمّد بن محمّدابن نباتة</schema:alternateName>
+<schema:givenName>محمّد بن محمّد</schema:givenName>
+<schema:familyName>ابن نباتة</schema:familyName>
+<schema:alternateName>ابن نباتة</schema:alternateName>
+<schema:alternateName>ابن نباتة، جمال الدين،</schema:alternateName>
+<schema:alternateName>ابن نباتة، محمد بن محمد</schema:alternateName>
+<schema:alternateName>ابن نباتة، محمد بن محمد</schema:alternateName>
+<schema:alternateName>ابن نباتة، محمد بن محمد، جمال الدين،</schema:alternateName>
+<schema:alternateName>ابن نباتة، محمد بن محمد، جمال الدين،</schema:alternateName>
+<schema:alternateName>ابن نباته، محمد بن محمد</schema:alternateName>
+<schema:alternateName>ابن نباته، محمد بن محمد</schema:alternateName>
+<schema:alternateName>ابن نباته، محمد بن محمد، |d</schema:alternateName>
+<schema:alternateName>ابن نباته، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>ابن نباته، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>الجذامي، محمد بن محمد، ابن نباتة،</schema:alternateName>
+<schema:alternateName>الجذامي، محمد بن محمد، ابن نباتة،</schema:alternateName>
+<schema:alternateName>الفارقي، محمد بن محمد، ابن نباتة،</schema:alternateName>
+<schema:alternateName>الفارقي، محمد بن محمد، ابن نباتة،</schema:alternateName>
+<schema:alternateName>الفارقي، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>الفارقي، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>المصري، محمد بن محمد، ابن نياتة،</schema:alternateName>
+<schema:alternateName>المصري، محمد بن محمد، ابن نياتة،</schema:alternateName>
+<schema:alternateName>المصري، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>المصري، محمد بن محمد،</schema:alternateName>
+<schema:alternateName>جمال الدين أبو بكر محمد بن محمد بن نباتة،</schema:alternateName>
+<schema:alternateName>جمال الدين محمد بن محمد بن نباتة المصري</schema:alternateName>
+<schema:alternateName>محمد بن محمد بن نباتة،</schema:alternateName>
+<schema:alternateName>محمد بن محمد بن نباتة،</schema:alternateName>
+<schema:alternateName>محمد بن محمد بن نياتة،</schema:alternateName>
+<schema:alternateName>‏ابن نباته، محمد بن محمد،‏</schema:alternateName>
+<schema:alternateName>Ibn Nubata</schema:alternateName>
+<schema:alternateName>Ibn Nubata</schema:alternateName>
+<schema:alternateName>Ibn Nubata</schema:alternateName>
+<schema:alternateName>Ibn Nubata</schema:alternateName>
+<schema:alternateName>Ibn Nubata</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad Ibn-Muḥammad Ibn-Nubāta</schema:alternateName>
+<schema:alternateName>Muḥammad ibn Muḥammad Ibn Nubātah</schema:alternateName>
+<schema:alternateName>Ібн Нубата</schema:alternateName>
+<schema:alternateName>Ибн Нубата</schema:alternateName>
+<schema:alternateName>ابن نباتة المصري</schema:alternateName>
+<schema:alternateName>ابن نباته المصرى</schema:alternateName>
+<schema:alternateName>ابن نباته</schema:alternateName>
+<schema:alternateName>ابن نباتہ المصری</schema:alternateName>
+<schema:alternateName>इब्न नबाता अल-मसरी</schema:alternateName>
+<schema:alternateName>ইবনে নবাতা আল-মাছৰী</schema:alternateName>
+<schema:alternateName>ইবনে নুবাতা</schema:alternateName>
+<schema:sameAs>
+<rdf:Description rdf:about="http://data.bnf.fr/ark:/12148/cb107474120#foaf:Person"/>
+</schema:sameAs>
+<schema:sameAs>
+<rdf:Description rdf:about="http://d-nb.info/gnd/12326068X"/>
+</schema:sameAs>
+<schema:sameAs>
+<rdf:Description rdf:about="http://isni.org/isni/0000000081633205"/>
+</schema:sameAs>
+<schema:sameAs>
+<rdf:Description rdf:about="http://id.loc.gov/authorities/names/nr91021847"/>
+</schema:sameAs>
+<schema:sameAs>
+<rdf:Description rdf:about="http://libris.kb.se/resource/auth/62980"/>
+</schema:sameAs>
+<schema:sameAs>
+<rdf:Description rdf:about="http://www.idref.fr/132738112/id"/>
+</schema:sameAs>
+<schema:sameAs>
+<rdf:Description rdf:about="http://www.wikidata.org/entity/Q1655892"/>
+</schema:sameAs>
+<rdf:value rdf:parseType="Literal">
+<ns1:source xmlns="http://viaf.org/viaf/terms#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:ns1="http://viaf.org/viaf/terms#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:void="http://rdfs.org/ns/void#" nsid="987007306311905171">J9U|987007306311905171</ns1:source>
+</rdf:value>
+<schema:sameAs rdf:resource="http://dbpedia.org/resource/Ibn_Nubata"/>
+<schema:gender rdf:resource="http://www.wikidata.org/entity/Q6581097"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/NTA%7C136320880#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/NTA"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Muḥammad b. Muḥammad (Ǧamāl al-Dīn Muḥammad b. Muḥammad), 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Fāriqī, Abū Bakr Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Fāriqī, Ǧamāl al-Dīn Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Fāriqī, Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Maṣrī, Abū Bakr Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Maṣrī, Ǧamāl al-Dīn Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Abū Bakr Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Ǧamāl al-Dīn Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Ǧamāl al-Dīn,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Abū Bakr Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Ǧamāl al-Dīn,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Šihāb al-Dīn Muḥammad b. Muḥammad,1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+<schema:url>http://opc4.kb.nl/PPN?PPN=136320880</schema:url>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/LC%7Cnr+91021847#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/LC"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad ibn Muḥammad, 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī, Muḥammad ibn Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Jamāl al-Dīn,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad ibn Muḥammad.</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">إبن نباتة، محمد بن محمد،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباته، محمد بن محمد</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباته، محمد بن محمد،1366-1287</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">‏ابن نباته، محمد بن محمد،‏‏1287-1366.</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/BNF%7C10747412#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/BNF"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātaẗ, Muḥammad ibn Muḥammad, 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nobatāh al MisriDjāmāl al Dīn Moḥammad ibn Moḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātaẗ al-MiṣrīǦamāl al-Dīn Muḥammad ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتةمحمّد بن محمّد1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/SUDOC%7C132738112#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/SUDOC"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātaẗ, Muḥammad ibn Muḥammad, 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nobatāh al Misri, Djāmāl al Dīn Moḥammad ibn Moḥammad</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī, Muḥammad ibn Muḥammad</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Jamāl al-Dīn</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātaẗ al-Miṣrī, Ǧamāl al-Dīn</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātaẗ, Ǧamāl al-Dīn Abū al-Fatḥ Abū Muḥammad ibn Muḥammad ibn Muḥammad al-Fāriqī al-Miṣrī</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Ǧamāl al-Dīn ibn Nubātah al-</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubātah</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة, جمال الدين أبو الفتح أبو  محمد بن محمد بن محمد الفارقي المصري</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة, محمد بن محمد,1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/RERO%7CA000084652#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/RERO"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Fārūqī, Ǧamāl al-Dīn</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Ǧamāl al-Dīn</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/ISNI%7C0000000081633205#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/ISNI"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Abū Bakr Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubāhah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Abū Bakr ibn Nubātah al-Miṣrī a1287-1366l-Fāriqī</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Fāriqī, Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Fārūqī, Jamāl al-Dīn ibn Nubātah al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Fārūqī, Ǧamāl al-Dīn</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nobatāh al Misri, Djāmāl al Dīn Moḥammad ibn Moḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubata, Muḥammad ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn NubataEgyptian poet</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubataarabischer Dichter</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Fāriqī, Abū Bakr Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Fāriqī, Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Fāriqī, Ǧamāl al-Dīn Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Maṣrī, Abū Bakr Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Maṣrī, Ǧamāl al-Dīn Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Abū Bakr Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Ǧamāl al-Dīn Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta al-Miṣrī, Ǧamāl al-Dīn1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Abū Bakr Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Šihāb al-Dīn Muḥammad b. Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Ǧamāl al-Dīn1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al- Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī, Muḥammad ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Jamāl al-Dīn1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad Ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātaẗ al-Miṣrī, Ǧamāl al-Dīn Muḥammad ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nabata1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta al-Miṣrī, Ǧamāl-ad-Dīn Abū-Bakr Muḥammad Ibn-Muḥammad Ibn-al-Ḥasan1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta al-Miṣrī, Ǧamāl-ad-Dīn Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Abū-Bakr Ǧamāl-ad-Dīn1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Muḥammad Ibn-Muḥammad al-Fārūqī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Ǧamāl-ad-Dīn Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn ibn Nubātah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Ǧamāl al-Dīn</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Ǧamāl al-Dīn ibn Nubātah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Ǧamāl-ad-Dīn Ibn-Nubāta al-1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad Ibn-Muḥammad Ibn-Nubāta</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad Ibn-Muḥammad Ibn-Nubāta1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad Ibn-Muḥammad Ibn-Nubātaauteur uit Egypte (-)</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubatah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubātah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">al-Fāriqī, Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">al-Fārūqī, Jamāl al-Dīn ibn Nubātah al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">al-Miṣrī, Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧamāl-ad-Dīn Ibn-Nubāta al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧamāladdīn Abū Bakr ibn Nubāta l-Miṣrī l-Fāriqī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧemâl-ed-dîn Abû Bekr Ibn Nubâta el-Maṣrî el-Fâriqî1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">إبن نباتة، محمد بن محمد،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن النباتة، محمد بن محمد، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصرى، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري، محمد بن محمد،686-768 هـ</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة, محمد بن محمد1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة, محمّد بن محمّد1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتهنویسنده مصری</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباته، محمد بن محمد</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباته، محمد بن محمد، |d1366-1287</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباته، محمد بن محمد،1366-1287</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الجذامي، محمد بن محمد، ابن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الفارقي، محمد بن محمد، ابن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الفارقي، محمد بن محمد،686-768 هـ</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">المصري، محمد بن محمد، ابن نياتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">المصري، محمد بن محمد،686-768 هـ</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">جمال الدين أبو بكر محمد بن محمد بن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">محمد بن محمد بن نباتة،686-768 هـ</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/J9U%7C987007306311905171#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/J9U"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad ibn Muḥammad, 1287-1366</skos:prefLabel>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد، 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī, Muḥammad ibn Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Jamāl al-Dīn,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن النباتة، محمد بن محمد، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري، محمد بن محمد،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الجذامي، محمد بن محمد، ابن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الفارقي، محمد بن محمد، ابن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">المصري، محمد بن محمد، ابن نياتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">محمد بن محمد بن نياتة،1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/NII%7CDA12178597#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/NII"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad ibn Muḥammad</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī, Muḥammad ibn Muḥammad</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn ibn Nubātah</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نبابة المصري, جمال الدين محمد بن محمد</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">جمال الدين محمد بن محمد بن نباتة المصري</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/SELIBR%7C62980#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/SELIBR"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad ibn Muḥammad, 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Abū Bakr Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubāhah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Abū Bakr ibn Nubātah al-Miṣrī a,1287-1366l-Fāriqī</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Fāriqī, Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Fārūqī, Jamāl al-Dīn ibn Nubātah al-Miṣrī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubata, Muḥammad ibn Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al- Miṣrī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah al-Miṣrī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubatah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">al-Fāriqī, Jamāl al-Dīn Abū Bakr ibn Nubātah al-Miṣrī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">al-Fārūqī, Jamāl al-Dīn ibn Nubātah al-Miṣrī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">al-Miṣrī, Jamāl al-Dīn Muḥammad ibn Muḥammad ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧamāladdīn Abū Bakr ibn Nubāta l-Miṣrī l-Fāriqī,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧemâl-ed-dîn Abû Bekr Ibn Nubâta el-Maṣrî el-Fâriqî,1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/DNB%7C12326068X#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/DNB"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Muḥammad Ibn-Muḥammad 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧamāl ad-Dīn Muḥammad Ibn Muḥammad Ibn Nubāta al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧamāl-ad-Dīn Abū-Bakr Ibn-Nubāta al-Miṣrī al-Fāriqī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ǧamāl-ad-Dīn Ibn-Nubāta al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabāta, Muḥammad Ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Ǧamāl ad-Dīn Muḥammad Ibn Muḥammad Ibn al-Ḥasan1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubāta, Muḥammad Ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad Ibn Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nabata1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta al-Miṣrī, Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Abū-Bakr Ǧamāl-ad-Dīn1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Abū-Bakr Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Ǧamāl-ad-Dīn Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubāta, Muḥammad Ibn-Muḥammad al-Fārūqī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubātah al-Miṣrī, Muḥammad Ibn-Muḥammad1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn-Nubātah al-Miṣrī1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad Ibn Muḥammad Ibn Nubāta1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad Ibn-Muḥammad Ibn-Nubāta1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/J9U%7C987007306311905171#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/J9U"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Muḥammad ibn Muḥammad, 1287-1366</skos:prefLabel>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد، 1287-1366</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nabatah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah al-Miṣrī, Muḥammad ibn Muḥammad,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Ibn Nubātah, Jamāl al-Dīn,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Miṣrī, Jamāl al-Dīn ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Muḥammad ibn Muḥammad ibn Nubātah,1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن النباتة، محمد بن محمد، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري، محمد بن محمد،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد، جمال الدين،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الجذامي، محمد بن محمد، ابن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الفارقي، محمد بن محمد، ابن نباتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">المصري، محمد بن محمد، ابن نياتة،1287-1366</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">محمد بن محمد بن نياتة،1287-1366</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+<rdf:Description rdf:about="http://viaf.org/viaf/sourceID/EGAXA%7Cvtls001053187#skos:Concept">
+<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+<skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://viaf.org/authorityScheme/EGAXA"/>
+<skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة، محمد بن محمد، 686-768 هـ.</skos:prefLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">ابن نباتة المصري، محمد بن محمد،686-768 هـ.</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">الفارقي، محمد بن محمد،686-768 هـ.</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">المصري، محمد بن محمد،686-768 هـ.</skos:altLabel>
+<skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">محمد بن محمد بن نباتة،686-768 هـ.</skos:altLabel>
+<foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/" rdf:resource="http://viaf.org/viaf/90045354"/>
+</rdf:Description>
+</rdf:RDF>

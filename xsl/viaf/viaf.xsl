@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+USAGE:
+target/bin/xslt.sh -config:saxon-local.xml -xsl:xsl/viaf/viaf.xsl -it id=VAIF_ID
+
+USAGE: get RDF/XML
+target/bin/xslt.sh -config:saxon-local.xml -xsl:xsl/viaf/viaf.xsl -it output-format=rdf id=VAIF_ID
+
+
+
+http:send-request#3 must be registered as extension function.
+
+<resources>
+    <extensionFunction>org.expath.httpclient.saxon.SendRequestFunction</extensionFunction>
+</resources>
+
+See https://github.com/expath/expath-http-client-java/tree/main
+
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://expath.org/ns/http-client"
+    xmlns="http://www.tei-c.org/ns/1.0" xmlns:bgn="http://bibliograph.net/"
+    xmlns:dbo="http://dbpedia.org/ontology/" xmlns:genont="http://www.w3.org/2006/gen/ont#"
+    xmlns:pto="http://www.productontology.org/id/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:re="http://oclcsrw.google.code/redirect" xmlns:schema="http://schema.org/"
+    xmlns:umbel="http://umbel.org/umbel#" xmlns:wdt="http://www.wikidata.org/prop/direct/"
+    xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    exclude-result-prefixes="#all" version="3.0" default-mode="oxy-action">
+
+    <xsl:output method="xml" indent="true"/>
+
+    <xsl:param name="id" as="xs:string" select="'90045354'" required="false"/>
+
+    <xsl:param name="viaf-base-url" as="xs:string" select="'https://viaf.org/viaf/'"/>
+
+    <xsl:param name="viaf-base-uri" as="xs:string" select="'http://viaf.org/viaf/'"/>
+
+    <xsl:param name="output-format" as="xs:string" select="'tei'" static="true"/>
+
+    <xsl:param name="nafs" as="xs:string*"
+        select="'http://d-nb.info/gnd/(.*)', 'http://id.loc.gov/authorities/names/(.*)', 'http://www.wikidata.org/entity/(.*)', 'http://isni.org/isni/(.*)'"/>
+
+    <xsl:param name="preferred-labels-ar-from" as="xs:string*" select="'LNL', 'EGAXA', 'UAE', 'J9U'"/>
+
+    <xsl:param name="preferred-labels-dmg-from" as="xs:string*" select="'DNB', 'BNF'"/>
+
+    <xsl:param name="preferred-labels-lc-translit-from" as="xs:string*" select="'LC'"/>
+
+    <xsl:param name="viaf-source-id-base" as="xs:string" select="'http://viaf.org/viaf/sourceID/'"/>
+
+    <xsl:variable name="viaf-resource" as="xs:string" select="$viaf-base-uri || $id"/>
+
+    <xsl:variable name="viaf-url" as="xs:string" select="$viaf-base-url || $id"/>
+
+
+    <xsl:param name="request" as="element(http:request)">
+        <http:request method="GET">
+            <http:header name="accept" value="application/rdf+xml"/>
+        </http:request>
+    </xsl:param>
+
+    <xsl:template name="xsl:initial-template">
+        <xsl:call-template name="from-viaf"/>
+    </xsl:template>
+
+    <xsl:template name="from-viaf" use-when="function-available('http:send-request', 3)">
+        <xsl:variable name="rdf" as="node()*" select="http:send-request($request, $viaf-url, ())"/>
+        <xsl:apply-templates select="$rdf" _mode="{$output-format}">
+            <xsl:with-param name="type" as="xs:string?"
+                select="($rdf/rdf:RDF/rdf:Description[@rdf:about eq $viaf-resource]/rdf:type/@rdf:resource)[1]"
+                tunnel="true"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template name="from-viaf" use-when="not(function-available('http:send-request', 3))">
+        <xsl:message terminate="yes">
+            <xsl:text xml:space="preserve">function Q{http://expath.org/ns/http-client}send-request#3 not available</xsl:text>
+        </xsl:message>
+    </xsl:template>
+
+    <!-- the mode oxy-action is an entry point for use in an Oxygen XSLT author mode action where the curret -->
+    <xsl:template mode="oxy-action" match="/">
+        <xsl:call-template name="from-viaf"/>
+    </xsl:template>
+
+    <!-- the rdf mode outputs the RDF/XML data from VIAF as is -->
+    <xsl:template match="/" mode="rdf">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+
+    <!-- the tei mode outputs TEI from from VIAF RDF/XML -->
+    <xsl:mode name="tei" on-no-match="shallow-skip"/>
+
+    <xsl:template mode="tei" match="/rdf:RDF">
+        <xsl:param name="type" as="xs:string?" tunnel="true"/>
+        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
+        <xsl:choose>
+            <xsl:when test="$type eq 'http://schema.org/Person'">
+                <person>
+                    <xsl:call-template name="identifier"/>
+                    <xsl:call-template name="names"/>
+                    <xsl:call-template name="dates"/>
+                    <xsl:call-template name="idno"/>
+                </person>
+            </xsl:when>
+            <xsl:when test="$type eq 'http://schema.org/Place'">
+                <place>
+                    <xsl:call-template name="identifier"/>
+                    <xsl:call-template name="names"/>
+                    <xsl:call-template name="idno"/>
+                </place>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message>
+                    <xsl:text>unknown type </xsl:text>
+                    <xsl:value-of select="$type"/>
+                </xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="identifier">
+        <xsl:attribute name="xml:id" select="'viaf:' || $id"/>
+    </xsl:template>
+
+    <xsl:template name="idno">
+        <xsl:context-item as="element(rdf:RDF)"/>
+        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
+        <idno xml:base="http://viaf.org/viaf/">
+            <xsl:value-of select="$context/rdf:Description/dcterms:identifier"/>
+        </idno>
+        <xsl:for-each select="$nafs">
+            <xsl:variable name="naf" as="xs:string" select="."/>
+            <idno>
+                <xsl:attribute name="xml:base" select="replace(., '\([^)]*\)', '')"/>
+                <xsl:value-of
+                    select="$context/rdf:Description/schema:sameAs/rdf:Description/@rdf:about[matches(., $naf)] => replace($naf, '$1')"
+                />
+            </idno>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template name="dates">
+        <xsl:context-item as="element(rdf:RDF)" use="required"/>
+        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
+        <birth calendar="gregorian">
+            <xsl:attribute name="when">
+                <xsl:value-of select="$context/rdf:Description/schema:birthDate"/>
+            </xsl:attribute>
+        </birth>
+        <death calendar="gregorian">
+            <xsl:attribute name="when">
+                <xsl:value-of select="$context/rdf:Description/schema:deathDate"/>
+            </xsl:attribute>
+        </death>
+    </xsl:template>
+
+    <xsl:template name="names">
+        <xsl:context-item as="element(rdf:RDF)" use="required"/>
+        <xsl:param name="type" as="xs:string?" tunnel="true"/>
+        <xsl:variable name="context" as="element(rdf:RDF)" select="."/>
+        <xsl:variable as="element()*" name="labels">
+            <xsl:for-each select="$preferred-labels-ar-from">
+                <xsl:variable name="naf" as="xs:string" select="."/>
+                <xsl:variable name="naf-data" as="element(rdf:Description)?"
+                    select="$context/rdf:Description[matches(@rdf:about, concat($viaf-source-id-base, $naf))][1]"/>
+                <xsl:choose>
+                    <xsl:when test="$naf-data">
+                        <xsl:element name="{rdf:type-to-tei-name-element($type)}">
+                            <xsl:attribute name="xml:lang">ar</xsl:attribute>
+                            <xsl:attribute name="sameAs" select="$naf-data/@rdf:about"/>
+                            <xsl:value-of select="$naf-data/skos:prefLabel"/>
+                        </xsl:element>
+                        <xsl:message>
+                            <xsl:text>no name found in </xsl:text>
+                            <xsl:value-of select="$naf"/>
+                        </xsl:message>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:sequence select="$labels[1]"/>
+    </xsl:template>
+
+    <xsl:function name="rdf:type-to-tei-name-element" as="xs:string">
+        <xsl:param name="type" as="xs:string?"/>
+        <xsl:choose>
+            <xsl:when test="$type eq 'http://schema.org/Person'">
+                <xsl:value-of select="'persName'"/>
+            </xsl:when>
+            <xsl:when test="$type eq 'http://schema.org/Place'">
+                <xsl:value-of select="'placeName'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="'unknown'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+</xsl:stylesheet>
