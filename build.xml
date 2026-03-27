@@ -22,7 +22,7 @@
         <antcall target="test-xsl-pagexml-pagecontent2tei.xsl"/>
         <antcall target="test-xsl-usx-usx2tei.xsl"/>
         <antcall target="test-xsl-usx-usx2tei-char-sigla.xsl"/>
-        <antcall target="test-xsl-viaf-viaf.xsl"/>
+        <antcall target="test-xsl-rdf-viaf.xsl"/>
     </target>
 
     <target name="test-xsl-pagexml-pagecontent2tei.xsl">
@@ -43,9 +43,9 @@
         </antcall>
     </target>
 
-    <target name="test-xsl-viaf-viaf.xsl">
+    <target name="test-xsl-rdf-viaf.xsl">
         <antcall target="xspec.xspec" inheritall="false">
-            <param name="xspec.xml" location="${basedir}/xsl/viaf/viaf.xspec"/>
+            <param name="xspec.xml" location="${basedir}/xsl/rdf/viaf.xspec"/>
         </antcall>
     </target>
 

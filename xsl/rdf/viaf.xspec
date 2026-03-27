@@ -13,20 +13,20 @@
     </x:scenario>
 
     <x:scenario label="tei output type for a person">
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Ibn-Nubatah.xml"/>
         <x:expect label="tei output type" test="exists(/t:person)"/>
         <x:expect label="has persName entry" test="exists(/t:person/t:persName)"/>
     </x:scenario>
 
     <x:scenario label="tei output type for a place">
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Kerala.xml"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Kerala.xml"/>
         <x:expect label="tei output type" test="exists(/t:place)"/>
         <x:expect label="has placeName entry" test="exists(/t:place/t:placeName)"/>
     </x:scenario>
 
     <x:scenario label="tei idno for a person">
-        <x:param name="config-url" select="'../../test/samples/viaf/config.xml'"/>
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
+        <x:param name="config-url" select="'../../test/samples/rdf/config.xml'"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Ibn-Nubatah.xml"/>
         <x:expect label="correct count of indo elements" test="count(/t:*/t:idno)" select="5"/>
         <x:expect label="has viaf idno"
             test="exists(/t:*/t:idno[@xml:base = 'http://viaf.org/viaf/'])"/>
@@ -40,8 +40,8 @@
     </x:scenario>
 
     <x:scenario label="tei idno for a place">
-        <x:param name="config-url" select="'../../test/samples/viaf/config.xml'"/>
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Kerala.xml"/>
+        <x:param name="config-url" select="'../../test/samples/rdf/config.xml'"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Kerala.xml"/>
         <x:expect label="correct count of indo elements" test="count(/t:*/t:idno)" select="5"/>
         <x:expect label="has viaf idno"
             test="exists(/t:*/t:idno[@xml:base = 'http://viaf.org/viaf/'])"/>
@@ -55,23 +55,23 @@
     </x:scenario>
 
     <x:scenario label="tei names for a person">
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Ibn-Nubatah.xml"/>
         <x:expect label="has arabic name" test="exists(/t:*/t:persName[@xml:lang = 'ar'])"/>
         <x:expect label="has arabic name from EGA"
             test="exists(/t:*/t:persName[@xml:lang = 'ar' and matches(@sameAs, 'EGA')])"/>
     </x:scenario>
 
     <x:scenario label="tei names for a place">
-        <x:param name="config-url" select="'../../test/samples/viaf/config.xml'"/>
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Kerala.xml"/>
+        <x:param name="config-url" select="'../../test/samples/rdf/config.xml'"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Kerala.xml"/>
         <x:expect label="has arabic name" test="exists(/t:*/t:placeName[@xml:lang = 'ar'])"/>
         <x:expect label="has arabic name from J9U"
             test="exists(/t:*/t:placeName[@xml:lang = 'ar' and matches(@sameAs, 'J9U')])"/>
     </x:scenario>
 
     <x:scenario label="tei dates for a person">
-        <x:param name="config-url" select="'../../test/samples/viaf/config.xml'"/>
-        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml"/>
+        <x:param name="config-url" select="'../../test/samples/rdf/config.xml'"/>
+        <x:context mode="tei" href="../../test/samples/rdf/viaf-Ibn-Nubatah.xml"/>
         <x:expect label="has birth" test="exists(/t:*/t:birth)"/>
         <x:expect label="has death" test="exists(/t:*/t:death)"/>
     </x:scenario>
