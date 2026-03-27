@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- a configuration suitable for arabic studies -->
+<config>
+    <files>
+        <base>http://d-nb.info/gnd/</base>
+        <base>http://id.loc.gov/authorities/names/</base>
+        <base>http://www.wikidata.org/entity/</base>
+        <base>http://isni.org/isni/</base>
+    </files>
+    <prefLabel xml:lang="ar">
+        <match>LNL</match>
+        <match>EGAXA</match>
+        <match>UAE</match>
+        <match>J9U</match>
+    </prefLabel>
+    <prefLabel xml:lang="ar-Latn" type="dmg">
+        <match>DNB</match>
+        <match>BNF</match>
+    </prefLabel>
+    <prefLabel xml:lang="ar-Latn" type="loc">
+        <match>LC</match>
+    </prefLabel>
+</config>
+

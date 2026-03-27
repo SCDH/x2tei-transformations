@@ -41,31 +41,38 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
     <xsl:param name="output-format" as="xs:string" select="'tei'" static="true"/>
 
-    <xsl:param name="config" as="document-node(element(config))">
+    <xsl:param name="config-url" as="xs:string?" select="()"/>
+
+    <xsl:param name="config" as="document-node(element(config))"
+        select="(doc($config-url), $default-config)[1]"/>
+
+    <xsl:variable name="default-config" as="document-node(element(config))">
         <xsl:document>
             <config xmlns="">
                 <files>
-                    <base>http://d-nb.info/gnd/</base>
                     <base>http://id.loc.gov/authorities/names/</base>
+                    <base>http://d-nb.info/gnd/</base>
                     <base>http://www.wikidata.org/entity/</base>
                     <base>http://isni.org/isni/</base>
                 </files>
-                <preferredLabel xml:lang="ar">
+                <prefLabel xml:lang="ar">
                     <match>LNL</match>
                     <match>EGAXA</match>
                     <match>UAE</match>
-                    <match>J9U</match>
-                </preferredLabel>
-                <preferredLabel xml:lang="ar-Latn" type="dmg">
+                </prefLabel>
+                <prefLabel xml:lang="fr">
+                    <match>BNF</match>
+                </prefLabel>
+                <prefLabel xml:lang="de">
                     <match>DNB</match>
                     <match>BNF</match>
-                </preferredLabel>
-                <preferredLabel xml:lang="ar-Latn" type="loc">
+                </prefLabel>
+                <prefLabel xml:lang="en">
                     <match>LC</match>
-                </preferredLabel>
+                </prefLabel>
             </config>
         </xsl:document>
-    </xsl:param>
+    </xsl:variable>
 
     <xsl:param name="viaf-source-id-base" as="xs:string" select="'http://viaf.org/viaf/sourceID/'"/>
 
@@ -193,7 +200,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <!-- graph: all resources focusing the current resource -->
         <xsl:variable name="graph" as="element(rdf:Description)*"
             select="., parent::rdf:RDF/rdf:Description[foaf:focus/@rdf:resource = $about]"/>
-        <xsl:for-each select="$config/*:config/*:preferredLabel">
+        <xsl:for-each select="$config/*:config/*:prefLabel">
             <xsl:variable name="preferredLabel" as="element()" select="."/>
             <xsl:variable as="element()*" name="labels">
                 <xsl:for-each select="match">
