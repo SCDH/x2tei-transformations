@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:p2t="http://scdh.wwu.de/transform/pagexml2tei#" xmlns:t="http://www.tei-c.org/ns/1.0"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" stylesheet="viaf.xsl" run-as="external">
+
+    <x:scenario label="type to element function">
+        <x:param name="id" select="'90045354'"/>
+        <x:call function="rdf:type-to-tei-name-element">
+            <x:param select="xs:anyURI('http://schema.org/Person')"/>
+        </x:call>
+        <x:expect label="result" select="'persName'"/>
+    </x:scenario>
+
+    <x:scenario label="tei output type">
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml">
+            <x:param name="type" select="xs:anyURI('http://schema.org/Person')" tunnel="true"/>
+        </x:context>
+        <x:expect label="tei output type" test="exists(/t:person)"/>
+        <x:expect label="has persName entry" test="exists(/t:person/t:persName)"/>
+    </x:scenario>
+
+    <x:scenario label="tei idno">
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml">
+            <x:param name="type" select="xs:anyURI('http://schema.org/Person')" tunnel="true"/>
+        </x:context>
+        <x:expect label="correct count of indo elements" test="count(/t:*/t:idno)" select="5"/>
+        <x:expect label="has viaf idno"
+            test="exists(/t:*/t:idno[@xml:base = 'http://viaf.org/viaf/'])"/>
+        <x:expect label="correct viaf ID"
+            test="/t:*/t:idno[@xml:base = 'http://viaf.org/viaf/'] => string()" select="'90045354'"/>
+        <x:expect label="has loc idno"
+            test="exists(/t:*/t:idno[@xml:base = 'http://id.loc.gov/authorities/names/'])"/>
+        <x:expect label="correct loc ID"
+            test="/t:*/t:idno[@xml:base = 'http://id.loc.gov/authorities/names/'] => string()"
+            select="'nr91021847'"/>
+    </x:scenario>
+
+    <x:scenario label="tei names">
+        <x:context mode="tei" href="../../test/samples/viaf/viaf-Ibn-Zayd.xml">
+            <x:param name="type" select="xs:anyURI('http://schema.org/Person')" tunnel="true"/>
+        </x:context>
+        <x:expect label="has arabic name" test="exists(/t:*/t:persName[@xml:lang = 'ar'])"/>
+        <x:expect label="has arabic name from EGA"
+            test="exists(/t:*/t:persName[@xml:lang = 'ar' and matches(@sameAs, 'EGA')])"/>
+    </x:scenario>
+
+</x:description>
