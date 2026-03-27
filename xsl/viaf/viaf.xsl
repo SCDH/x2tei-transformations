@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!-- get RDF/XML from viaf.org and transform it to TEI
 
 USAGE:
 target/bin/xslt.sh -config:saxon-local.xml -xsl:xsl/viaf/viaf.xsl -it id=VAIF_ID
@@ -7,7 +7,8 @@ target/bin/xslt.sh -config:saxon-local.xml -xsl:xsl/viaf/viaf.xsl -it id=VAIF_ID
 USAGE: get RDF/XML
 target/bin/xslt.sh -config:saxon-local.xml -xsl:xsl/viaf/viaf.xsl -it output-format=rdf id=VAIF_ID
 
-
+USAGE: transform a RDF/XML source file to TEI
+target/bin/xslt.sh -xsl:xsl/viaf/viaf.xsl -s:VAIF-RDF.XML
 
 http:send-request#3 must be registered as extension function.
 
