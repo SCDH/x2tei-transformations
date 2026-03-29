@@ -44,31 +44,22 @@ See https://github.com/expath/expath-http-client-java/tree/main
     <xsl:param name="config-url" as="xs:string?" select="()"/>
 
     <xsl:param name="config" as="document-node(element(config))"
-        select="(doc($config-url), $default-config)[1]"/>
+        select="($config-url ! doc(.), $default-config)[1]"/>
 
     <xsl:variable name="default-config" as="document-node(element(config))">
         <xsl:document>
             <config xmlns="">
                 <files>
-                    <base>http://id.loc.gov/authorities/names/</base>
-                    <base>http://d-nb.info/gnd/</base>
-                    <base>http://www.wikidata.org/entity/</base>
-                    <base>http://isni.org/isni/</base>
+                    <file match="(^http://data.bnf.fr/ark:)(.*)" base="$1" id="$2"/>
+                    <file match="(^http://www.idref.fr/)(([^/]*)(/id)$)" base="$1" id="$2"/>
+                    <file match="(^http://id.loc.gov/authorities/names/)(.*)" base="$1" id="$2"/>
+                    <file match="(^http://www.wikidata.org/entity/)(.*)" base="$1" id="$2"/>
                 </files>
-                <prefLabel xml:lang="ar">
-                    <scheme>http://viaf.org/authorityScheme/LNL</scheme>
-                    <scheme>http://viaf.org/authorityScheme/EGAXA</scheme>
-                    <scheme>http://viaf.org/authorityScheme/UAE</scheme>
-                </prefLabel>
-                <prefLabel xml:lang="fr">
-                    <scheme>http://viaf.org/authorityScheme/BNF</scheme>
-                </prefLabel>
-                <prefLabel xml:lang="de">
-                    <scheme>http://viaf.org/authorityScheme/DNB</scheme>
-                    <scheme>http://viaf.org/authorityScheme/BNF</scheme>
-                </prefLabel>
-                <prefLabel xml:lang="en">
+                <prefLabel>
                     <scheme>http://viaf.org/authorityScheme/LC</scheme>
+                </prefLabel>
+                <prefLabel>
+                    <scheme>http://viaf.org/authorityScheme/BNF</scheme>
                 </prefLabel>
             </config>
         </xsl:document>
@@ -158,18 +149,20 @@ See https://github.com/expath/expath-http-client-java/tree/main
             <xsl:text>count of nafs </xsl:text>
             <xsl:value-of select="$config/* => count()"/>
         </xsl:message>
-        <xsl:for-each select="$config/*:config/*:files/*:base">
-            <xsl:variable name="naf" as="xs:string" select="."/>
-            <xsl:variable name="naf-id" as="xs:string?"
-                select="($context/schema:sameAs/rdf:Description/@rdf:about[starts-with(., $naf)] ! substring(., string-length($naf) + 1))[1]"/>
+        <xsl:for-each select="$config/*:config/*:files/*:file">
+            <xsl:variable name="file" as="element()" select="."/>
+            <xsl:variable name="naf" as="attribute()?"
+                select="($context/schema:sameAs/@rdf:resource | $context/schema:sameAs/rdf:Description/@rdf:about)[matches(., $file/@match)][1]"/>
             <xsl:message use-when="system-property('debug') eq 'true'">
                 <xsl:text>idno of </xsl:text>
+                <xsl:sequence select="$file"/>
+                <xsl:text>: </xsl:text>
                 <xsl:value-of select="$naf"/>
             </xsl:message>
-            <xsl:if test="$naf-id">
+            <xsl:if test="$naf">
                 <idno>
-                    <xsl:attribute name="xml:base" select="$naf"/>
-                    <xsl:value-of select="$naf-id"/>
+                    <xsl:attribute name="xml:base" select="replace($naf, @match, @base)"/>
+                    <xsl:value-of select="replace($naf, @match, @id)"/>
                 </idno>
             </xsl:if>
         </xsl:for-each>

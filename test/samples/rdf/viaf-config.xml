@@ -2,10 +2,12 @@
 <!-- a configuration suitable for arabic studies -->
 <config>
     <files>
-        <base>http://d-nb.info/gnd/</base>
-        <base>http://id.loc.gov/authorities/names/</base>
-        <base>http://www.wikidata.org/entity/</base>
-        <base>http://isni.org/isni/</base>
+        <file match="(^http://data.bnf.fr/ark:)(.*)" base="$1" id="$2"/>
+        <file match="(^http://d-nb.info/gnd/)(.*)" base="$1" id="$2"/>
+        <file match="(^http://isni.org/isni/)(.*)" base="$1" id="$2"/>
+        <file match="(^http://id.loc.gov/authorities/names/)(.*)" base="$1" id="$2"/>
+        <file match="(^http://www.idref.fr/)(([^/]*)(/id)$)" base="$1" id="$2"/>
+        <file match="(^http://www.wikidata.org/entity/)(.*)" base="$1" id="$2"/>
     </files>
     <prefLabel xml:lang="ar">
         <scheme>http://viaf.org/authorityScheme/LNL</scheme>
@@ -21,4 +23,3 @@
         <scheme>http://viaf.org/authorityScheme/LC</scheme>
     </prefLabel>
 </config>
-
