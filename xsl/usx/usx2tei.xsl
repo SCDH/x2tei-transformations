@@ -25,7 +25,7 @@ The example USX document present during development has these features:
     <xsl:param name="notes" as="xs:boolean" select="true()" required="false"/>
 
     <!-- canonical link to the source file. Default: Its basename. -->
-    <xsl:param name="source-url" as="xs:anyURI"
+    <xsl:param name="source-url" as="xs:anyURI?"
         select="(base-uri(.) => tokenize('/'))[last()] => xs:anyURI()" required="false"/>
 
     <!-- this stylesheets is applicable on /usx as global context item -->
