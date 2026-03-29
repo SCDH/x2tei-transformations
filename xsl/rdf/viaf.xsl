@@ -56,19 +56,19 @@ See https://github.com/expath/expath-http-client-java/tree/main
                     <base>http://isni.org/isni/</base>
                 </files>
                 <prefLabel xml:lang="ar">
-                    <match>LNL</match>
-                    <match>EGAXA</match>
-                    <match>UAE</match>
+                    <scheme>http://viaf.org/authorityScheme/LNL</scheme>
+                    <scheme>http://viaf.org/authorityScheme/EGAXA</scheme>
+                    <scheme>http://viaf.org/authorityScheme/UAE</scheme>
                 </prefLabel>
                 <prefLabel xml:lang="fr">
-                    <match>BNF</match>
+                    <scheme>http://viaf.org/authorityScheme/BNF</scheme>
                 </prefLabel>
                 <prefLabel xml:lang="de">
-                    <match>DNB</match>
-                    <match>BNF</match>
+                    <scheme>http://viaf.org/authorityScheme/DNB</scheme>
+                    <scheme>http://viaf.org/authorityScheme/BNF</scheme>
                 </prefLabel>
                 <prefLabel xml:lang="en">
-                    <match>LC</match>
+                    <scheme>http://viaf.org/authorityScheme/LC</scheme>
                 </prefLabel>
             </config>
         </xsl:document>
@@ -203,10 +203,10 @@ See https://github.com/expath/expath-http-client-java/tree/main
         <xsl:for-each select="$config/*:config/*:prefLabel">
             <xsl:variable name="preferredLabel" as="element()" select="."/>
             <xsl:variable as="element()*" name="labels">
-                <xsl:for-each select="match">
-                    <xsl:variable name="match" as="xs:string" select="."/>
+                <xsl:for-each select="*:scheme">
+                    <xsl:variable name="scheme" as="xs:string" select="."/>
                     <xsl:variable name="naf-data" as="element(rdf:Description)?"
-                        select="$graph[matches(@rdf:about, concat($viaf-source-id-base, $match))][1]"/>
+                        select="$graph[skos:inScheme/@rdf:resource = $scheme][1]"/>
                     <xsl:choose>
                         <xsl:when test="$naf-data">
                             <xsl:element
@@ -217,7 +217,7 @@ See https://github.com/expath/expath-http-client-java/tree/main
                             </xsl:element>
                             <xsl:message>
                                 <xsl:text>no name found in </xsl:text>
-                                <xsl:value-of select="$match"/>
+                                <xsl:value-of select="$scheme"/>
                             </xsl:message>
                         </xsl:when>
                     </xsl:choose>
