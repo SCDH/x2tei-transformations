@@ -58,7 +58,7 @@
         <x:param name="config-url" select="'../../test/samples/rdf/viaf-config.xml'"/>
         <x:context mode="tei" href="../../test/samples/rdf/viaf-Ibn-Nubatah.xml"/>
         <x:expect label="has arabic name" test="exists(/t:*/t:persName[@xml:lang = 'ar'])"/>
-        <x:expect label="has arabic name from EGA"
+        <x:expect label="has arabic name from the Library of Alexandria"
             test="exists(/t:*/t:persName[@xml:lang = 'ar' and matches(@sameAs, 'EGA')])"/>
     </x:scenario>
 
@@ -66,7 +66,7 @@
         <x:param name="config-url" select="'../../test/samples/rdf/viaf-config.xml'"/>
         <x:context mode="tei" href="../../test/samples/rdf/viaf-Kerala.xml"/>
         <x:expect label="has arabic name" test="exists(/t:*/t:placeName[@xml:lang = 'ar'])"/>
-        <x:expect label="has arabic name from J9U"
+        <x:expect label="has arabic name from National Library of Isreal"
             test="exists(/t:*/t:placeName[@xml:lang = 'ar' and matches(@sameAs, 'J9U')])"/>
     </x:scenario>
 
