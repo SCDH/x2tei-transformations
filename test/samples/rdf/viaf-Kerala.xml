@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:bgn="http://bibliograph.net/"
+         xmlns:dbo="http://dbpedia.org/ontology/"
+         xmlns:genont="http://www.w3.org/2006/gen/ont#"
+         xmlns:pto="http://www.productontology.org/id/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:re="http://oclcsrw.google.code/redirect"
+         xmlns:schema="http://schema.org/"
+         xmlns:umbel="http://umbel.org/umbel#"
+         xmlns:wdt="http://www.wikidata.org/prop/direct/">
+   <rdf:Description rdf:about="http://viaf.org/viaf/127828705/">
+      <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+      <rdf:type rdf:resource="http://www.w3.org/2006/gen/ont#InformationResource"/>
+      <void:inDataset xmlns:void="http://rdfs.org/ns/void#"
+                      rdf:resource="http://viaf.org/viaf/data"/>
+      <foaf:primaryTopic xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                         rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/127828705">
+      <dcterms:identifier xmlns:dcterms="http://purl.org/dc/terms/">127828705</dcterms:identifier>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <rdf:type rdf:resource="http://schema.org/Organization"/>
+      <rdf:type rdf:resource="http://schema.org/Organization"/>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <rdf:type rdf:resource="http://schema.org/Organization"/>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <rdf:type rdf:resource="http://schema.org/Organization"/>
+      <rdf:type rdf:resource="http://schema.org/Organization"/>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <rdf:type rdf:resource="http://schema.org/Organization"/>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <rdf:type rdf:resource="http://schema.org/Place"/>
+      <dbo:notableWork>
+         <rdf:Description rdf:about="http://viaf.org/viaf/307423302">
+            <rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">Kerala Education Act, 1958</rdfs:label>
+         </rdf:Description>
+      </dbo:notableWork>
+      <dbo:notableWork>
+         <rdf:Description rdf:about="http://viaf.org/viaf/174593602">
+            <rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">Kerala Factories Rules, 1957</rdfs:label>
+         </rdf:Description>
+      </dbo:notableWork>
+      <dbo:notableWork>
+         <rdf:Description rdf:about="http://viaf.org/viaf/179215244">
+            <rdfs:label xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">Kerala Land Reform (Amendment) Act, 1969</rdfs:label>
+         </rdf:Description>
+      </dbo:notableWork>
+      <schema:location>
+         <rdf:Description rdf:about="http://viaf.org/viaf/127828705/#Place/india">
+            <rdf:type rdf:resource="http://schema.org/Place"/>
+            <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">This is a placeholder URI in need of further matching</rdfs:comment>
+            <schema:name>India</schema:name>
+         </rdf:Description>
+      </schema:location>
+      <schema:name xml:lang="en-US">Kerala</schema:name>
+      <schema:name xml:lang="en-US">Kerala</schema:name>
+      <schema:name xml:lang="no-NO">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="no-NO">Kerala</skos:prefLabel>
+      <schema:name xml:lang="no-NO">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="no-NO">Kerala</skos:prefLabel>
+      <schema:name xml:lang="fr-FR">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="fr-FR">Kerala</skos:prefLabel>
+      <schema:name xml:lang="fr-FR">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="fr-FR">Kerala</skos:prefLabel>
+      <schema:name xml:lang="de-DE">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="de-DE">Kerala</skos:prefLabel>
+      <schema:name xml:lang="de-DE">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="de-DE">Kerala</skos:prefLabel>
+      <schema:name xml:lang="fr-FR">Kerala</schema:name>
+      <schema:name xml:lang="fr-FR">Kerala</schema:name>
+      <schema:name xml:lang="fr-CH">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="fr-CH">Kerala</skos:prefLabel>
+      <schema:name xml:lang="fr-CH">Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="fr-CH">Kerala</skos:prefLabel>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'WKP' is undetermined. Name is 'Kerala'.</rdfs:comment>
+      <schema:name>Kerala</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'WKP|Q68078448' is undetermined. Name is 'Kerala'.</rdfs:comment>
+      <schema:name>Kerala</schema:name>
+      <schema:name xml:lang="en">Kerala (India)</schema:name>
+      <schema:name xml:lang="en">Kerala (India)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U' is undetermined. Name is 'Kerala (India)'.</rdfs:comment>
+      <schema:name>Kerala (India)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U|987007561806305171' is undetermined. Name is 'Kerala (India)'.</rdfs:comment>
+      <schema:name>Kerala (India)</schema:name>
+      <schema:name xml:lang="en-US">Kerala (India)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en-US">Kerala (India)</skos:prefLabel>
+      <schema:name xml:lang="en-US">Kerala (India)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en-US">Kerala (India)</skos:prefLabel>
+      <schema:name xml:lang="en-AU">Kerala (India)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en-AU">Kerala (India)</skos:prefLabel>
+      <schema:name xml:lang="en-AU">Kerala (India)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:lang="en">Warning: skos:prefLabels are not ensured against change!</rdfs:comment>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en-AU">Kerala (India)</skos:prefLabel>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U' is undetermined. Name is 'קרלה (הודו)'.</rdfs:comment>
+      <schema:name>קרלה (הודו)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U|987007561806305171' is undetermined. Name is 'קרלה (הודו)'.</rdfs:comment>
+      <schema:name>קרלה (הודו)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U' is undetermined. Name is 'كيرالا (الهند)'.</rdfs:comment>
+      <schema:name>كيرالا (الهند)</schema:name>
+      <rdfs:comment xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">BCP47 tag for 'J9U|987007561806305171' is undetermined. Name is 'كيرالا (الهند)'.</rdfs:comment>
+      <schema:name>كيرالا (الهند)</schema:name>
+      <schema:alternateName>Chera</schema:alternateName>
+      <schema:alternateName>Government of Kerala</schema:alternateName>
+      <schema:alternateName>India</schema:alternateName>
+      <schema:alternateName>India</schema:alternateName>
+      <schema:alternateName>India</schema:alternateName>
+      <schema:alternateName>India</schema:alternateName>
+      <schema:alternateName>India</schema:alternateName>
+      <schema:alternateName>India</schema:alternateName>
+      <schema:alternateName>Kerala State</schema:alternateName>
+      <schema:alternateName>Kerala, India (State)</schema:alternateName>
+      <schema:alternateName>Keralam (India)</schema:alternateName>
+      <schema:alternateName>Keralam (India)</schema:alternateName>
+      <schema:alternateName>Kēraḷaṃ</schema:alternateName>
+      <schema:alternateName>Kīrālā (India)</schema:alternateName>
+      <schema:alternateName>Malankar (India)</schema:alternateName>
+      <schema:alternateName>Malankar (India)</schema:alternateName>
+      <schema:alternateName>Malankara (India)</schema:alternateName>
+      <schema:alternateName>Malankara (India)</schema:alternateName>
+      <schema:alternateName>केरल</schema:alternateName>
+      <schema:alternateName>കേരളം</schema:alternateName>
+      <schema:alternateName>Kerala</schema:alternateName>
+      <schema:alternateName>Kerala</schema:alternateName>
+      <schema:alternateName>Kerala</schema:alternateName>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://isni.org/isni/0000000087962130"/>
+      </schema:sameAs>
+      <rdf:value rdf:parseType="Literal">
+         <ns1:source xmlns="http://viaf.org/viaf/terms#"
+                     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                     xmlns:ns1="http://viaf.org/viaf/terms#"
+                     xmlns:owl="http://www.w3.org/2002/07/owl#"
+                     xmlns:void="http://rdfs.org/ns/void#"
+                     nsid="987007561806305171">J9U|987007561806305171</ns1:source>
+      </rdf:value>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://id.loc.gov/authorities/names/n79055067"/>
+      </schema:sameAs>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://www.idref.fr/028639979/id"/>
+      </schema:sameAs>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://data.bibsys.no/data/notrbib/authorityentry/x97054646"/>
+      </schema:sameAs>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://d-nb.info/gnd/4030266-0"/>
+      </schema:sameAs>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://id.worldcat.org/fast/1205181"/>
+      </schema:sameAs>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://data.bnf.fr/ark:/12148/cb12043419h#spatialThing"/>
+      </schema:sameAs>
+      <schema:sameAs>
+         <rdf:Description rdf:about="http://www.wikidata.org/entity/Q68078448"/>
+      </schema:sameAs>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/FAST%7Cfst01205181#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/FAST"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">India Kerala</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">IndiaKerala (State)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">IndiaKeralam</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">IndiaKīrālā</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">IndiaMalankar</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">IndiaMalankara</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">IndiaTravancore and Cochin</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/BIBSYS%7C97054646#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/BIBSYS"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala</skos:prefLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/BNF%7C12043419#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/BNF"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala</skos:prefLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/DNB%7C040302660#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/DNB"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Chera</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kēraḷaṃ</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">केरल</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">കേരളം</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/SUDOC%7C028639979#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/SUDOC"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala</skos:prefLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/SZ%7C040302660#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/SZ"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Chera</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kēraḷaṃ</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">केरल</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">കേരളം</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/ISNI%7C0000000087962130#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/ISNI"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala (India)</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Government of Kerala</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala State</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Keralam (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankar (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankara (India)</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/J9U%7C987007561806305171#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/J9U"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala (India)</skos:prefLabel>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">كيرالا (الهند)</skos:prefLabel>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">קרלה (הודו)</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala, India (State)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Keralam (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankar (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankara (India)</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/LC%7Cn++79055067#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/LC"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala (India)</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala, India (State)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Keralam (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kīrālā (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankar (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankara (India)</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/NLA%7C000035267524#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/NLA"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala (India)</skos:prefLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/J9U%7C987007561806305171#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/J9U"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala (India)</skos:prefLabel>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">كيرالا (الهند)</skos:prefLabel>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">קרלה (הודו)</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala, India (State)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Keralam (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankar (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankara (India)</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+   <rdf:Description rdf:about="http://viaf.org/viaf/sourceID/J9U%7C987007561806305171#skos:Concept">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+      <skos:inScheme xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                     rdf:resource="http://viaf.org/authorityScheme/J9U"/>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala (India)</skos:prefLabel>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">كيرالا (الهند)</skos:prefLabel>
+      <skos:prefLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">קרלה (הודו)</skos:prefLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Kerala, India (State)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Keralam (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankar (India)</skos:altLabel>
+      <skos:altLabel xmlns:skos="http://www.w3.org/2004/02/skos/core#">Malankara (India)</skos:altLabel>
+      <foaf:focus xmlns:foaf="http://xmlns.com/foaf/0.1/"
+                  rdf:resource="http://viaf.org/viaf/127828705"/>
+   </rdf:Description>
+</rdf:RDF>

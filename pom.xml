@@ -62,7 +62,7 @@
 
         <!-- Tool Versions -->
         <ph.schematron.version>5.6.4</ph.schematron.version>
-        <saxon.version>10.9</saxon.version>
+        <saxon.version>12.5</saxon.version>
         <xmlresolver.version>4.5.1</xmlresolver.version>
         <oxygen.version>24.1.0.0</oxygen.version>
         <jing.version>20091111</jing.version>
@@ -82,6 +82,22 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.expath.http.client</groupId>
+            <artifactId>http-client-saxon</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.expath.http.client</groupId>
+            <artifactId>http-client-java</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.expath.packaging</groupId>
+            <artifactId>pkg-saxon</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
         <!-- Frontend -->
         <!--dependency>
             <groupId>de.wwu.scdh.seed</groupId>
@@ -138,6 +154,7 @@
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-cmds</artifactId>
             <version>${jena.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

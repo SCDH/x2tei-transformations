@@ -16,6 +16,8 @@ test/*.usx
 # build artifacts
 /target
 /public
+/.project
+/.settings
 *.xsl.sef
 *.xsef
 /test.sh
