@@ -25,8 +25,8 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     package-version="1.0.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:p2t="http://scdh.wwu.de/transform/pagexml2tei#"
-    xmlns:pc="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"
-    xpath-default-namespace="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"
+    xmlns:pc="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15"
+    xpath-default-namespace="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15"
     exclude-result-prefixes="#all" version="3.0" default-mode="p2t:source">
 
     <xsl:output method="xml" indent="true" encoding="UTF-8"/>
@@ -101,7 +101,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
         @seed:it@
     -->
     <xsl:template name="p2t:collection" visibility="final">
-        <xsl:variable name="documents" as="document-node()*">
+        <xsl:variable name="documents" as="document-node(element(PcGts))*">
             <xsl:variable name="col" as="document-node()" select="doc($p2t:collection-uri)"/>
             <xsl:for-each select="$col/*:collection/*:doc/@href">
                 <xsl:sequence select="doc(resolve-uri(., base-uri($col)))"/>
@@ -134,7 +134,7 @@ Collection Catalogs: https://www.saxonica.com/documentation12/index.html#!source
     -->
     <xsl:mode name="p2t:source" on-no-match="fail" visibility="final"/>
 
-    <xsl:template mode="p2t:source" match="document-node()">
+    <xsl:template mode="p2t:source" match="document-node(element(PcGts))">
         <xsl:call-template name="tei-template">
             <xsl:with-param name="pages" select="."/>
             <xsl:with-param name="single-source" as="xs:boolean" select="true()" tunnel="true"/>
