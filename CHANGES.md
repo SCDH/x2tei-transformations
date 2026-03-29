@@ -1,5 +1,10 @@
 # Changes
 
+## 0.9.0
+
+- adds `xsl/rdf/viaf.xsl` for transforming RDF/XML from viaf.org to
+  TEI person or place entries in a registry file
+
 ## 0.8.1
 
 - publishing on github
