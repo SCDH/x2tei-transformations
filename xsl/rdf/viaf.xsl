@@ -235,4 +235,69 @@ See https://github.com/expath/expath-http-client-java/tree/main
         </xsl:choose>
     </xsl:function>
 
+
+    <!-- the mode config outputs a config file from RDF/XML -->
+    <xsl:mode name="config" on-no-match="shallow-skip"/>
+
+    <xsl:template mode="config"
+        match="rdf:Description[@rdf:about = $viaf-resource and rdf:type(.) => rdf:type-to-tei-name-element() != 'unknown']">
+        <xsl:variable name="about" as="xs:string" select="@rdf:about"/>
+        <config xmlns="">
+            <files>
+                <xsl:for-each select="schema:sameAs">
+                    <xsl:variable name="resource" as="xs:string"
+                        select="(@rdf:resource | rdf:Description/@rdf:about)"/>
+                    <xsl:choose>
+                        <xsl:when test="$resource">
+                            <file>
+                                <xsl:attribute name="match" select="$resource ! rdf:iri-format(.)"/>
+                                <xsl:attribute name="base">
+                                    <xsl:text>$1</xsl:text>
+                                </xsl:attribute>
+                                <xsl:attribute name="id">
+                                    <xsl:text>$2</xsl:text>
+                                </xsl:attribute>
+                            </file>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:message>
+                                <xsl:text>could not parse sameAs: </xsl:text>
+                                <xsl:sequence select="."/>
+                            </xsl:message>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </files>
+            <xsl:for-each
+                select="parent::rdf:RDF/rdf:Description[foaf:focus/@rdf:resource = $about and exists(skos:inScheme)]">
+                <prefLabel xmlns="">
+                    <match>
+                        <xsl:value-of
+                            select="@rdf:about => replace(concat($viaf-source-id-base, '([^%]*)%.*'), '$1')"
+                        />
+                    </match>
+                    <scheme>
+                        <xsl:value-of select="skos:inScheme/@rdf:resource"/>
+                    </scheme>
+                </prefLabel>
+            </xsl:for-each>
+        </config>
+    </xsl:template>
+
+    <!-- returns a regex for extracting the core ID from an resource IRI -->
+    <xsl:function name="rdf:iri-format" as="xs:string">
+        <xsl:param as="xs:string" name="iri"/>
+        <xsl:choose>
+            <xsl:when test="matches($iri, 'ark:')">
+                <xsl:value-of select="replace($iri, '^(.*ark:)(.*)', '(^$1)(.*)')"/>
+            </xsl:when>
+            <xsl:when test="matches($iri, '/id$')">
+                <xsl:value-of select="replace($iri, '^(.*/)[^/]*/id$', '(^$1)(([^/]*)(/id)\$)')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="replace($iri, '^(.*/)([^/])*$', '(^$1)(.*)')"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
 </xsl:stylesheet>
