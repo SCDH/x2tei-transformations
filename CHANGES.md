@@ -1,5 +1,10 @@
 # Changes
 
+## 0.9.1
+
+- makes correct identifier for registry entries from VIAF's RDF/XML
+- makes identifier prefix configurable
+
 ## 0.9.0
 
 - adds `xsl/rdf/viaf.xsl` for transforming RDF/XML from viaf.org to
