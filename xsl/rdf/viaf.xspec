@@ -16,6 +16,9 @@
         <x:context mode="tei" href="../../test/samples/rdf/viaf-Ibn-Nubatah.xml"/>
         <x:expect label="tei output type" test="exists(/t:person)"/>
         <x:expect label="has persName entry" test="exists(/t:person/t:persName)"/>
+        <x:expect label="has xml:id" test="exists(/*/@xml:id)"/>
+        <x:expect label="xml:id is valid identifier" test="exists(/*/@xml:id => xs:ID())"/>
+        <x:expect label="xml:id has viaf id as name part" test="matches(/*/@xml:id, '90045354')"/>
     </x:scenario>
 
     <x:scenario label="tei output type for a place">

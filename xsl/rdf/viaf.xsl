@@ -35,6 +35,8 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
     <xsl:param name="id" as="xs:string" select="'90045354'" required="false"/>
 
+    <xsl:param name="entry-id-prefix" as="xs:string" select="'viaf_'" required="false"/>
+
     <xsl:param name="viaf-base-url" as="xs:string" select="'https://viaf.org/viaf/'"/>
 
     <xsl:param name="viaf-base-uri" as="xs:string" select="'http://viaf.org/viaf/'"/>
@@ -134,7 +136,8 @@ See https://github.com/expath/expath-http-client-java/tree/main
 
 
     <xsl:template name="identifier">
-        <xsl:attribute name="xml:id" select="'viaf:' || $id"/>
+        <xsl:context-item as="element(rdf:Description)"/>
+        <xsl:attribute name="xml:id" select="$entry-id-prefix || $id"/>
     </xsl:template>
 
     <xsl:template name="idno">
