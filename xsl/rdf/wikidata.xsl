@@ -3,8 +3,8 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://expath.org/ns/http-client"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:saxon="http://saxon.sf.net/"
     xmlns:array="http://www.w3.org/2005/xpath-functions/array"
-    xmlns:map="http://www.w3.org/2005/xpath-functions/map" xmlns="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="#all" version="3.0">
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map" xmlns:exb="http://expath.org/ns/binary"
+    xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="#all" version="3.0">
 
     <xsl:output method="json" indent="true"/>
 
@@ -48,7 +48,7 @@
         <!--xsl:variable name="graph" as="item()*" select="json-doc($wkd-url)"/-->
         <xsl:call-template _name="{$output-format}">
             <xsl:with-param name="data" as="xs:string?"
-                select="$graph ! saxon:base64Binary-to-string(., 'UTF8') => string-join()"/>
+                select="$graph ! http:decode(.) => string-join()"/>
         </xsl:call-template>
     </xsl:template>
 
@@ -58,6 +58,26 @@
             <xsl:text xml:space="preserve">function Q{http://expath.org/ns/http-client}send-request#3 not available</xsl:text>
         </xsl:message>
     </xsl:template>
+
+
+    <xsl:function name="http:decode" as="xs:string"
+        use-when="function-available('saxon:base64Binary-to-string', 2) and not(function-available('exb:decode-string', 2))">
+        <xsl:param name="input" as="xs:base64Binary"/>
+        <xsl:sequence select="saxon:base64Binary-to-string($input, 'UTF8')"/>
+    </xsl:function>
+
+    <xsl:function name="http:decode" as="xs:string"
+        use-when="function-available('exb:decode-string', 2)">
+        <xsl:param name="input" as="xs:base64Binary"/>
+        <xsl:sequence select="exb:decode-string($input, 'utf-8')"/>
+    </xsl:function>
+
+    <xsl:function name="http:decode" as="xs:string"
+        use-when="not(function-available('exb:decode-string', 2)) and not(function-available('exb:decode-string', 2))">
+        <xsl:param name="input" as="xs:base64Binary"/>
+        <xsl:message terminate="yes">No base64 decoding function available</xsl:message>
+    </xsl:function>
+
 
     <xsl:template name="data">
         <xsl:param name="data" as="xs:string?"/>
