@@ -11,7 +11,7 @@
 
     <xsl:output method="xml" indent="true"/>
 
-    <xsl:param name="geo-property" as="xs:string" select="'P5140'"/>
+    <xsl:param name="geo-properties" as="xs:string*" select="'P5140', 'P625'"/>
 
     <!-- overrides the default value -->
     <xsl:param name="output-format" as="xs:string" select="'tei-geo'" static="true"/>
@@ -20,14 +20,32 @@
 
     <xsl:template name="tei-geo">
         <xsl:param name="data" as="xs:string*"/>
-        <xsl:variable name="property" as="item()*"
-            select="parse-json($data) => map:get('statements') => map:get($geo-property) => array:head()"/>
+        <xsl:variable name="json" as="item()*" select="parse-json($data)"/>
+        <xsl:variable name="properties" as="map(*)*">
+            <xsl:for-each select="$geo-properties">
+                <xsl:variable name="p" as="xs:string*" select="."/>
+                <xsl:sequence
+                    select="($json => map:get('statements') => map:get($p)) ! array:head(.)"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="first" as="map(*)?"
+            select="$properties[1] => map:get('value') => map:get('content')"/>
         <location source="{$wkd-url}">
-            <geo>
-                <xsl:value-of
-                    select="$property => map:get('value') => map:get('content') => map:get('latitude') || ' ' || $property => map:get('value') => map:get('content') => map:get('longitude')"
-                />
-            </geo>
+            <xsl:choose>
+                <xsl:when test="exists($first)">
+                    <geo>
+                        <xsl:value-of
+                            select="concat(map:get($first, 'latitude'), ' ', map:get($first, 'longitude'))"
+                        />
+                    </geo>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:comment>
+                        <xsl:text>none of the geo properties is present: </xsl:text>
+                        <xsl:value-of select="$geo-properties"/>
+                    </xsl:comment>
+                </xsl:otherwise>
+            </xsl:choose>
         </location>
     </xsl:template>
 
