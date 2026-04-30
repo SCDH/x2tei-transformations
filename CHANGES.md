@@ -1,5 +1,11 @@
 # Changes
 
+## 0.10.0
+
+- adds `xsl/rdf/wikidata.xsl` and `xsl/rdf/wikidata-geo.xsl` for
+  retrieving data from the Wikidata API and making TEI snippets, e.g.,
+  `<location><geo>... ...</geo></location>`
+
 ## 0.9.1
 
 - makes correct identifier for registry entries from VIAF's RDF/XML

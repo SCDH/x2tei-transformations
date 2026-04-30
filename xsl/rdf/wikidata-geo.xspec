@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:tei="http://www.tei-c.org/ns/1.0" stylesheet="wikidata-geo.xsl">
+
+    <x:scenario label="parse JSON and output TEI">
+        <x:call template="tei-geo">
+            <x:param name="data"
+                select="unparsed-text('../../../test/samples/rdf/wikidata-Kerala.json')"/>
+        </x:call>
+        <x:expect label="location" test="exists(/tei:location)"/>
+        <x:expect label="location has source attribute" test="exists(/tei:location/@source)"/>
+        <x:expect label="location has geo element" test="exists(/tei:location/tei:geo)"/>
+        <x:expect label="location has two coordinates separated by ws"
+            test="matches(/tei:location/tei:geo, '\d\s*\d')"/>
+    </x:scenario>
+
+</x:description>
